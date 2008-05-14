@@ -1,0 +1,16 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<directory>./target</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/site</directory>
+			<outputDirectory>docs</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>

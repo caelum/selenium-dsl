@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Form Test</title>
+
+<script type="text/javascript">
+	function testFunction() {
+		document.getElementById( 'messages' ).appendChild( document.createTextNode( 'test message' ) );
+	}
+</script>
+<body>
+<div id="messages">
+	
+</div>
+
+<table>
+	<form id="form" action="action">
+	<tbody>
+		<tr class="">
+			<td>Text input</td>
+			<td><input name="textinput" value="" type="text"></td>
+		</tr>
+		<tr class="">
+			<td>Checkbox</td>
+			<td><input name="checkbox" value="FIRST" style="width: 20px;"
+				type="checkbox">First Type</td>
+		</tr>
+
+		<tr>
+			<td>Combobox</td>
+			<td><select name="combobox">
+				<option value="1">Label 1</option>
+				<option value="2">Label 2</option>
+				<option value="3">Label 3</option>
+			</select></td>
+		</tr>
+
+		<tr>
+			<td>Size</td>
+			<td><input id="radio1" style="width: 20px" type="radio"
+				name="radio" value="S" checked="checked" />small<br />
+			<input id="radio2" style="width: 20px" type="radio" name="radio"
+				value="M" />medium<br />
+			<input id="radio3" style="width: 20px" type="radio" name="radio"
+				value="L" />large<br />
+			</td>
+		</tr>
+
+		<tr class="">
+			<td></td>
+			<td><input id="button" value="button" type="button" onclick="testFunction()"></td>
+		</tr>
+	</tbody>
+	</form>
+</table>
+</body>
+</html>
