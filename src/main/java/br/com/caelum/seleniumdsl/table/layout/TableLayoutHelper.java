@@ -1,10 +1,15 @@
 package br.com.caelum.seleniumdsl.table.layout;
 
+import java.util.logging.Logger;
+
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.SeleniumException;
 
 public class TableLayoutHelper {
+	private static final Logger log = Logger.getLogger(TableLayoutHelper.class.getName());
+
 	private Selenium selenium;
 	private String id;
 	private String type;
@@ -24,7 +29,13 @@ public class TableLayoutHelper {
 	}
 
 	protected String getXPathText(String expr) {
-		return selenium.getText("xpath=//table[@" + type + "='" + id + "']/" + expr);
+		try {
+			return selenium.getText("xpath=//table[@" + type + "='" + id + "']/" + expr);
+		} catch (SeleniumException e) {
+			log.info(e.getMessage());
+		}
+
+		return null;
 	}
 
 	public boolean contains(Table table, String col, String content) {

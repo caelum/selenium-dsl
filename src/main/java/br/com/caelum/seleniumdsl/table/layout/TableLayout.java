@@ -29,7 +29,7 @@ public interface TableLayout {
 	 *            the row index
 	 * @param col
 	 *            the col index
-	 * @return the text of the cell
+	 * @return the text of the cell or null if the cell is not found
 	 */
 	public String value(int row, int col);
 
