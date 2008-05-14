@@ -1,6 +1,7 @@
 package br.com.caelum.seleniumdsl.table;
 
 import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.SeleniumException;
 
 public class DefaultCell implements Cell {
 
@@ -21,11 +22,16 @@ public class DefaultCell implements Cell {
 	}
 
 	public String getLink() {
-		return selenium.getEval("dom=selenium.page().findElement(\"" + getXPath() + "/a\").href");
+		return selenium.getEval("dom=selenium.page().findElement(\""
+				+ getXPath() + "/a\").href");
 	}
 
 	public String headerValue() {
-		return table.getLayout().headerValue(col);
+		try {
+			return table.getLayout().headerValue(col);
+		} catch (SeleniumException e) {
+			return headerLinkValue();
+		}
 	}
 
 	public String headerLinkValue() {
@@ -33,7 +39,8 @@ public class DefaultCell implements Cell {
 	}
 
 	private String getXPath() {
-		return "//table[@" + table.getType() + "='" + table.getId() + "']/*/tr[" + row + "]/td[" + col + "]";
+		return "//table[@" + table.getType() + "='" + table.getId()
+				+ "']/*/tr[" + row + "]/td[" + col + "]";
 	}
 
 	public Cell check() {
