@@ -22,8 +22,7 @@ public class DefaultCell implements Cell {
 	}
 
 	public String getLink() {
-		return selenium.getEval("dom=selenium.page().findElement(\""
-				+ getXPath() + "/a\").href");
+		return selenium.getEval("dom=selenium.page().findElement(\"" + getXPath() + "/a\").href");
 	}
 
 	public String headerValue() {
@@ -39,8 +38,7 @@ public class DefaultCell implements Cell {
 	}
 
 	private String getXPath() {
-		return "//table[@" + table.getType() + "='" + table.getId()
-				+ "']/*/tr[" + row + "]/td[" + col + "]";
+		return "//table[@" + table.getType() + "='" + table.getId() + "']/*/tr[" + row + "]/td[" + col + "]";
 	}
 
 	public Cell check() {
@@ -58,7 +56,7 @@ public class DefaultCell implements Cell {
 	}
 
 	public boolean contains(String content) {
-		return value().equals(content);
+		return content.equals(value());
 	}
 
 }

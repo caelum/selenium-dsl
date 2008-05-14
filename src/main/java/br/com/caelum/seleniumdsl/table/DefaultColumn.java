@@ -1,6 +1,5 @@
 package br.com.caelum.seleniumdsl.table;
 
-
 import com.thoughtworks.selenium.Selenium;
 
 public class DefaultColumn implements Column {
@@ -17,36 +16,26 @@ public class DefaultColumn implements Column {
 		this.columnNumber = columnNumber;
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.caelum.seleniumdsl.table.Column#contains(java.lang.String)
-	 */
 	public boolean contains(String value) {
 		return find(value) != -1;
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.caelum.seleniumdsl.table.Column#find(java.lang.String)
-	 */
 	public int find(String value) {
 		int rowCount = table.getRowCount();
-		for (int i = 0; i < rowCount; i++) {
-			if (table.cell(i + 1, columnNumber).value().equals(value)) {
-				return i + 1;
-			}
-		}
+		for (int i = 1; i < rowCount; i++)
+			if (table.cell(i, columnNumber)
+					.contains(value))
+				return i;
 		return -1;
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.caelum.seleniumdsl.table.Column#containsPartial(java.lang.String)
-	 */
 	public boolean containsPartial(String value) {
 		int rowCount = table.getRowCount();
-		for (int i = 0; i < rowCount; i++) {
-			if (table.cell(i + 1, columnNumber).value().contains(value)) {
+		for (int i = 1; i < rowCount; i++)
+			if (table.cell(i, columnNumber)
+					.value()
+					.contains(value))
 				return true;
-			}
-		}
 		return false;
 	}
 }

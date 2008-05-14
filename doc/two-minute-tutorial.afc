@@ -71,7 +71,7 @@ public class SeleniumTestCase {
 	@Test
 	public void testTableRowCount() {
 		Table table = browser.currentPage().table( "table" );
-		Assert.assertEquals(table.rowCount(), 2);
+		Assert.assertEquals(table.getRowCount(), 2);
 	}
 	
 	@Test
@@ -84,20 +84,22 @@ public class SeleniumTestCase {
 	public void testTableHeaderLabel() {
 		Table table = browser.currentPage().table( "table" );
 		// indexes start at 1
-		Assert.assertEquals(table.row(1).get(1).headerValue(), "First Column");
+		Assert.assertEquals(table.header().get(1).headerValue(), "First Column");
 	}
 	
 	@Test
 	public void testTableContent() {
 		Table table = browser.currentPage().table( "table" );
 		// second row, column named "First Column"
-		Assert.assertEquals(table.cell( 2, "First Column" ), "cell_1_1" );
+		// value() returns null if the cell isn't found
+		Assert.assertEquals(table.cell( 2, "First Column" ).value(), "cell_1_1" );
+		// or
+		Assert.assertTrue(table.cell( 2, "First Column" ).contains( "cell_1_1" ) );
 	}
 
 	@Test
 	public void testLogin() {
-		Page page = browser.currentPage();
-		Form form = page.form( "form" );
+		Form form = browser.currentPage().form( "form" );
 		form.field( "login" ).type( "myLogin" );
 		form.field( "password" ).type( "myPassword" );
 		form.check( "remember" );
@@ -109,17 +111,16 @@ public class SeleniumTestCase {
 	}
 	@Test
 	public void testInvalidLogin() {
-		Page page = browser.currentPage();
-		Form form = page.form( "form" );
+		Form form = browser.currentPage().form( "form" );
 		form.field( "login" ).type( "invalid_login" );
 		form.field( "password" ).type( "invalid_password" );
 		
 		form.submit();
 		
-		page = browser.currentPage();
+		Page page = browser.currentPage();
 		
 		Assert.assertEquals( "Login", page.title() );
-		page.div( "errors" ).contains( "Invalid login!" );
+		Assert.assertTrue( page.div( "errors" ).contains( "Invalid login!" ) );
 		
 		Assert.assertTrue( form.isChecked( "rememeber" ) );
 		// ensures that the form remains with the previously typed login
