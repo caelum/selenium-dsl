@@ -11,7 +11,6 @@ import br.com.caelum.seleniumdsl.table.DefaultTable;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.thoughtworks.selenium.Selenium;
-import com.thoughtworks.selenium.SeleniumException;
 
 public class FullTableTest {
 	private static final String BASE_COUNT_PATH = "//table[@id='id']/";
@@ -97,28 +96,6 @@ public class FullTableTest {
 
 				String headerValue = BASE_TEXT_PATH + "/thead/tr[1]/th[1]";
 				one(mock).getText(headerValue);
-				will(returnValue("columnName"));
-			}
-		});
-
-		Assert.assertEquals(table.findColumn("columnName"), new Integer(1));
-		mockery.assertIsSatisfied();
-	}
-
-	@Test
-	public void testFindColumnWithoutTHead() {
-		mockery.checking(new Expectations() {
-			{
-				String colCount = BASE_COUNT_PATH + "/thead/tr/th";
-				one(mock).getXpathCount(colCount);
-				will(returnValue(1));
-
-				String headerValue = BASE_TEXT_PATH + "/thead/tr[1]/th[1]";
-				one(mock).getText(headerValue);
-				will(throwException(new SeleniumException("mocked exception")));
-
-				String value = BASE_TEXT_PATH + "/tbody/tr[1]/td[1]";
-				one(mock).getText(value);
 				will(returnValue("columnName"));
 			}
 		});
