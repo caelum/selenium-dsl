@@ -30,12 +30,13 @@ div.content {
 
 /*header*/
 div.header {
-	height: 90px;
+	height: 20px;
 	background-color: #802832;
 	padding: 25px 0px 20px 20px;
 }
 
 h1.logo {
+	display: none;
 	content: Selenium DSL
 	position: absolute;
 	left: 20px;
