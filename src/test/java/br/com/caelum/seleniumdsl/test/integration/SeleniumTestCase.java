@@ -21,7 +21,7 @@ public class SeleniumTestCase {
 	@BeforeClass
 	public static void beforeStartup() {
 		selenium = new DefaultSelenium("localhost", SeleniumServer.getDefaultPort(), "*firefox",
-				"http://localhost:8080/seleniumds/");
+				"http://localhost:8080/seleniumdsl/");
 		selenium.start();
 		selenium.setContext("Selenium DSL testing");
 		selenium.setBrowserLogLevel(SeleniumLogLevels.DEBUG);

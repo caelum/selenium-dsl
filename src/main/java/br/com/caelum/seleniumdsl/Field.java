@@ -2,10 +2,25 @@ package br.com.caelum.seleniumdsl;
 
 public interface Field {
 
-	public abstract Form type(String content);
+	/**
+	 * Types something on this field.
+	 * 
+	 * @param content
+	 *            the content to be typed
+	 * @return the Form
+	 */
+	public Form type(String content);
 
-	public abstract boolean contains(String content);
+	/**
+	 * @param text
+	 *            the text to be compared
+	 * @return if the field contains the text
+	 */
+	public boolean contains(String text);
 
-	public abstract String content();
+	/**
+	 * @return the text of this field
+	 */
+	public String content();
 
 }

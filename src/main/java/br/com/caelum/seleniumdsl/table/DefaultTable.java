@@ -93,9 +93,9 @@ public class DefaultTable implements Table {
 		for (int i = 0; i < colCount; i++) {
 			String current;
 			try {
-				current = row.get(i + 1).headerValue();
+				current = row.cell(i + 1).headerValue();
 			} catch (SeleniumException e) {
-				current = row.get(i + 1).value();
+				current = row.cell(i + 1).value();
 			}
 			if (columnName.equals(current))
 				return i + 1;

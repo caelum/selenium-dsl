@@ -19,8 +19,10 @@ public class TableLayoutChooser {
 	}
 
 	public TableLayout choose() {
-		int theadCount = selenium.getXpathCount(String.format(testThead, id)).intValue();
-		int thCount = selenium.getXpathCount(String.format(testTh, id)).intValue();
+		int theadCount = selenium.getXpathCount(String.format(testThead, id))
+				.intValue();
+		int thCount = selenium.getXpathCount(String.format(testTh, id))
+				.intValue();
 
 		TableLayout layout = null;
 		if (theadCount <= 0 && thCount <= 0)

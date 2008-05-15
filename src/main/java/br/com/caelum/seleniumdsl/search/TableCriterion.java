@@ -25,6 +25,6 @@ public class TableCriterion {
 	}
 	
 	public boolean match(Row row) {
-		return content.equals(row.get(column).value());
+		return content.equals(row.cell(column).value());
 	}
 }

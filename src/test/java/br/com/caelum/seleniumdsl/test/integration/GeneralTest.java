@@ -1,51 +1,23 @@
-[title Test]
-[chapter Two Minute Tutorial]
+package br.com.caelum.seleniumdsl.test.integration;
 
-[list]
-* Have a Selenium enabled project
-* Add the seleniumdsl.jar to your classpath
-* Start the Selenium server
-* On following tests we are going to use this HTML 
-[xml]
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <table id="table">
-            <thead>
-            	<tr>
-                	<th>First Column</th>
-                	<th>Second Column</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>cell_1_1</td>
-                    <td>cell_1_2</td>
-                </tr>
-                <tr>
-                    <td>cell_2_1</td>
-                    <td>cell_2_2</td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <div id="errors">
-            <!-- populated on invalid login --> 
-        </div>
-        <form id="form" action="main.html">
-            Login: <input type="text" name="login"/><br/>
-            Password: <input type="password" name="password"/><br/>
-            Remember? <input type="checkbox" name="remember"/>
-        </form>
-    </body>
-</html>
-[/xml]
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.server.SeleniumServer;
 
-* Run the following test
-[java]
-public class SeleniumTestCase {
+import br.com.caelum.seleniumdsl.Browser;
+import br.com.caelum.seleniumdsl.DefaultBrowser;
+import br.com.caelum.seleniumdsl.Form;
+import br.com.caelum.seleniumdsl.Page;
+import br.com.caelum.seleniumdsl.table.Table;
+
+import com.thoughtworks.selenium.DefaultSelenium;
+import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.SeleniumLogLevels;
+
+public class GeneralTest {
 
 	private static Selenium selenium;
 
@@ -91,7 +63,7 @@ public class SeleniumTestCase {
 				.table("table");
 		// indexes start at 1
 		Assert.assertEquals(table.header()
-				.get(1)
+				.cell(1)
 				.headerValue(), "First Column");
 	}
 
@@ -151,5 +123,3 @@ public class SeleniumTestCase {
 				.contains("invalid_login"));
 	}
 }
-[/java]
-[/list]

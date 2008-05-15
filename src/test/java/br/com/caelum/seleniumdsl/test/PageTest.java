@@ -41,7 +41,7 @@ public class PageTest {
 				exactly(1).of(mock).waitForPageToLoad(with(any(String.class)));
 			}
 		});
-		page.click("id");
+		page.clickLink("id");
 		mockery.assertIsSatisfied();
 	}
 
@@ -52,7 +52,7 @@ public class PageTest {
 				exactly(1).of(mock).click(with(any(String.class)));
 			}
 		});
-		page.clickDontWait("id");
+		page.click("id");
 		mockery.assertIsSatisfied();
 	}
 

@@ -15,7 +15,7 @@ public interface TableLayout {
 	 * 
 	 * @param col
 	 *            the column index
-	 * @return the '<a href' tag's text
+	 * @return the &lt;a href' tag's text
 	 */
 	public String headerLinkValue(int col);
 

@@ -83,7 +83,7 @@ public class FormTest extends SeleniumTestCase {
 
 	@Test
 	public void testClickButton() {
-		page.clickDontWait("button");
+		page.click("button");
 		Assert.assertTrue(page.div("messages").contains("test message"));
 	}
 }

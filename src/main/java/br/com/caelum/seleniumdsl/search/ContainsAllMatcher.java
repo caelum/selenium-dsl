@@ -18,7 +18,7 @@ public class ContainsAllMatcher implements Matcher {
 	}
 
 	public boolean matches(Row row) {
-		if (contents.remove(row.get(column).value()))
+		if (contents.remove(row.cell(column).value()))
 			return contents.isEmpty();
 		return false;
 	}

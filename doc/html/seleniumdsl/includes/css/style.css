@@ -35,6 +35,15 @@ div.header {
 	padding: 25px 0px 20px 20px;
 }
 
+h1.logo {
+	content: Selenium DSL
+	position: absolute;
+	left: 20px;
+	top: 15px;
+	height: 100px;
+	width: 220px;
+}
+
 h1.logo span {
 	visibility:hidden;
 }

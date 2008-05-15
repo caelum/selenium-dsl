@@ -20,9 +20,9 @@ class EqualsMatcher implements Matcher {
 	public boolean matches(Row row) {
 		//FIXME
 		if (column != null)
-			return row.get(column).value().equals(content);
+			return row.cell(column).value().equals(content);
 		else
-			return row.get(columnName).value().equals(content);
+			return row.cell(columnName).value().equals(content);
 	}
 
 	public void setColumn(String column) {

@@ -12,7 +12,7 @@ public interface Table {
 	/**
 	 * @param columnIndex
 	 *            the index of the column.
-	 * @return the br.com.caelum.seleniumdsl.Column object
+	 * @return the br.com.caelum.seleniumdsl.table.Column object
 	 */
 	public Column column(int columnIndex);
 
@@ -27,14 +27,20 @@ public interface Table {
 
 	public int getRowCount();
 
+	/**
+	 * @return the number of rows of the contents, ignoring header and footer (if one is found)
+	 */
 	public int getContentCount();
 
+	/**
+	 * @return the header br.com.caelum.seleniumdsl.table.Row object
+	 */
 	public Row header();
 
 	/**
 	 * @param row
 	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the header.
-	 * @return the Row object
+	 * @return the br.com.caelum.seleniumdsl.table.Row object
 	 */
 	public Row row(Integer row);
 
@@ -67,6 +73,11 @@ public interface Table {
 
 	public void iterate(RowVisitor visitor);
 
+	/**
+	 * @param columnName
+	 *            the header label of the column
+	 * @return the column index
+	 */
 	public Integer findColumn(String columnName);
 
 	public RowMatcher select(RowMatcher matcher);

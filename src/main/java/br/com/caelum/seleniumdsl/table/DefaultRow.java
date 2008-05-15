@@ -14,16 +14,16 @@ public class DefaultRow implements Row {
 		this.index = index;
 	}
 
-	public Cell get(int column) {
+	public Cell cell(int column) {
 		return new DefaultCell(selenium, table, index, column);
 	}
 
-	public Cell get(String column) {
+	public Cell cell(String column) {
 		int columnNumber = table.findColumn(column);
 		return new DefaultCell(selenium, table, index, columnNumber);
 	}
 
-	public Integer getIndex() {
+	public Integer index() {
 		return index;
 	}
 }

@@ -50,23 +50,23 @@ public class TableTest extends SeleniumTestCase {
 
 	@Test
 	public void testHeaderLabel() {
-		Assert.assertEquals(plain.row(1).get(1).headerValue(), "header_1");
-		Assert.assertEquals(plainTh.row(1).get(1).headerValue(), "header_1");
-		Assert.assertEquals(full.row(1).get(1).headerValue(), "header_1");
+		Assert.assertEquals(plain.row(1).cell(1).headerValue(), "header_1");
+		Assert.assertEquals(plainTh.row(1).cell(1).headerValue(), "header_1");
+		Assert.assertEquals(full.row(1).cell(1).headerValue(), "header_1");
 	}
 
 	@Test
 	public void testHeaderLinkLabel() {
-		Assert.assertEquals(plain.header().get(2).headerLinkValue(), "header_2");
-		Assert.assertEquals(plainTh.header().get(2).headerLinkValue(), "header_2");
-		Assert.assertEquals(full.header().get(2).headerLinkValue(), "header_2");
+		Assert.assertEquals(plain.header().cell(2).headerLinkValue(), "header_2");
+		Assert.assertEquals(plainTh.header().cell(2).headerLinkValue(), "header_2");
+		Assert.assertEquals(full.header().cell(2).headerLinkValue(), "header_2");
 	}
 
 	@Test
 	public void testGetValue() {
-		Assert.assertEquals(plain.row(1).get(1).value(), "cell_1_1");
-		Assert.assertEquals(plainTh.row(1).get(1).value(), "cell_1_1");
-		Assert.assertEquals(full.row(1).get(1).value(), "cell_1_1");
+		Assert.assertEquals(plain.row(1).cell(1).value(), "cell_1_1");
+		Assert.assertEquals(plainTh.row(1).cell(1).value(), "cell_1_1");
+		Assert.assertEquals(full.row(1).cell(1).value(), "cell_1_1");
 	}
 
 	@Test
@@ -92,15 +92,15 @@ public class TableTest extends SeleniumTestCase {
 
 	@Test
 	public void testCheck() {
-		Assert.assertTrue(plain.row(2).get(3).check().checked());
-		Assert.assertTrue(plainTh.row(2).get(3).check().checked());
-		Assert.assertTrue(full.row(2).get(3).check().checked());
+		Assert.assertTrue(plain.row(2).cell(3).check().checked());
+		Assert.assertTrue(plainTh.row(2).cell(3).check().checked());
+		Assert.assertTrue(full.row(2).cell(3).check().checked());
 	}
 
 	@Test
 	public void testUnheck() {
-		Assert.assertFalse(plain.row(2).get(3).uncheck().checked());
-		Assert.assertFalse(plainTh.row(2).get(3).uncheck().checked());
-		Assert.assertFalse(full.row(2).get(3).uncheck().checked());
+		Assert.assertFalse(plain.row(2).cell(3).uncheck().checked());
+		Assert.assertFalse(plainTh.row(2).cell(3).uncheck().checked());
+		Assert.assertFalse(full.row(2).cell(3).uncheck().checked());
 	}
 }

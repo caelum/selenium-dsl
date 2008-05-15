@@ -2,18 +2,57 @@ package br.com.caelum.seleniumdsl;
 
 public interface Form {
 
-	public abstract Field field(String fieldName);
+	/**
+	 * @param field
+	 *            the field's name or id
+	 * @return the Field
+	 */
+	public Field field(String field);
 
-	public abstract void click(String buttonLabel);
+	/**
+	 * Clicks something on the page
+	 * 
+	 * @param element
+	 *            can be the element ID, name or an xpath expression
+	 */
+	public void click(String element);
 
-	public abstract SelectField selectField(String fieldName);
+	/**
+	 * 
+	 * @param selectField
+	 *            the select's name or id
+	 * @return the SelectField
+	 */
+	public SelectField selectField(String selectField);
 
-	public abstract Form check(String checkbox);
+	/**
+	 * Checks a checkbox
+	 * 
+	 * @param checkbox
+	 *            the input's name or id
+	 * @return the Form
+	 */
+	public Form check(String checkbox);
 
-	public abstract Form uncheck(String checkbox);
+	/**
+	 * Unchecks a checkbox
+	 * 
+	 * @param checkbox
+	 *            the input's name or id
+	 * @return the Form
+	 */
+	public Form uncheck(String checkbox);
 
-	public abstract boolean isChecked(String checkbox);
+	/**
+	 * @param checkbox
+	 *            the input's name or id
+	 * @return if the checkbox is checked
+	 */
+	public boolean isChecked(String checkbox);
 
-	public abstract void submit();
+	/**
+	 * Submits this form
+	 */
+	public void submit();
 
 }
