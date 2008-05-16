@@ -41,4 +41,8 @@ class DefaultField implements Field {
 	public String content() {
 		return selenium.getValue(id);
 	}
+
+	public void blur() {
+		selenium.fireEvent(id, "blur");
+	}
 }
