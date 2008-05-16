@@ -23,4 +23,5 @@ public interface Field {
 	 */
 	public String content();
 
+	public void blur();
 }

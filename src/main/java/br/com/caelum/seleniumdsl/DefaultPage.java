@@ -35,7 +35,7 @@ class DefaultPage implements Page {
 		return new DefaultTable(selenium, id);
 	}
 
-	public Page clickLink(String link) {
+	public Page navigate(String link) {
 		selenium.click(link);
 		selenium.waitForPageToLoad(Integer.toString(timeout));
 		return this;

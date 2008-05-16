@@ -14,30 +14,15 @@ class DefaultField implements Field {
 		this.id = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.Field#type(java.lang.String)
-	 */
 	public Form type(String content) {
 		selenium.type(id, content);
 		return form;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.Field#contains(java.lang.String)
-	 */
 	public boolean contains(String content) {
 		return content.contains(selenium.getValue(id));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.Field#content()
-	 */
 	public String content() {
 		return selenium.getValue(id);
 	}

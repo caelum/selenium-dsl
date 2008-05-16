@@ -41,7 +41,7 @@ public class PageTest {
 				exactly(1).of(mock).waitForPageToLoad(with(any(String.class)));
 			}
 		});
-		page.clickLink("id");
+		page.navigate("id");
 		mockery.assertIsSatisfied();
 	}
 

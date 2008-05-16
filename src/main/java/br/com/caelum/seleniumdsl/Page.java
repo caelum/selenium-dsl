@@ -13,19 +13,19 @@ public interface Page {
 	public Table table(String id);
 
 	/**
-	 * Clicks a link and waits for the browser to load the page
+	 * Clicks an element and waits for the browser to load the page
 	 * 
-	 * @param link
-	 *            the link's id or name
+	 * @param element
+	 *            the elements's id or name or an Selenium expression
 	 * @return the Page
 	 */
-	public Page clickLink(String link);
+	public Page navigate(String element);
 
 	/**
 	 * Clicks something
 	 * 
 	 * @param element
-	 *            the element's id or name
+	 *            the element's id or name or a Selenium expression
 	 * @return the Page
 	 */
 	public Page click(String element);
