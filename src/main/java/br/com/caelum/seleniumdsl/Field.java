@@ -23,5 +23,9 @@ public interface Field {
 	 */
 	public String content();
 
+	/**
+	 * Executes the blur action in this component.
+	 */
 	public void blur();
+
 }

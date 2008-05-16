@@ -4,9 +4,9 @@ import com.thoughtworks.selenium.Selenium;
 
 class DefaultField implements Field {
 
-	private final String id;
+	final String id;
 	private final Form form;
-	private final Selenium selenium;
+	final Selenium selenium;
 
 	public DefaultField(Selenium selenium, Form form, String id) {
 		this.selenium = selenium;
