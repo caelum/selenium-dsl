@@ -216,13 +216,9 @@
   </build>
 
   <scm>
-    <developerConnection>
-      scm:svn:https://seleniumdsl.googlecode.com/svn/trunk/
-    </developerConnection>
-    <connection>
-      http://seleniumdsl.googlecode.com/svn/trunk/
-    </connection>
-    <url>http://seleniumdsl.googlecode.com/svn/trunk/</url>
+    <developerConnection>scm:svn:https://seleniumdsl.svn.sourceforge.net/svnroot/seleniumdsl/trunk</developerConnection>
+    <connection>scm:svn:http://seleniumdsl.svn.sourceforge.net/svnroot/seleniumdsl/trunk</connection>
+    <url>http://seleniumdsl.svn.sourceforge.net/viewvc/seleniumdsl/trunk</url>
   </scm>
 
   <pluginRepositories>
