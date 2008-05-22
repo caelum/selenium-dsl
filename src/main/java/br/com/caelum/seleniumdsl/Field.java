@@ -1,5 +1,10 @@
 package br.com.caelum.seleniumdsl;
 
+/**
+ * A form field.
+ * 
+ * @author Guilherme Silveira
+ */
 public interface Field {
 
 	/**
@@ -9,23 +14,28 @@ public interface Field {
 	 *            the content to be typed
 	 * @return the Form
 	 */
-	public Form type(String content);
+	Form type(String content);
 
 	/**
-	 * @param text
+	 * Checks if this field contains a value.
+	 * 
+	 * @param content
 	 *            the text to be compared
 	 * @return if the field contains the text
 	 */
-	public boolean contains(String text);
+	boolean contains(String content);
 
 	/**
+	 * Retrieves its content.
+	 * 
 	 * @return the text of this field
 	 */
-	public String content();
+	String content();
 
 	/**
-	 * Executes the blur action in this component.
+	 * Executes the blur action in this component. Typically used to simulate a
+	 * typing+lose focus action on a field to execute its javascript action.
 	 */
-	public void blur();
+	void blur();
 
 }

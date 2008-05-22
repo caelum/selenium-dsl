@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import br.com.caelum.seleniumdsl.js.Array;
+import br.com.caelum.seleniumdsl.js.DefaultArray;
 import br.com.caelum.seleniumdsl.table.DefaultTable;
 import br.com.caelum.seleniumdsl.table.Table;
 
@@ -58,6 +60,10 @@ class DefaultPage implements Page {
 	public Page check(String checkbox) {
 		selenium.click(checkbox);
 		return this;
+	}
+
+	public Array array(String name) {
+		return new DefaultArray(selenium, name);
 	}
 
 }

@@ -1,16 +1,22 @@
 package br.com.caelum.seleniumdsl;
 
+import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.table.Table;
 
+/**
+ * A web page.
+ * 
+ * @author Guilherme Silveira
+ */
 public interface Page {
 
-	public Form form(String id);
+	Form form(String id);
 
-	public ContentTag div(String id);
+	ContentTag div(String id);
 
-	public ContentTag span(String id);
+	ContentTag span(String id);
 
-	public Table table(String id);
+	Table table(String id);
 
 	/**
 	 * Clicks an element and waits for the browser to load the page
@@ -19,7 +25,7 @@ public interface Page {
 	 *            the elements's id or name or an Selenium expression
 	 * @return the Page
 	 */
-	public Page navigate(String element);
+	Page navigate(String element);
 
 	/**
 	 * Clicks something
@@ -28,14 +34,26 @@ public interface Page {
 	 *            the element's id or name or a Selenium expression
 	 * @return the Page
 	 */
-	public Page click(String element);
+	Page click(String element);
 
-	public boolean hasLink(String link);
+	boolean hasLink(String link);
 
-	public boolean isFilled(String textBoxId, String value);
+	boolean isFilled(String textBoxId, String value);
 
-	public Page check(String checkbox);
+	Page check(String checkbox);
 
-	public String title();
+	/**
+	 * Returns the page title.
+	 * 
+	 * @return the page title
+	 */
+	String title();
+	
+	/**
+	 * Returns access to a javascript array.
+	 * @param name	the variable name
+	 * @return	the javascript array
+	 */
+	Array array(String name);
 
 }
