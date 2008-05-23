@@ -76,5 +76,12 @@ public interface Page {
 	 * @return	the javascript array
 	 */
 	Array array(String name);
+	
+	/**
+	 * Invokes a javascript command.
+	 * @param cmd a command
+	 * @return	the result
+	 */
+	String invoke(String cmd);
 
 }

@@ -56,4 +56,8 @@ class DefaultPage implements Page {
 		return new DefaultArray(selenium, name);
 	}
 
+	public String invoke(String cmd) {
+		return selenium.getEval(cmd);
+	}
+
 }
