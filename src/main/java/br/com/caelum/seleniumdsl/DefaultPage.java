@@ -52,16 +52,6 @@ class DefaultPage implements Page {
 		return selenium.isTextPresent(link);
 	}
 
-	public boolean isFilled(String textBoxId, String value) {
-		return selenium.getValue(textBoxId)
-				.equals(value);
-	}
-
-	public Page check(String checkbox) {
-		selenium.click(checkbox);
-		return this;
-	}
-
 	public Array array(String name) {
 		return new DefaultArray(selenium, name);
 	}

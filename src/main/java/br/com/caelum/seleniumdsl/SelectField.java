@@ -1,11 +1,30 @@
 package br.com.caelum.seleniumdsl;
 
+/**
+ * A select field
+ * @author guilherme
+ *
+ */
 public interface SelectField {
 
-	public abstract Form choose(String value);
+	/**
+	 * Chooses an specific option for this select field.
+	 * @param value
+	 * @return
+	 */
+	Form choose(String value);
 
-	public abstract Form chooseByIndex(Integer index);
+	/**
+	 * Chooses an specific option for this select field.
+	 * @param index	option index
+	 * @return
+	 */
+	Form choose(int index);
 
-	public abstract String value();
+	/**
+	 * Returns the value for the current selected option.
+	 * @return
+	 */
+	String value();
 
 }

@@ -2,6 +2,11 @@ package br.com.caelum.seleniumdsl;
 
 import com.thoughtworks.selenium.Selenium;
 
+/**
+ * Selenium based implementation.
+ * @author Guilherme Silveira
+ *
+ */
 class DefaultSelectField implements SelectField {
 
 	private final String id;
@@ -14,32 +19,17 @@ class DefaultSelectField implements SelectField {
 		this.id = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.SelectField#choose(java.lang.String)
-	 */
 	public Form choose(String value) {
 		selenium.select(id, value);
 		return form;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.SelectField#chooseByIndex(java.lang.Integer)
-	 */
-	public Form chooseByIndex(Integer index) {
+	public Form choose(int index) {
 		String[] options = selenium.getSelectOptions(id);
 		selenium.select(id, options[index]);
 		return form;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.caelum.seleniumdsl.SelectField#value()
-	 */
 	public String value() {
 		return selenium.getValue(id);
 	}

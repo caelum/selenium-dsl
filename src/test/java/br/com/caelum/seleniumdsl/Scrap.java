@@ -1,4 +1,4 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.openqa.selenium.server.SeleniumServer;
 

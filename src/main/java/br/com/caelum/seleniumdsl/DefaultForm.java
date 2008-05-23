@@ -24,7 +24,7 @@ class DefaultForm implements Form {
 		selenium.waitForPageToLoad(Integer.toString(timeout));
 	}
 
-	public SelectField selectField(String selectField) {
+	public SelectField select(String selectField) {
 		return new DefaultSelectField(selenium, this, id + selectField);
 	}
 

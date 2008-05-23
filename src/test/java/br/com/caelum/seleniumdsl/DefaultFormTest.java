@@ -1,4 +1,4 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -10,7 +10,7 @@ import br.com.caelum.seleniumdsl.Form;
 
 import com.thoughtworks.selenium.Selenium;
 
-public class FormTest {
+public class DefaultFormTest {
 	private Selenium mock;
 	private Mockery mockery;
 	private Form form;

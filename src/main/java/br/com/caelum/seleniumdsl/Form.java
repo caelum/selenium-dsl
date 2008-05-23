@@ -1,5 +1,10 @@
 package br.com.caelum.seleniumdsl;
 
+/**
+ * A web form.
+ * 
+ * @author Guilherme Silveira
+ */
 public interface Form {
 
 	/**
@@ -23,7 +28,7 @@ public interface Form {
 	 *            the select's name or id
 	 * @return the SelectField
 	 */
-	public SelectField selectField(String selectField);
+	public SelectField select(String selectField);
 
 	/**
 	 * Checks a checkbox

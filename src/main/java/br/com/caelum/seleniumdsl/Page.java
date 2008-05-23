@@ -10,12 +10,32 @@ import br.com.caelum.seleniumdsl.table.Table;
  */
 public interface Page {
 
+	/**
+	 * Accesses a web form.
+	 * @param id
+	 * @return
+	 */
 	Form form(String id);
 
+	/**
+	 * Access to a div.
+	 * @param id
+	 * @return
+	 */
 	ContentTag div(String id);
 
+	/**
+	 * Access to a span.
+	 * @param id
+	 * @return
+	 */
 	ContentTag span(String id);
 
+	/**
+	 * Access to a table.
+	 * @param id
+	 * @return
+	 */
 	Table table(String id);
 
 	/**
@@ -36,11 +56,12 @@ public interface Page {
 	 */
 	Page click(String element);
 
+	/**
+	 * Checks for the existence of a link
+	 * @param link
+	 * @return
+	 */
 	boolean hasLink(String link);
-
-	boolean isFilled(String textBoxId, String value);
-
-	Page check(String checkbox);
 
 	/**
 	 * Returns the page title.

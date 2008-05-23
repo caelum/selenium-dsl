@@ -1,16 +1,15 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.caelum.seleniumdsl.DefaultBrowser;
 import br.com.caelum.seleniumdsl.Page;
 
 import com.thoughtworks.selenium.Selenium;
 
-public class PageTest {
+public class DefaultPageTest {
 	private Selenium mock;
 	private Mockery mockery;
 	private Page page;
@@ -19,18 +18,7 @@ public class PageTest {
 	public void setUp() {
 		mockery = new Mockery();
 		mock = mockery.mock(Selenium.class);
-		page = new DefaultBrowser(mock).currentPage();
-	}
-
-	@Test
-	public void testCheck() {
-		mockery.checking(new Expectations() {
-			{
-				exactly(1).of(mock).click(with(any(String.class)));
-			}
-		});
-		page.check("id");
-		mockery.assertIsSatisfied();
+		page = new DefaultPage(mock, 10000);
 	}
 
 	@Test
@@ -67,14 +55,4 @@ public class PageTest {
 		mockery.assertIsSatisfied();
 	}
 
-	@Test
-	public void testIsFilled() {
-		mockery.checking(new Expectations() {
-			{
-				exactly(1).of(mock).getValue(with(any(String.class)));
-			}
-		});
-		page.isFilled("id", "value");
-		mockery.assertIsSatisfied();
-	}
 }

@@ -1,58 +1,57 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.DefaultBrowser;
-import br.com.caelum.seleniumdsl.Field;
 
 import com.thoughtworks.selenium.Selenium;
 
-public class FieldTest {
+public class ContentTagTest {
 	private Selenium mock;
 	private Mockery mockery;
-	private Field field;
+	private ContentTag tag;
 
 	@Before
 	public void setUp() {
 		mockery = new Mockery();
 		mock = mockery.mock(Selenium.class);
-		field = new DefaultBrowser(mock).currentPage().form("id").field("id");
+		tag = new DefaultBrowser(mock).currentPage().div("id");
 	}
 
 	@Test
 	public void testContains() {
 		mockery.checking(new Expectations() {
 			{
-				exactly(1).of(mock).getValue(with(any(String.class)));
+				exactly(1).of(mock).getText(with(any(String.class)));
 			}
 		});
-		field.contains("content");
+		tag.contains("id");
 		mockery.assertIsSatisfied();
 	}
 
 	@Test
-	public void testContent() {
+	public void testExists() {
 		mockery.checking(new Expectations() {
 			{
-				exactly(1).of(mock).getValue(with(any(String.class)));
+				exactly(1).of(mock).isElementPresent(with(any(String.class)));
 			}
 		});
-		field.content();
+		tag.exists();
 		mockery.assertIsSatisfied();
 	}
 
 	@Test
-	public void testType() {
+	public void testInnerHTML() {
 		mockery.checking(new Expectations() {
 			{
-				exactly(1).of(mock).type(with(any(String.class)), with(any(String.class)));
+				exactly(1).of(mock).getText(with(any(String.class)));
 			}
 		});
-		field.type("content");
+		tag.innerHTML();
 		mockery.assertIsSatisfied();
 	}
-
 }

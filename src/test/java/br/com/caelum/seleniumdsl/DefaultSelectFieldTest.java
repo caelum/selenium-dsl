@@ -1,4 +1,4 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -10,7 +10,7 @@ import br.com.caelum.seleniumdsl.SelectField;
 
 import com.thoughtworks.selenium.Selenium;
 
-public class SelectFieldTest {
+public class DefaultSelectFieldTest {
 	private Selenium mock;
 	private Mockery mockery;
 	private SelectField field;
@@ -19,7 +19,7 @@ public class SelectFieldTest {
 	public void setUp() {
 		mockery = new Mockery();
 		mock = mockery.mock(Selenium.class);
-		field = new DefaultBrowser(mock).currentPage().form("id").selectField("id");
+		field = new DefaultBrowser(mock).currentPage().form("id").select("id");
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class SelectFieldTest {
 				exactly(1).of(mock).select(with(any(String.class)), with(any(String.class)));
 			}
 		});
-		field.chooseByIndex(1);
+		field.choose(1);
 		mockery.assertIsSatisfied();
 	}
 

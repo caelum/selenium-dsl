@@ -1,4 +1,4 @@
-package br.com.caelum.seleniumdsl.test;
+package br.com.caelum.seleniumdsl;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -10,7 +10,7 @@ import br.com.caelum.seleniumdsl.DefaultBrowser;
 
 import com.thoughtworks.selenium.Selenium;
 
-public class BrowserTest {
+public class DefaultBrowserTest {
 	private Selenium mock;
 	private Mockery mockery;
 	private Browser browser;

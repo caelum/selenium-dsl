@@ -52,7 +52,7 @@ public class FormTest extends SeleniumTestCase {
 	@Test
 	public void shouldSelectWithChoose() {
 		String fieldId = "combobox";
-		form.selectField(fieldId).choose("Label 2");
+		form.select(fieldId).choose("Label 2");
 		String value = getSelenium().getSelectedValue(fieldId);
 		Assert.assertEquals(value, "2");
 
@@ -60,7 +60,7 @@ public class FormTest extends SeleniumTestCase {
 
 	public void shouldSelectWithChooseByIndex() {
 		String fieldId = "combobox";
-		form.selectField(fieldId).chooseByIndex(2);
+		form.select(fieldId).choose(2);
 		String value = getSelenium().getSelectedLabel(fieldId);
 		Assert.assertEquals(value, "Label 3");
 	}
