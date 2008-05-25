@@ -57,7 +57,7 @@ class DefaultPage implements Page {
 	}
 
 	public String invoke(String cmd) {
-		return selenium.getEval(cmd);
+		return selenium.getEval("this.browserbot.getCurrentWindow()." + cmd);
 	}
 
 }

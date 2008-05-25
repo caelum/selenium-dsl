@@ -13,7 +13,7 @@ public class DefaultRecord implements Record {
 	}
 
 	public void set(String dataIndex, boolean value) {
-		selenium.getEval(id + ".set('" + dataIndex + "', " + value + ")");
+		selenium.getEval("this.browserbot.getCurrentWindow()." + id + ".set('" + dataIndex + "', " + value + ")");
 	}
 
 }

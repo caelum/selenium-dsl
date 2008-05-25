@@ -13,7 +13,7 @@ public class Store {
 	}
 	
 	public Record recordAt(int position) {
-		return new DefaultRecord(selenium, grid.getIdentifier() + ".store.data.getAt(" + position +")");
+		return new DefaultRecord(selenium, grid.getIdentifier() + ".store.data.get(" + position +")");
 	}
 
 }
