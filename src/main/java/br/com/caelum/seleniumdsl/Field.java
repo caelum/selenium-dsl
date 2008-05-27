@@ -38,4 +38,10 @@ public interface Field {
 	 */
 	void blur();
 
+	/**
+	 * Executes the change action in this component.
+	 */
+	void change();
+
+
 }

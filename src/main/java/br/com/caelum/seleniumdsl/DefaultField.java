@@ -30,4 +30,7 @@ class DefaultField implements Field {
 	public void blur() {
 		selenium.fireEvent(id, "blur");
 	}
+	public void change() {
+		selenium.fireEvent(id, "change");
+	}
 }
