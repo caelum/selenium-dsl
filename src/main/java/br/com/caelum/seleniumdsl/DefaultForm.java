@@ -29,17 +29,17 @@ class DefaultForm implements Form {
 	}
 
 	public Form check(String checkbox) {
-		selenium.check(checkbox);
+		selenium.check(id + checkbox);
 		return this;
 	}
 
 	public Form uncheck(String checkbox) {
-		selenium.uncheck(checkbox);
+		selenium.uncheck(id + checkbox);
 		return this;
 	}
 
 	public boolean isChecked(String checkbox) {
-		return selenium.getEval("selenium.page().findElement(\"" + checkbox + "\").checked")
+		return selenium.getEval("selenium.page().findElement(\"" + id + checkbox + "\").checked")
 				.equals("true");
 	}
 
