@@ -8,7 +8,9 @@ class DefaultForm implements Form {
 	private final Selenium selenium;
 	private int timeout;
 
-	// FIXME: é suposto que id venha ou vazio, ou da forma "<id>."
+	/**
+	 * The form id is used in order to submit differente forms in the same web page.
+	 */
 	public DefaultForm(Selenium selenium, int timeout, String id) {
 		this.selenium = selenium;
 		this.timeout = timeout;
@@ -16,7 +18,7 @@ class DefaultForm implements Form {
 	}
 
 	public Field field(String field) {
-		return new DefaultField(selenium, this, id + field);
+		return new DefaultField(selenium, this, field);
 	}
 
 	public void click(String element) {
@@ -25,21 +27,21 @@ class DefaultForm implements Form {
 	}
 
 	public SelectField select(String selectField) {
-		return new DefaultSelectField(selenium, this, id + selectField);
+		return new DefaultSelectField(selenium, this, selectField);
 	}
 
 	public Form check(String checkbox) {
-		selenium.check(id + checkbox);
+		selenium.check(checkbox);
 		return this;
 	}
 
 	public Form uncheck(String checkbox) {
-		selenium.uncheck(id + checkbox);
+		selenium.uncheck(checkbox);
 		return this;
 	}
 
 	public boolean isChecked(String checkbox) {
-		return selenium.getEval("selenium.page().findElement(\"" + id + checkbox + "\").checked")
+		return selenium.getEval("selenium.page().findElement(\"" + checkbox + "\").checked")
 				.equals("true");
 	}
 
