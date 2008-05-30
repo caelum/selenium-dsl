@@ -133,6 +133,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <skip>true</skip>
+          <reportsDirectory>
+          	${project.build.directory}/test-results
+          </reportsDirectory>
         </configuration>
         <executions>
           <execution>
