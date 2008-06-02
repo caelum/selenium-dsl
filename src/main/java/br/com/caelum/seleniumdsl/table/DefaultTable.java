@@ -117,9 +117,4 @@ public class DefaultTable implements Table {
 	public TableLayout getLayout() {
 		return layout;
 	}
-
-	public boolean contains(String col, String content) {
-		return layout.contains(this, col, content);
-	}
-
 }

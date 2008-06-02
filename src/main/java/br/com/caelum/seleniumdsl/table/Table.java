@@ -58,15 +58,6 @@ public interface Table {
 	 */
 	public Cell cell(int row, String col);
 
-	/**
-	 * @param col
-	 *            the header text of the column
-	 * @param content
-	 *            the content to search
-	 * @return true if the content exists
-	 */
-	public boolean contains(String col, String content);
-
 	public String getId();
 
 	public boolean exists();

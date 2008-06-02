@@ -77,13 +77,6 @@ public class TableTest extends SeleniumTestCase {
 	}
 
 	@Test
-	public void testSearchCellValue() {
-		Assert.assertTrue(plain.contains("header_1", "cell_1_2"));
-		Assert.assertTrue(plainTh.contains("header_1", "cell_1_2"));
-		Assert.assertTrue(full.contains("header_1", "cell_1_2"));
-	}
-
-	@Test
 	public void testGetValueByCellAndColumn() {
 		Assert.assertEquals(plain.cell(2, "header_1").value(), "cell_1_2");
 		Assert.assertEquals(plainTh.cell(2, "header_1").value(), "cell_1_2");
