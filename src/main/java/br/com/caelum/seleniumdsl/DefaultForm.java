@@ -23,6 +23,10 @@ class DefaultForm implements Form {
 
 	public void click(String element) {
 		selenium.click(element);
+	}
+
+	public void navigate(String element) {
+		selenium.click(element);
 		selenium.waitForPageToLoad(Integer.toString(timeout));
 	}
 

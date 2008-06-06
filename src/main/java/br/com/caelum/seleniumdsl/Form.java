@@ -23,6 +23,14 @@ public interface Form {
 	public void click(String element);
 
 	/**
+	 * Clicks something on the page and waits
+	 * 
+	 * @param element
+	 *            can be the element ID, name or an xpath expression
+	 */
+	public void navigate(String element);
+
+	/**
 	 * 
 	 * @param selectField
 	 *            the select's name or id
