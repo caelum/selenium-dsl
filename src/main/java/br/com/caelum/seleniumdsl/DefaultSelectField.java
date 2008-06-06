@@ -34,4 +34,8 @@ class DefaultSelectField implements SelectField {
 		return selenium.getValue(id);
 	}
 
+	public String[] values() {
+		return selenium.getSelectOptions(id);
+	}
+
 }

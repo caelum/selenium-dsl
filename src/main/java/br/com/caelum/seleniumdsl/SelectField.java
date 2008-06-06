@@ -26,5 +26,11 @@ public interface SelectField {
 	 * @return
 	 */
 	String value();
+	
+	/**
+	 * Returns an array with all values for that select combo.
+	 * @return
+	 */
+	String[] values();
 
 }
