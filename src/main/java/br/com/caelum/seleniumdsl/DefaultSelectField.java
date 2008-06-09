@@ -38,4 +38,8 @@ class DefaultSelectField implements SelectField {
 		return selenium.getSelectOptions(id);
 	}
 
+	public String content() {
+		return selenium.getSelectedLabel(id);
+	}
+
 }

@@ -32,5 +32,11 @@ public interface SelectField {
 	 * @return
 	 */
 	String[] values();
+	
+	/**
+	 * Returns the currrent content for the selected option.
+	 * @return
+	 */
+	String content();
 
 }
