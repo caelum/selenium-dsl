@@ -60,4 +60,8 @@ class DefaultPage implements Page {
 		return selenium.getEval("this.browserbot.getCurrentWindow()." + cmd);
 	}
 
+	public void screenshot(String filename) {
+		selenium.captureScreenshot(filename);
+	}
+
 }

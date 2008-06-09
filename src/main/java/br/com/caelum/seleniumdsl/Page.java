@@ -83,5 +83,11 @@ public interface Page {
 	 * @return	the result
 	 */
 	String invoke(String cmd);
+	
+	/**
+	 * Takes a screenshot to the designated file.
+	 * @param filename
+	 */
+	void screenshot(String filename);
 
 }
