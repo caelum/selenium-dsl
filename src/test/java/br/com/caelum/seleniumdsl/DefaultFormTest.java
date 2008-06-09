@@ -48,8 +48,7 @@ public class DefaultFormTest {
 	public void testClick() {
 		mockery.checking(new Expectations() {
 			{
-				exactly(1).of(mock).click(with(any(String.class)));
-				exactly(1).of(mock).waitForPageToLoad(with(any(String.class)));
+				exactly(1).of(mock).click("id");
 			}
 		});
 		form.click("id");
