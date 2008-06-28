@@ -47,6 +47,14 @@
       <timezone>-3</timezone>
     </developer>
     <developer>
+      <id>ceci_fernandes</id>
+      <name>Cecilia Fernandes</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-3</timezone>
+    </developer>
+    <developer>
       <id>cairesvs</id>
       <name>Caires Vinicius</name>
       <roles>
