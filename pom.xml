@@ -1,6 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.com.caelum.seleniumdsl</groupId>
   <artifactId>selenium-dsl</artifactId>
@@ -9,7 +8,6 @@
   <name>selenium-dsl</name>
   <description>A DSL for working with Selenium and Java</description>
   <url>http://maven.apache.org</url>
-
   <developers>
     <developer>
       <id>fabiokung</id>
@@ -79,7 +77,6 @@
       <timezone>-3</timezone>
     </developer>
   </developers>
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -99,12 +96,10 @@
       <version>1.0-beta-1</version>
     </dependency>
   </dependencies>
-
   <properties>
     <java.compiler.version>1.5</java.compiler.version>
     <firefox.bin>/usr/lib/firefox/firefox-bin</firefox.bin>
   </properties>
-
   <build>
     <plugins>
       <plugin>
@@ -114,7 +109,6 @@
           <target>${java.compiler.version}</target>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -128,21 +122,17 @@
             </goals>
             <configuration>
               <links>
-                <link>
-                  http://java.sun.com/j2se/1.5/docs/api
-                </link>
+                <link> http://java.sun.com/j2se/1.5/docs/api </link>
               </links>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <skip>true</skip>
-          <reportsDirectory>
-          	${project.build.directory}/test-results
+          <reportsDirectory> ${project.build.directory}/test-results 
           </reportsDirectory>
         </configuration>
         <executions>
@@ -155,15 +145,12 @@
             <configuration>
               <skip>false</skip>
               <excludes>
-                <exclude>
-                  **/integration/**/*.java
-                </exclude>
+                <exclude> **/integration/**/*.java </exclude>
               </excludes>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>dependency-maven-plugin</artifactId>
@@ -175,19 +162,14 @@
               <goal>unpack</goal>
             </goals>
             <configuration>
-              <outputDirectory>
-                ${project.build.directory}/site/javadoc
+              <outputDirectory> ${project.build.directory}/site/javadoc 
               </outputDirectory>
               <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>
-                true
-              </overWriteSnapshots>
+              <overWriteSnapshots> true </overWriteSnapshots>
               <artifactItems>
                 <artifactItem>
                   <groupId>${pom.groupId}</groupId>
-                  <artifactId>
-                    ${pom.artifactId}
-                  </artifactId>
+                  <artifactId> ${pom.artifactId} </artifactId>
                   <version>${pom.version}</version>
                   <classifier>javadoc</classifier>
                 </artifactItem>
@@ -196,7 +178,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -209,15 +190,11 @@
             </goals>
             <configuration>
               <descriptors>
-                <descriptor>
-                  ${basedir}/src/main/assembly/bin.xml
+                <descriptor> ${basedir}/src/main/assembly/bin.xml 
                 </descriptor>
               </descriptors>
-              <finalName>
-                ${pom.artifactId}-${pom.version}
-              </finalName>
-              <workDirectory>
-                ${project.build.directory}/assembly/bin
+              <finalName> ${pom.artifactId}-${pom.version} </finalName>
+              <workDirectory> ${project.build.directory}/assembly/bin 
               </workDirectory>
             </configuration>
           </execution>
@@ -225,7 +202,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>macosx</id>
@@ -236,12 +212,11 @@
       </activation>
       <properties>
         <firefox.bin>
-          /Applications/Firefox.app/Contents/MacOS/firefox-bin
+          /Applications/Firefox.app/Contents/MacOS/firefox-bin 
         </firefox.bin>
         <java.compiler.version>1.5</java.compiler.version>
       </properties>
     </profile>
-
     <profile>
       <id>integration</id>
       <build>
@@ -260,21 +235,16 @@
                   <systemProperties>
                     <property>
                       <name>seleniumBrowserString</name>
-                      <value>
-                        *firefox ${firefox.bin}
-                      </value>
+                      <value> *firefox ${firefox.bin} </value>
                     </property>
                     <property>
                       <name>seleniumContextPath</name>
-                      <value>
-                        /${pom.artifactId}-${pom.version}/
+                      <value> /${pom.artifactId}-${pom.version}/ 
                       </value>
                     </property>
                   </systemProperties>
                   <includes>
-                    <include>
-                      **/integration/**/*Test.java
-                    </include>
+                    <include> **/integration/**/*Test.java </include>
                   </includes>
                 </configuration>
               </execution>
@@ -284,7 +254,6 @@
       </build>
     </profile>
   </profiles>
-    
   <pluginRepositories>
     <pluginRepository>
       <id>codehaus snapshot repository</id>
@@ -294,14 +263,28 @@
       </releases>
     </pluginRepository>
   </pluginRepositories>
-
+  
   <repositories>
     <repository>
+      <id>internal</id>
+      <name>Archiva Managed Internal Repository</name>
+      <url>http://192.168.0.2:8080/archiva/repository/internal</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>openqa</id>
-      <url>http://archiva.openqa.org/repository/releases/</url>
+      <url>http://maven.openqa.org</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
   </repositories>
-    
+  
   <distributionManagement>
     <downloadUrl>http://sourceforge.net/project/showfiles.php?group_id=227875</downloadUrl>
     <site>
@@ -320,34 +303,31 @@
       <url>scp://shell.sourceforge.net/home/groups/s/se/seleniumdsl/htdocs/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-
   <scm>
     <developerConnection>scm:svn:https://seleniumdsl.svn.sourceforge.net/svnroot/seleniumdsl/trunk</developerConnection>
     <connection>scm:svn:http://seleniumdsl.svn.sourceforge.net/svnroot/seleniumdsl/trunk</connection>
     <url>http://seleniumdsl.svn.sourceforge.net/viewvc/seleniumdsl/trunk</url>
   </scm>
-  
-	<reporting>
-		<plugins>
-		  <plugin>
+  <reporting>
+    <plugins>
+      <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-			</plugin>
-  		  <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>changelog-maven-plugin</artifactId>
-        </plugin>
-		</plugins>
-	</reporting>
-
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>changelog-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
