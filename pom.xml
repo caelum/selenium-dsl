@@ -325,19 +325,13 @@
   								</zipUrlInstaller>
   							</container>
   							<configuration>
+  								<properties>
+  									<cargo.servlet.port>8082</cargo.servlet.port>
+                                    <selenium.port>4445</selenium.port>
+  								</properties>
   								<home>
   									${project.build.directory}/tomcat5x/container
   								</home>
-                              <systemProperties>
-                              <property>
-									<name>cargo.servlet.port</name>
-									<value>8082</value>
-								</property>
-                                <property>
-                                  <name>selenium.port</name>
-                                  <value>4445</value>
-                                </property>
-                              </systemProperties>
   							</configuration>
   						</configuration>
   						<executions>
