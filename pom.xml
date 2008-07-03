@@ -127,30 +127,66 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-          <reportsDirectory> ${project.build.directory}/test-results 
-          </reportsDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>run tests</id>
-            <phase>test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <skip>false</skip>
-              <excludes>
-                <exclude> **/integration/**/*.java </exclude>
-              </excludes>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>run integration tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<systemProperties>
+								<property>
+									<name>cargo.servlet.port</name>
+									<value>8082</value>
+								</property>
+                                <property>
+                                  <name>selenium.port</name>
+                                  <value>4445</value>
+                                </property>
+								<property>
+									<name>seleniumBrowserString</name>
+									<value>
+										*firefox ${firefox.bin}
+									</value>
+								</property>
+								<property>
+									<name>seleniumContextPath</name>
+									<value>
+										/${pom.artifactId}-${pom.version}/
+									</value>
+								</property>
+							</systemProperties>
+							<includes>
+								<include>
+									**/integracao/**/*Test.java
+								</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>run tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<excludes>
+								<exclude>
+									**/integracao/**/*Test.java
+								</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>dependency-maven-plugin</artifactId>
