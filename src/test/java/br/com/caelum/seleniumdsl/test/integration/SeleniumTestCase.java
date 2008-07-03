@@ -27,6 +27,7 @@ public abstract class SeleniumTestCase {
 		String seleniumPort = System.getProperty("selenium.port");
 		if (seleniumPort == null || seleniumPort.equals("")) {
 			seleniumPort = String.valueOf(SeleniumServer.getDefaultPort());
+			seleniumPort = "4445";
 		}
 		String browser = System.getProperty("seleniumBrowserString");
 		browser = browser == null ? "*firefox" : browser;
