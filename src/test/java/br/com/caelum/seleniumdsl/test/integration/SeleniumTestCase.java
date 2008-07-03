@@ -20,11 +20,21 @@ public class SeleniumTestCase {
 
 	@BeforeClass
 	public static void beforeStartup() {
-		selenium = new DefaultSelenium("localhost", SeleniumServer.getDefaultPort(), "*firefox",
-				"http://localhost:8080/seleniumdsl/");
+		String port = System.getProperty("cargo.servlet.port");
+		if (port == null || port.equals("")) {
+			port = "8080";
+		}
+		String seleniumPort = System.getProperty("selenium.port");
+		if (seleniumPort == null || seleniumPort.equals("")) {
+			seleniumPort = String.valueOf(SeleniumServer.getDefaultPort());
+		}
+		String browser = System.getProperty("seleniumBrowserString");
+		browser = browser == null ? "*firefox" : browser;
+		selenium = new DefaultSelenium("localhost", Integer
+				.valueOf(seleniumPort), browser, "http://localhost:" + port);
 		selenium.start();
-		selenium.setContext("Selenium DSL testing");
-		selenium.setBrowserLogLevel(SeleniumLogLevels.DEBUG);
+		selenium.setContext("SeleniumDSL");
+		selenium.setBrowserLogLevel(SeleniumLogLevels.WARN);
 	}
 
 	@AfterClass
@@ -36,7 +46,7 @@ public class SeleniumTestCase {
 
 	@Before
 	public void setUp() {
-		this.browser = new DefaultBrowser(selenium);
+		browser = new DefaultBrowser(selenium);
 	}
 
 	@After

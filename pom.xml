@@ -288,9 +288,8 @@
   							</container>
   							<configuration>
   								<properties>
-  									<cargo.servlet.port>
-  										8081
-  									</cargo.servlet.port>
+  									<cargo.servlet.port>8082</cargo.servlet.port>
+                                    <selenium.port>4445</selenium.port>
   								</properties>
   								<home>
   									${project.build.directory}/tomcat5x/container
