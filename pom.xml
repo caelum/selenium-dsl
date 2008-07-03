@@ -167,7 +167,7 @@
 							</systemProperties>
 							<includes>
 								<include>
-									**/test/integracao/**/*Test.java
+									**/integration/**/*Test.java
 								</include>
 							</includes>
 						</configuration>

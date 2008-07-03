@@ -15,7 +15,7 @@ import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumLogLevels;
 
-public class SeleniumTestCase {
+public abstract class SeleniumTestCase {
 	private static Selenium selenium;
 
 	@BeforeClass
