@@ -16,45 +16,41 @@ import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumLogLevels;
 
 public abstract class SeleniumTestCase {
-	private static Selenium selenium;
+    private static Selenium selenium;
 
-	@BeforeClass
-	public static void beforeStartup() {
-		String port = System.getProperty("cargo.servlet.port");
-		if (port == null || port.equals("")) {
-			port = "8080";
-		}
-		String seleniumPort = System.getProperty("selenium.port");
-		if (seleniumPort == null || seleniumPort.equals("")) {
-			seleniumPort = String.valueOf(SeleniumServer.getDefaultPort());
-			seleniumPort = "4445";
-		}
-		String browser = System.getProperty("seleniumBrowserString");
-		browser = browser == null ? "*firefox" : browser;
-		selenium = new DefaultSelenium("localhost", Integer
-				.valueOf(seleniumPort), browser, "http://localhost:" + port);
-		selenium.start();
-		selenium.setContext("SeleniumDSL");
-		selenium.setBrowserLogLevel(SeleniumLogLevels.WARN);
+    @BeforeClass
+    public static void beforeStartup() {
+	String port = System.getProperty("cargo.servlet.port");
+	if (port == null || port.equals("")) {
+	    port = "8080";
 	}
 
-	@AfterClass
-	public static void afterShutdown() {
-		selenium.stop();
-	}
+	String browser = System.getProperty("seleniumBrowserString");
+	browser = browser == null ? "*firefox" : browser;
+	selenium = new DefaultSelenium("localhost", SeleniumServer
+		.getDefaultPort(), browser, "http://localhost:" + port);
+	selenium.start();
+	selenium.setContext("SeleniumDSL");
+	selenium.setBrowserLogLevel(SeleniumLogLevels.WARN);
+    }
 
-	protected Browser browser;
+    @AfterClass
+    public static void afterShutdown() {
+	selenium.stop();
+    }
 
-	@Before
-	public void setUp() {
-		browser = new DefaultBrowser(selenium);
-	}
+    protected Browser browser;
 
-	@After
-	public void tearDown() throws IOException {
-	}
+    @Before
+    public void setUp() {
+	browser = new DefaultBrowser(selenium);
+    }
 
-	public static Selenium getSelenium() {
-		return selenium;
-	}
+    @After
+    public void tearDown() throws IOException {
+    }
+
+    public static Selenium getSelenium() {
+	return selenium;
+    }
 }

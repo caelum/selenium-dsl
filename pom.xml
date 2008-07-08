@@ -146,12 +146,8 @@
 							<systemProperties>
 								<property>
 									<name>cargo.servlet.port</name>
-									<value>8082</value>
+									<value>8081</value>
 								</property>
-                                <property>
-                                  <name>selenium.port</name>
-                                  <value>4445</value>
-                                </property>
 								<property>
 									<name>seleniumBrowserString</name>
 									<value>
@@ -327,7 +323,6 @@
   							<configuration>
   								<properties>
   									<cargo.servlet.port>8082</cargo.servlet.port>
-                                    <selenium.port>4445</selenium.port>
   								</properties>
   								<home>
   									${project.build.directory}/tomcat5x/container
