@@ -53,6 +53,14 @@
       <timezone>-3</timezone>
     </developer>
     <developer>
+      <id>lucascs</id>
+      <name>Lucas Cavalcanti</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-3</timezone>
+    </developer>
+    <developer>
       <id>cairesvs</id>
       <name>Caires Vinicius</name>
       <roles>
@@ -389,7 +397,7 @@
   <repositories>
     <repository>
       <id>openqa</id>
-      <url>http://maven.openqa.org</url>
+      <url>http://archiva.openqa.org/repository/releases</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
