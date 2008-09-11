@@ -12,6 +12,7 @@ public interface Page {
 
 	/**
 	 * Accesses a web form.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -19,6 +20,7 @@ public interface Page {
 
 	/**
 	 * Access to a div.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -26,6 +28,7 @@ public interface Page {
 
 	/**
 	 * Access to a span.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -33,6 +36,7 @@ public interface Page {
 
 	/**
 	 * Access to a table.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -58,6 +62,7 @@ public interface Page {
 
 	/**
 	 * Checks for the existence of a link
+	 * 
 	 * @param link
 	 * @return
 	 */
@@ -69,23 +74,38 @@ public interface Page {
 	 * @return the page title
 	 */
 	String title();
-	
+
 	/**
 	 * Returns access to a javascript array.
-	 * @param name	the variable name
-	 * @return	the javascript array
+	 * 
+	 * @param name
+	 *            the variable name
+	 * @return the javascript array
 	 */
 	Array array(String name);
-	
+
 	/**
 	 * Invokes a javascript command.
-	 * @param cmd a command
-	 * @return	the result
+	 * 
+	 * @param cmd
+	 *            a command
+	 * @return the result
 	 */
 	String invoke(String cmd);
-	
+
+	/**
+	 * Waits at most timeout miliseconds until condition is true.
+	 * 
+	 * @param condition
+	 *            a javascript command that evals to true or false
+	 * @param timeout
+	 *            max time to wait
+	 */
+	void waitUntil(String condition, long timeout);
+
 	/**
 	 * Takes a screenshot to the designated file.
+	 * 
 	 * @param filename
 	 */
 	void screenshot(String filename);

@@ -10,6 +10,7 @@ import com.thoughtworks.selenium.Selenium;
 class DefaultPage implements Page {
 
 	final Selenium selenium;
+
 	private final int timeout;
 
 	public DefaultPage(Selenium selenium, int timeout) {
@@ -64,4 +65,7 @@ class DefaultPage implements Page {
 		selenium.captureScreenshot(filename);
 	}
 
+	public void waitUntil(String condition, long timeout) {
+		selenium.waitForCondition("selenium.browserbot.getCurrentWindow()." + condition, "" + timeout);
+	}
 }
