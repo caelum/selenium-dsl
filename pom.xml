@@ -4,7 +4,7 @@
 	<groupId>br.com.caelum.seleniumdsl</groupId>
 	<artifactId>selenium-dsl</artifactId>
 	<packaging>jar</packaging>
-	<version>0.8.5.1</version>
+	<version>0.8.5.2</version>
 	<name>selenium-dsl</name>
 	<description>A DSL for working with Selenium and Java</description>
 	<url>http://maven.apache.org</url>
@@ -338,13 +338,13 @@
 									<daemon>true</daemon>
 								</configuration>
 							</execution>
-							<execution>
-								<id>stop-jetty</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
+<!--							<execution>-->
+<!--								<id>stop-jetty</id>-->
+<!--								<phase>post-integration-test</phase>-->
+<!--								<goals>-->
+<!--									<goal>stop</goal>-->
+<!--								</goals>-->
+<!--							</execution>-->
 						</executions>
 					</plugin>
 				</plugins>
