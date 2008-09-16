@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.openqa.selenium.server.SeleniumServer;
 
 import br.com.caelum.seleniumdsl.Browser;
 import br.com.caelum.seleniumdsl.DefaultBrowser;
@@ -16,41 +15,44 @@ import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumLogLevels;
 
 public abstract class SeleniumTestCase {
-    private static Selenium selenium;
+	private static Selenium selenium;
 
-    @BeforeClass
-    public static void beforeStartup() {
-	String port = System.getProperty("cargo.servlet.port");
-	if (port == null || port.equals("")) {
-	    port = "8080";
+	@BeforeClass
+	public static void beforeStartup() {
+		String port = getProperty("cargo.servlet.port", "8080");
+		String browser = getProperty("seleniumBrowserString", "*firefox");
+		String seleniumPort = getProperty("selenium.port", "4444");
+
+		selenium = new DefaultSelenium("localhost", Integer.parseInt(seleniumPort), browser, "http://localhost:" + port);
+		selenium.start();
+		selenium.setContext("SeleniumDSL");
+		selenium.setBrowserLogLevel(SeleniumLogLevels.WARN);
 	}
 
-	String browser = System.getProperty("seleniumBrowserString");
-	browser = browser == null ? "*firefox" : browser;
-	selenium = new DefaultSelenium("localhost", SeleniumServer
-		.getDefaultPort(), browser, "http://localhost:" + port);
-	selenium.start();
-	selenium.setContext("SeleniumDSL");
-	selenium.setBrowserLogLevel(SeleniumLogLevels.WARN);
-    }
+	private static String getProperty(String key, String standard) {
+		String value = System.getProperty(key);
+		if (value == null || value.equals(""))
+			return standard;
+		return value;
+	}
 
-    @AfterClass
-    public static void afterShutdown() {
-	selenium.stop();
-    }
+	@AfterClass
+	public static void afterShutdown() {
+		selenium.stop();
+	}
 
-    protected Browser browser;
+	protected Browser browser;
 
-    @Before
-    public void setUp() {
-	browser = new DefaultBrowser(selenium);
-    }
+	@Before
+	public void setUp() {
+		browser = new DefaultBrowser(selenium);
+	}
 
-    @After
-    public void tearDown() throws IOException {
-    }
+	@After
+	public void tearDown() throws IOException {
+	}
 
-    public static Selenium getSelenium() {
-	return selenium;
-    }
+	public static Selenium getSelenium() {
+		return selenium;
+	}
 }

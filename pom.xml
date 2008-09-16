@@ -291,7 +291,7 @@
 		<profile>
 			<id>tomcat</id>
 			<properties>
-				<cargo.port>9091</cargo.port>
+				<cargo.port>9891</cargo.port>
 			</properties>
 			<build>
 				<plugins>
@@ -320,7 +320,7 @@
 								</connector>
 							</connectors>
 							<stopKey>seleniumdsl</stopKey>
-							<stopPort>9999</stopPort>
+							<stopPort>9898</stopPort>
 							<deamon>true</deamon>
 							<contextPath>/</contextPath>
 							<scanIntervalSeconds>10</scanIntervalSeconds>
