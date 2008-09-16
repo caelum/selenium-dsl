@@ -24,6 +24,14 @@ public interface Browser {
 	Page currentPage();
 
 	/**
+	 * Waits for a new page to load.
+	 * 
+	 * @param timeout
+	 *            max time to wait
+	 */
+	Page waitForPageLoad(long timeout);
+
+	/**
 	 * Returns the internal implementation which is used by this browser api.
 	 * 
 	 * @return the delegate object

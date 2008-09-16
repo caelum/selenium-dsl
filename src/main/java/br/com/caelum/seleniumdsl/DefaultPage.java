@@ -65,7 +65,15 @@ class DefaultPage implements Page {
 		selenium.captureScreenshot(filename);
 	}
 
-	public void waitUntil(String condition, long timeout) {
+	public Page waitUntil(String condition, long timeout) {
 		selenium.waitForCondition("selenium.browserbot.getCurrentWindow()." + condition, "" + timeout);
+		return this;
 	}
+
+	public Page refresh() {
+		selenium.refresh();
+		selenium.waitForPageToLoad(title());
+		return this;
+	}
+
 }

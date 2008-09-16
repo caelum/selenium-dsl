@@ -3,8 +3,8 @@ package br.com.caelum.seleniumdsl;
 import com.thoughtworks.selenium.Selenium;
 
 /**
- * A default browser implementation based on selenium. Other browser
- * implementations might be created based on other projects (webdriver?).
+ * A default browser implementation based on selenium. Other browser implementations might be created based on other
+ * projects (webdriver?).
  * 
  * @author Guilherme Silveira
  */
@@ -24,8 +24,7 @@ public class DefaultBrowser implements Browser {
 	}
 
 	/**
-	 * Creates the browser with this selenium implementation and the selected
-	 * timeout in millisecs.
+	 * Creates the browser with this selenium implementation and the selected timeout in millisecs.
 	 * 
 	 * @param selenium
 	 * @param timeout
@@ -47,6 +46,11 @@ public class DefaultBrowser implements Browser {
 
 	public Object getDelegate() {
 		return selenium;
+	}
+
+	public Page waitForPageLoad(long timeout) {
+		selenium.waitForPageToLoad("" + timeout);
+		return currentPage();
 	}
 
 }

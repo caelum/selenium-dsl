@@ -21,6 +21,10 @@ public class DefaultTable implements Table {
 
 	private final TableLayout layout;
 
+	private Integer colCount;
+
+	private Integer rowCount;
+
 	public DefaultTable(Selenium selenium, String id) {
 		this(selenium, id, "id");
 	}
@@ -46,11 +50,17 @@ public class DefaultTable implements Table {
 	}
 
 	public int getColCount() {
-		return layout.getColCount();
+		if (this.colCount == null) {
+			this.colCount = layout.getColCount();
+		}
+		return this.colCount;
 	}
 
 	public int getRowCount() {
-		return layout.getRowCount();
+		if (this.rowCount == null) {
+			this.rowCount = layout.getRowCount();
+		}
+		return this.rowCount;
 	}
 
 	public int getContentCount() {
@@ -75,8 +85,9 @@ public class DefaultTable implements Table {
 
 	public void iterate(RowVisitor visitor) {
 		int count = getRowCount();
-		for (int row = 1; row <= count; row++)
+		for (int row = 1; row <= count; row++) {
 			visitor.visit(new DefaultRow(this, selenium, row));
+		}
 	}
 
 	public Row header() {
@@ -93,11 +104,9 @@ public class DefaultTable implements Table {
 		for (int i = 0; i < colCount; i++) {
 			String current;
 			try {
-				current = row.cell(i + 1)
-						.headerValue();
+				current = row.cell(i + 1).headerValue();
 			} catch (SeleniumException e) {
-				current = row.cell(i + 1)
-						.value();
+				current = row.cell(i + 1).value();
 			}
 			if (columnName.equals(current))
 				return i + 1;

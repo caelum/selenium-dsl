@@ -101,7 +101,7 @@ public interface Page {
 	 * @param timeout
 	 *            max time to wait
 	 */
-	void waitUntil(String condition, long timeout);
+	Page waitUntil(String condition, long timeout);
 
 	/**
 	 * Takes a screenshot to the designated file.
@@ -109,5 +109,10 @@ public interface Page {
 	 * @param filename
 	 */
 	void screenshot(String filename);
+
+	/**
+	 * Simulates the user clicking the "Refresh" button on their browser.
+	 */
+	Page refresh();
 
 }

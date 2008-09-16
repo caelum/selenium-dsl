@@ -25,6 +25,10 @@ public interface Table {
 
 	public int getColCount();
 
+	/**
+	 * The first time that method is called for, it makes the internal cache. If method is called for again, it uses the
+	 * cached value.
+	 */
 	public int getRowCount();
 
 	/**
@@ -39,21 +43,24 @@ public interface Table {
 
 	/**
 	 * @param row
-	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the header.
+	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the
+	 *            header.
 	 * @return the br.com.caelum.seleniumdsl.table.Row object
 	 */
 	public Row row(Integer row);
 
 	/**
 	 * @param row
-	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the header.
+	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the
+	 *            header.
 	 * @return the Cell object
 	 */
 	public Cell cell(int row, int col);
 
 	/**
 	 * @param row
-	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the header.
+	 *            Only counts the CONTENTS of the table. So index 1 is the first data row of the table, ignoring the
+	 *            header.
 	 * @return the Cell object
 	 */
 	public Cell cell(int row, String col);
