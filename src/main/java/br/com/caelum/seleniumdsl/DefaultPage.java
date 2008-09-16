@@ -72,7 +72,7 @@ class DefaultPage implements Page {
 
 	public Page refresh() {
 		selenium.refresh();
-		selenium.waitForPageToLoad(title());
+		selenium.waitForPageToLoad(timeout + "");
 		return this;
 	}
 
