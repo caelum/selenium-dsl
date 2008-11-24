@@ -13,8 +13,8 @@ import br.com.caelum.seleniumdsl.table.Table;
 import com.thoughtworks.selenium.Selenium;
 
 public class PlainTableTest {
-	private static final String BASE_COUNT_PATH = "//table[@id='id']/";
-	private static final String BASE_TEXT_PATH = "xpath=//table[@id='id']/";
+	private static final String BASE_COUNT_PATH = "//table[@id='id']";
+	private static final String BASE_TEXT_PATH = "xpath=//table[@id='id']";
 
 	private Selenium mock;
 	private Mockery mockery;
@@ -46,7 +46,7 @@ public class PlainTableTest {
 	public void testRowCount() {
 		mockery.checking(new Expectations() {
 			{
-				String rowCount = BASE_COUNT_PATH + "*/tr";
+				String rowCount = BASE_COUNT_PATH + "/*/tr";
 
 				one(mock).getXpathCount(rowCount);
 				will(returnValue(5));
@@ -61,7 +61,7 @@ public class PlainTableTest {
 	public void testContentCount() {
 		mockery.checking(new Expectations() {
 			{
-				String rowCount = BASE_COUNT_PATH + "*/tr";
+				String rowCount = BASE_COUNT_PATH + "/*/tr";
 
 				one(mock).getXpathCount(rowCount);
 				will(returnValue(5));

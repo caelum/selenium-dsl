@@ -17,7 +17,7 @@ public class PlainPlusThTableLayout implements TableLayout {
 	}
 
 	public int getColCount() {
-		return helper.countXPath("tbody/tr/th");
+		return helper.countXPath("/tbody/tr/th");
 	}
 
 	public String headerValue(int col) {

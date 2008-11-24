@@ -13,11 +13,11 @@ public class FullTableLayout implements TableLayout {
 	}
 
 	public int getContentCount() {
-		return helper.countXPath("tbody/tr");
+		return helper.countXPath("/tbody/tr");
 	}
 
 	public int getColCount() {
-		return helper.countXPath("thead/tr/th");
+		return helper.countXPath("/thead/tr/th");
 	}
 
 	public String headerValue(int col) {

@@ -75,7 +75,8 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.row(1).cell(1).value(), "cell_1_1");
 		Assert.assertEquals(plainTh.row(1).cell(1).value(), "cell_1_1");
 		Assert.assertEquals(full.row(1).cell(1).value(), "cell_1_1");
-		Assert.assertEquals(nested.row(1).cell(1).value(), "nested");
+		Assert.assertEquals(nested.row(1).cell(1).value(), "cell_1_1");
+		Assert.assertEquals(nested.row(2).cell(1).value(), "cell_1_2");
 	}
 
 	@Test
@@ -83,7 +84,8 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.cell(1, 1).value(), "cell_1_1");
 		Assert.assertEquals(plainTh.cell(1, 1).value(), "cell_1_1");
 		Assert.assertEquals(full.cell(1, 1).value(), "cell_1_1");
-		Assert.assertEquals(nested.cell(1, 1).value(), "nested");
+		Assert.assertEquals(nested.cell(1, 1).value(), "cell_1_1");
+		Assert.assertEquals(nested.cell(2, 1).value(), "cell_1_2");
 	}
 
 	@Test

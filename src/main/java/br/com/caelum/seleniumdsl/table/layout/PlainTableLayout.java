@@ -6,7 +6,7 @@ import com.thoughtworks.selenium.Selenium;
 
 public class PlainTableLayout implements TableLayout {
 
-	private TableLayoutHelper helper;
+	private final TableLayoutHelper helper;
 
 	public PlainTableLayout(Selenium selenium, String id, String type) {
 		helper = new TableLayoutHelper(selenium, id, type);

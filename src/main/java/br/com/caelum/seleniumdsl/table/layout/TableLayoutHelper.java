@@ -21,17 +21,17 @@ class TableLayoutHelper {
 	}
 
 	int getRowCount() {
-		return countXPath("*/tr");
+		return countXPath("/*/tr");
 	}
 
 	int countXPath(String expr) {
-		return selenium.getXpathCount("//table[@" + type + "='" + id + "']/" + expr)
+		return selenium.getXpathCount("//table[@" + type + "='" + id + "']" + expr)
 				.intValue();
 	}
 
 	String getXPathText(String expr) {
 		try {
-			return selenium.getText("xpath=//table[@" + type + "='" + id + "']/" + expr);
+			return selenium.getText("xpath=//table[@" + type + "='" + id + "']" + expr);
 		} catch (SeleniumException e) {
 			log.info(e.getMessage());
 		}
