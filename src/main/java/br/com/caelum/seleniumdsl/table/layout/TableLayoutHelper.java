@@ -10,9 +10,9 @@ import com.thoughtworks.selenium.SeleniumException;
 class TableLayoutHelper {
 	private static final Logger log = Logger.getLogger(TableLayoutHelper.class.getName());
 
-	private Selenium selenium;
-	private String id;
-	private String type;
+	private final Selenium selenium;
+	private final String id;
+	private final String type;
 
 	TableLayoutHelper(Selenium selenium, String id, String type) {
 		this.selenium = selenium;
@@ -21,7 +21,7 @@ class TableLayoutHelper {
 	}
 
 	int getRowCount() {
-		return countXPath("/*/tr");
+		return countXPath("*/tr");
 	}
 
 	int countXPath(String expr) {
@@ -40,10 +40,12 @@ class TableLayoutHelper {
 	}
 
 	boolean contains(Table table, String col, String content) {
-		for (int i = 1; i < table.getRowCount(); i++)
+		for (int i = 1; i < table.getRowCount(); i++) {
 			if (table.cell(i, col)
-					.contains(content))
+					.contains(content)) {
 				return true;
+			}
+		}
 		return false;
 	}
 }

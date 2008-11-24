@@ -46,7 +46,7 @@ public class PlainThTableTest {
 	public void testRowCount() {
 		mockery.checking(new Expectations() {
 			{
-				String rowCount = BASE_COUNT_PATH + "/*/tr";
+				String rowCount = BASE_COUNT_PATH + "*/tr";
 
 				one(mock).getXpathCount(rowCount);
 				will(returnValue(5));
@@ -61,7 +61,7 @@ public class PlainThTableTest {
 	public void testContentCount() {
 		mockery.checking(new Expectations() {
 			{
-				String rowCount = BASE_COUNT_PATH + "/*/tr";
+				String rowCount = BASE_COUNT_PATH + "*/tr";
 
 				one(mock).getXpathCount(rowCount);
 				will(returnValue(5));
@@ -76,7 +76,7 @@ public class PlainThTableTest {
 	public void testColCount() {
 		mockery.checking(new Expectations() {
 			{
-				String colCount = BASE_COUNT_PATH + "/tbody/tr/th";
+				String colCount = BASE_COUNT_PATH + "tbody/tr/th";
 				one(mock).getXpathCount(colCount);
 				will(returnValue(3));
 			}

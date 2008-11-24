@@ -17,6 +17,8 @@ public class TableTest extends SeleniumTestCase {
 	private Table plainTh;
 	private Table full;
 
+	private Table nested;
+
 	@Override
 	public void setUp() {
 		super.setUp();
@@ -25,6 +27,7 @@ public class TableTest extends SeleniumTestCase {
 		plain = page.table("plain");
 		plainTh = page.table("plain_with_th");
 		full = page.table("full");
+		nested = page.table("nested");
 	}
 
 	@Test
@@ -32,6 +35,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertTrue(plain.getLayout().getClass().equals(PlainTableLayout.class));
 		Assert.assertTrue(plainTh.getLayout().getClass().equals(PlainPlusThTableLayout.class));
 		Assert.assertTrue(full.getLayout().getClass().equals(FullTableLayout.class));
+		Assert.assertTrue(nested.getLayout().getClass().equals(FullTableLayout.class));
 	}
 
 	@Test
@@ -39,6 +43,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.getRowCount(), 5);
 		Assert.assertEquals(plainTh.getRowCount(), 5);
 		Assert.assertEquals(full.getRowCount(), 5);
+		Assert.assertEquals(nested.getRowCount(), 5);
 	}
 
 	@Test
@@ -46,6 +51,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.getContentCount(), 4);
 		Assert.assertEquals(plainTh.getContentCount(), 4);
 		Assert.assertEquals(full.getContentCount(), 3);
+		Assert.assertEquals(nested.getContentCount(), 3);
 	}
 
 	@Test
@@ -53,6 +59,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.row(1).cell(1).headerValue(), "header_1");
 		Assert.assertEquals(plainTh.row(1).cell(1).headerValue(), "header_1");
 		Assert.assertEquals(full.row(1).cell(1).headerValue(), "header_1");
+		Assert.assertEquals(nested.row(1).cell(1).headerValue(), "header_1");
 	}
 
 	@Test
@@ -60,6 +67,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.header().cell(2).headerLinkValue(), "header_2");
 		Assert.assertEquals(plainTh.header().cell(2).headerLinkValue(), "header_2");
 		Assert.assertEquals(full.header().cell(2).headerLinkValue(), "header_2");
+		Assert.assertEquals(nested.header().cell(2).headerLinkValue(), "header_2");
 	}
 
 	@Test
@@ -67,6 +75,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.row(1).cell(1).value(), "cell_1_1");
 		Assert.assertEquals(plainTh.row(1).cell(1).value(), "cell_1_1");
 		Assert.assertEquals(full.row(1).cell(1).value(), "cell_1_1");
+		Assert.assertEquals(nested.row(1).cell(1).value(), "nested");
 	}
 
 	@Test
@@ -74,6 +83,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.cell(1, 1).value(), "cell_1_1");
 		Assert.assertEquals(plainTh.cell(1, 1).value(), "cell_1_1");
 		Assert.assertEquals(full.cell(1, 1).value(), "cell_1_1");
+		Assert.assertEquals(nested.cell(1, 1).value(), "nested");
 	}
 
 	@Test
@@ -81,6 +91,7 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertEquals(plain.cell(2, "header_1").value(), "cell_1_2");
 		Assert.assertEquals(plainTh.cell(2, "header_1").value(), "cell_1_2");
 		Assert.assertEquals(full.cell(2, "header_1").value(), "cell_1_2");
+		Assert.assertEquals(nested.cell(2, "header_1").value(), "cell_1_2");
 	}
 
 	@Test
@@ -88,12 +99,14 @@ public class TableTest extends SeleniumTestCase {
 		Assert.assertTrue(plain.row(2).cell(3).check().checked());
 		Assert.assertTrue(plainTh.row(2).cell(3).check().checked());
 		Assert.assertTrue(full.row(2).cell(3).check().checked());
+		Assert.assertTrue(nested.row(2).cell(3).check().checked());
 	}
 
 	@Test
-	public void testUnheck() {
+	public void testUncheck() {
 		Assert.assertFalse(plain.row(2).cell(3).uncheck().checked());
 		Assert.assertFalse(plainTh.row(2).cell(3).uncheck().checked());
 		Assert.assertFalse(full.row(2).cell(3).uncheck().checked());
+		Assert.assertFalse(nested.row(2).cell(3).uncheck().checked());
 	}
 }

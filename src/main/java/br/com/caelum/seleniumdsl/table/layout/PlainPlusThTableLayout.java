@@ -6,7 +6,7 @@ import com.thoughtworks.selenium.Selenium;
 
 public class PlainPlusThTableLayout implements TableLayout {
 
-	private TableLayoutHelper helper;
+	private final TableLayoutHelper helper;
 
 	public PlainPlusThTableLayout(Selenium selenium, String id, String type) {
 		helper = new TableLayoutHelper(selenium, id, type);
@@ -17,7 +17,7 @@ public class PlainPlusThTableLayout implements TableLayout {
 	}
 
 	public int getColCount() {
-		return helper.countXPath("/tbody/tr/th");
+		return helper.countXPath("tbody/tr/th");
 	}
 
 	public String headerValue(int col) {

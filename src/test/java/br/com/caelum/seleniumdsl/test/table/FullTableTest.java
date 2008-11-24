@@ -46,7 +46,7 @@ public class FullTableTest {
 	public void testRowCount() {
 		mockery.checking(new Expectations() {
 			{
-				String rowCount = BASE_COUNT_PATH + "/*/tr";
+				String rowCount = BASE_COUNT_PATH + "*/tr";
 
 				one(mock).getXpathCount(rowCount);
 				will(returnValue(5));
@@ -61,7 +61,7 @@ public class FullTableTest {
 	public void testContentCount() {
 		mockery.checking(new Expectations() {
 			{
-				String contentCount = BASE_COUNT_PATH + "/tbody/tr";
+				String contentCount = BASE_COUNT_PATH + "tbody/tr";
 
 				one(mock).getXpathCount(contentCount);
 				will(returnValue(3));
@@ -76,7 +76,7 @@ public class FullTableTest {
 	public void testColCount() {
 		mockery.checking(new Expectations() {
 			{
-				String colCount = BASE_COUNT_PATH + "/thead/tr/th";
+				String colCount = BASE_COUNT_PATH + "thead/tr/th";
 				one(mock).getXpathCount(colCount);
 				will(returnValue(3));
 			}
@@ -90,7 +90,7 @@ public class FullTableTest {
 	public void testFindColumnWithTHead() {
 		mockery.checking(new Expectations() {
 			{
-				String colCount = BASE_COUNT_PATH + "/thead/tr/th";
+				String colCount = BASE_COUNT_PATH + "thead/tr/th";
 				one(mock).getXpathCount(colCount);
 				will(returnValue(1));
 

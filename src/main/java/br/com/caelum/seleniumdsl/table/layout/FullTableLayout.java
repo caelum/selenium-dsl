@@ -6,18 +6,18 @@ import com.thoughtworks.selenium.Selenium;
 
 public class FullTableLayout implements TableLayout {
 
-	private TableLayoutHelper helper;
+	private final TableLayoutHelper helper;
 
 	public FullTableLayout(Selenium selenium, String id, String type) {
 		helper = new TableLayoutHelper(selenium, id, type);
 	}
 
 	public int getContentCount() {
-		return helper.countXPath("/tbody/tr");
+		return helper.countXPath("tbody/tr");
 	}
 
 	public int getColCount() {
-		return helper.countXPath("/thead/tr/th");
+		return helper.countXPath("thead/tr/th");
 	}
 
 	public String headerValue(int col) {
