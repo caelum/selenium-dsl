@@ -29,7 +29,7 @@ public class HtmlUnitPage implements Page {
     }
 
     public Array array(String name) {
-        return new HtmlUnitArray(name);
+        return new HtmlUnitArray(webClient, name);
     }
 
     public Page click(String element) {
