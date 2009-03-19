@@ -8,8 +8,9 @@ import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class HtmlUnitPage implements Page {
@@ -29,11 +30,15 @@ public class HtmlUnitPage implements Page {
 	}
 
 	public ContentTag div(String id) {
-		return new HtmlUnitContentTag(page.getElementById(id));
+		HtmlElement div = page.getElementById(id);
+		if (div == null) {
+			throw new ElementNotFoundException("div", "id", id);
+		}
+		return new HtmlUnitContentTag(div);
 	}
 
 	public Form form(String id) {
-		return new HtmlUnitForm(this, (HtmlForm) page.getElementById(id));
+		return new HtmlUnitForm(this, page.getFormByName(id));
 	}
 	
 	void setPage(HtmlPage page) {

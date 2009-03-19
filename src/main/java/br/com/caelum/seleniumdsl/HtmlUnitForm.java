@@ -39,7 +39,7 @@ public class HtmlUnitForm implements Form {
     }
 
     public SelectField select(String selectField) {
-        throw new NotImplementedException();
+    	return new HtmlUnitSelectField(this, form.getSelectByName(selectField));
     }
 
     public void submit() {

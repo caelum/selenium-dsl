@@ -20,11 +20,14 @@ public class HtmlUnitContentTag implements ContentTag {
         throw new NotImplementedException();
     }
 
-    /**
-     * FIXME returns element html also
-     */
+    // FIXME returns element html also
     public String innerHTML() {
         return element.asXml();
     }
+    
+    @Override
+	public String toString() {
+		return element.asXml();
+	} 
 
 }

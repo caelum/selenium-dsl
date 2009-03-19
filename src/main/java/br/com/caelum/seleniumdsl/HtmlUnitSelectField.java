@@ -2,22 +2,22 @@ package br.com.caelum.seleniumdsl;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+
 
 public class HtmlUnitSelectField implements SelectField {
     
-    private final HtmlUnitForm form;
-    private final String id;
-    private final HtmlUnitPage page;
+    private final HtmlSelect select;
+	private final HtmlUnitForm parent;
 
-    public HtmlUnitSelectField(HtmlUnitPage page, HtmlUnitForm form, String id) {
-        this.page = page;
-        this.form = form;
-        this.id = id;
-    }
+	public HtmlUnitSelectField(HtmlUnitForm parent, HtmlSelect select) {
+		this.parent = parent;
+		this.select = select;
+	}
 
-    public Form choose(String value) {
-        form.select(value);
-        return form;
+	public Form choose(String value) {
+        select.setSelectedAttribute(value, true);
+        return parent;
     }
 
     public Form choose(int index) {
