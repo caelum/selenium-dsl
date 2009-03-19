@@ -8,30 +8,19 @@ import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-/* is it necessary to wait?? */
 
 public class HtmlUnitPage implements Page {
 
     private final HtmlPage page;
-    private final WebClient webClient;
-    private final long timeout;
 
-    public HtmlUnitPage(HtmlPage page, WebClient webClient) {
-        this(page, webClient, 10000);
+    public HtmlUnitPage(HtmlPage page) {
+        this.page = page;
     }
     
-    public HtmlUnitPage(HtmlPage page, WebClient webClient, long timeout) {
-        this.page = page;
-        this.webClient = webClient;
-        this.timeout = timeout;
-    }
-
     public Array array(String name) {
-        return new HtmlUnitArray(webClient, name);
+        return new HtmlUnitArray(page.getWebClient(), name);
     }
 
     public Page click(String element) {
@@ -86,12 +75,7 @@ public class HtmlUnitPage implements Page {
     }
 
     public Page waitUntil(String condition, long timeout) {
-        try {
-            webClient.wait(timeout);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return this;
+    	throw new NotImplementedException();
     }
 
 }
