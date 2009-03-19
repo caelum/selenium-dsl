@@ -13,7 +13,7 @@ public class HtmlUnitContentTag implements ContentTag {
     }
 
     public boolean contains(String content) {
-        throw new NotImplementedException();
+        return innerHTML().contains(content);
     }
 
     public boolean exists() {
