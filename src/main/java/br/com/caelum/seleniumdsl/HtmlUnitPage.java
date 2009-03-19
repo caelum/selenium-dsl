@@ -9,73 +9,81 @@ import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class HtmlUnitPage implements Page {
 
-    private final HtmlPage page;
+	private HtmlPage page;
 
-    public HtmlUnitPage(HtmlPage page) {
-        this.page = page;
-    }
-    
-    public Array array(String name) {
-        return new HtmlUnitArray(page.getWebClient(), name);
-    }
+	public HtmlUnitPage(HtmlPage page) {
+		this.page = page;
+	}
 
-    public Page click(String element) {
-        HtmlAnchor anchorByName = page.getAnchorByName(element);
-        try {
-            anchorByName.click();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+	public Array array(String name) {
+		return new HtmlUnitArray(page.getWebClient(), name);
+	}
 
-    public ContentTag div(String id) {
-        return new HtmlUnitContentTag(id);
-    }
+	public Page click(String element) {
+		throw new NotImplementedException();
+	}
 
-    public Form form(String id) {
-        return new HtmlUnitForm(id.equals("") ? "" : id + ".");
-    }
+	public ContentTag div(String id) {
+		return new HtmlUnitContentTag(page.getElementById(id));
+	}
 
-    public boolean hasLink(String link) {
-        HtmlAnchor anchorByName = page.getAnchorByName(link);
-        return anchorByName == null;
-    }
+	public Form form(String id) {
+		return new HtmlUnitForm(this, (HtmlForm) page.getElementById(id));
+	}
+	
+	void setPage(HtmlPage page) {
+		this.page = page;
+	}
 
-    public String invoke(String cmd) {
-        throw new NotImplementedException();
-    }
+	public boolean hasLink(String link) {
+		HtmlAnchor anchorByName = page.getAnchorByName(link);
+		return anchorByName == null;
+	}
 
-    public Page navigate(String element) {
-        throw new NotImplementedException();
-    }
+	public String invoke(String cmd) {
+		throw new NotImplementedException();
+	}
 
-    public Page refresh() {
-        throw new NotImplementedException();
-    }
+	public Page navigate(String element) {
+		if (element.startsWith("link=")) {
+			HtmlAnchor anchorByName = page.getFirstAnchorByText(element.replace("link=", ""));
+			try {
+				this.page = anchorByName.click();
+				return this;
+			} catch (IOException e) {
+				throw new IllegalArgumentException(e);
+			}
+		}
+		throw new NotImplementedException(element + " not recognized");
+	}
 
-    public void screenshot(String filename) {
-        throw new NotImplementedException();
-    }
+	public Page refresh() {
+		throw new NotImplementedException();
+	}
 
-    public ContentTag span(String id) {
-        return new HtmlUnitContentTag(id);
-    }
+	public void screenshot(String filename) {
+		throw new NotImplementedException();
+	}
 
-    public Table table(String id) {
-        return new HtmlUnitTable(id);
-    }
+	public ContentTag span(String id) {
+		return div(id);
+	}
 
-    public String title() {
-        return page.getTitleText();
-    }
+	public Table table(String id) {
+		return new HtmlUnitTable(id);
+	}
 
-    public Page waitUntil(String condition, long timeout) {
-    	throw new NotImplementedException();
-    }
+	public String title() {
+		return page.getTitleText();
+	}
+
+	public Page waitUntil(String condition, long timeout) {
+		throw new NotImplementedException();
+	}
 
 }

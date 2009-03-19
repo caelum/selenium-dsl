@@ -1,13 +1,21 @@
 package br.com.caelum.seleniumdsl;
 
+import java.io.IOException;
+
 import org.apache.commons.lang.NotImplementedException;
+
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 public class HtmlUnitForm implements Form {
 
-    private final String id;
+    private final HtmlForm form;
+	private final HtmlUnitPage parent;
 
-    public HtmlUnitForm(String id) {
-        this.id = id;
+    public HtmlUnitForm(HtmlUnitPage page, HtmlForm htmlForm) {
+        this.parent = page;
+		this.form = htmlForm;
     }
 
     public Form check(String checkbox) {
@@ -19,7 +27,7 @@ public class HtmlUnitForm implements Form {
     }
 
     public Field field(String field) {
-        throw new NotImplementedException();
+        return new HtmlUnitField(this, form.getInputByName(field));
     }
 
     public boolean isChecked(String checkbox) {
@@ -35,7 +43,12 @@ public class HtmlUnitForm implements Form {
     }
 
     public void submit() {
-        throw new NotImplementedException();
+        try {
+        	HtmlSubmitInput submit = form.getFirstByXPath("input[@type='submit']");
+        	parent.setPage((HtmlPage) submit.click());
+		} catch (IOException e) {
+			new IllegalStateException("Error while clicking", e);
+		}
     }
 
     public Form uncheck(String checkbox) {

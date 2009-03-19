@@ -2,12 +2,14 @@ package br.com.caelum.seleniumdsl;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 public class HtmlUnitContentTag implements ContentTag {
     
-    private final String id;
+    private final HtmlElement element;
 
-    public HtmlUnitContentTag(String id) {
-        this.id = id;
+    public HtmlUnitContentTag(HtmlElement element) {
+        this.element = element;
     }
 
     public boolean contains(String content) {
@@ -18,8 +20,11 @@ public class HtmlUnitContentTag implements ContentTag {
         throw new NotImplementedException();
     }
 
+    /**
+     * FIXME returns element html also
+     */
     public String innerHTML() {
-        throw new NotImplementedException();
+        return element.asXml();
     }
 
 }
