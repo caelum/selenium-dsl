@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import org.apache.commons.lang.NotImplementedException;
+
 
 public class HtmlUnitSelectField implements SelectField {
     
@@ -19,23 +21,19 @@ public class HtmlUnitSelectField implements SelectField {
     }
 
     public Form choose(int index) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public String content() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public String value() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public String[] values() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
 }

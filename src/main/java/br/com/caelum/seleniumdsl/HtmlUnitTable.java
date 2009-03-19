@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import org.apache.commons.lang.NotImplementedException;
+
 import br.com.caelum.seleniumdsl.search.RowMatcher;
 import br.com.caelum.seleniumdsl.search.RowVisitor;
 import br.com.caelum.seleniumdsl.search.TableCriteria;
@@ -18,88 +20,71 @@ public class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, int col) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public Cell cell(int row, String col) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public Column column(int columnIndex) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public Column column(String columnName) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public TableCriteria createCriteria() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public boolean exists() {
-        // TODO Auto-generated method stub
-        return false;
+        throw new NotImplementedException();
     }
 
     public Integer findColumn(String columnName) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public int getColCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        throw new NotImplementedException();
     }
 
     public int getContentCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        throw new NotImplementedException();
     }
 
     public String getId() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public TableLayout getLayout() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public int getRowCount() {
-        // TODO Auto-generated method stub
-        return 0;
+        throw new NotImplementedException();
     }
 
     public String getType() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public Row header() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public void iterate(RowVisitor visitor) {
-        // TODO Auto-generated method stub
-
+        throw new NotImplementedException();
     }
 
     public Row row(Integer row) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public RowMatcher select(RowMatcher matcher) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
 }

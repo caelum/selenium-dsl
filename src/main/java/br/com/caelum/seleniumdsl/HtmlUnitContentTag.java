@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import org.apache.commons.lang.NotImplementedException;
+
 public class HtmlUnitContentTag implements ContentTag {
     
     private final String id;
@@ -9,18 +11,15 @@ public class HtmlUnitContentTag implements ContentTag {
     }
 
     public boolean contains(String content) {
-        // TODO Auto-generated method stub
-        return false;
+        throw new NotImplementedException();
     }
 
     public boolean exists() {
-        // TODO Auto-generated method stub
-        return false;
+        throw new NotImplementedException();
     }
 
     public String innerHTML() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
 }

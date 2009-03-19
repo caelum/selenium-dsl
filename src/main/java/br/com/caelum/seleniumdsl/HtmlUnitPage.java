@@ -2,6 +2,8 @@ package br.com.caelum.seleniumdsl;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.NotImplementedException;
+
 import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
@@ -56,22 +58,19 @@ public class HtmlUnitPage implements Page {
     }
 
     public String invoke(String cmd) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public Page navigate(String element) {
-        click(element);
-        return this;
+        throw new NotImplementedException();
     }
 
     public Page refresh() {
-        // TODO Auto-generated method stub
-        return this;
+        throw new NotImplementedException();
     }
 
     public void screenshot(String filename) {
-        throw new IllegalStateException();
+        throw new NotImplementedException();
     }
 
     public ContentTag span(String id) {

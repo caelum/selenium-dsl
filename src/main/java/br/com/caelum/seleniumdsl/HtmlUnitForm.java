@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import org.apache.commons.lang.NotImplementedException;
+
 public class HtmlUnitForm implements Form {
 
     private final String id;
@@ -9,43 +11,35 @@ public class HtmlUnitForm implements Form {
     }
 
     public Form check(String checkbox) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public void click(String element) {
-        // TODO Auto-generated method stub
-
+        throw new NotImplementedException();
     }
 
     public Field field(String field) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public boolean isChecked(String checkbox) {
-        // TODO Auto-generated method stub
-        return false;
+        throw new NotImplementedException();
     }
 
     public void navigate(String element) {
-        // TODO Auto-generated method stub
-
+        throw new NotImplementedException();
     }
 
     public SelectField select(String selectField) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public void submit() {
-        // TODO Auto-generated method stub
-
+        throw new NotImplementedException();
     }
 
     public Form uncheck(String checkbox) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
 }
