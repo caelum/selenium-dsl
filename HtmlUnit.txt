@@ -1,0 +1,5 @@
+Diffs:
+
+HtmlUnit fails if it cannot load referenced JS files:
+
+<script type="text/javascript" src="/non/existant/url"></script>
