@@ -48,7 +48,7 @@ class HtmlUnitForm implements Form {
 
     public void submit() {
         try {
-        	HtmlSubmitInput submit = form.getFirstByXPath("//input[@type='submit']");
+        	HtmlSubmitInput submit = (HtmlSubmitInput) form.getElementsByAttribute("input", "type", "submit").get(0);
         	parent.setPage((HtmlPage) submit.click());
 		} catch (IOException e) {
 			new IllegalStateException("Error while clicking", e);
