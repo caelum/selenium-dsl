@@ -1,11 +1,14 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import org.apache.commons.lang.NotImplementedException;
+
+import br.com.caelum.seleniumdsl.Form;
+import br.com.caelum.seleniumdsl.SelectField;
 
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
 
-public class HtmlUnitSelectField implements SelectField {
+class HtmlUnitSelectField implements SelectField {
     
     private final HtmlSelect select;
 	private final HtmlUnitForm parent;

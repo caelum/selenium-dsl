@@ -1,10 +1,12 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import br.com.caelum.seleniumdsl.ContentTag;
+
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
-public class HtmlUnitContentTag implements ContentTag {
+class HtmlUnitContentTag implements ContentTag {
     
     private final HtmlElement element;
 

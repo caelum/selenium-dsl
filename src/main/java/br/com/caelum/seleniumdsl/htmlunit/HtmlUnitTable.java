@@ -1,4 +1,4 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import org.apache.commons.lang.NotImplementedException;
 
@@ -11,7 +11,7 @@ import br.com.caelum.seleniumdsl.table.Row;
 import br.com.caelum.seleniumdsl.table.Table;
 import br.com.caelum.seleniumdsl.table.layout.TableLayout;
 
-public class HtmlUnitTable implements Table {
+class HtmlUnitTable implements Table {
 
     private final String id;
 

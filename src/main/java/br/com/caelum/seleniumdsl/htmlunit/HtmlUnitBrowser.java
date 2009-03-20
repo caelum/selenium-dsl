@@ -1,7 +1,10 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+
+import br.com.caelum.seleniumdsl.Browser;
+import br.com.caelum.seleniumdsl.Page;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;

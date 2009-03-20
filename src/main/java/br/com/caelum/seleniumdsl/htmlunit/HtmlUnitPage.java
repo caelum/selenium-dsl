@@ -1,9 +1,12 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.io.IOException;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import br.com.caelum.seleniumdsl.ContentTag;
+import br.com.caelum.seleniumdsl.Form;
+import br.com.caelum.seleniumdsl.Page;
 import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
@@ -13,7 +16,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-public class HtmlUnitPage implements Page {
+class HtmlUnitPage implements Page {
 
 	private HtmlPage page;
 

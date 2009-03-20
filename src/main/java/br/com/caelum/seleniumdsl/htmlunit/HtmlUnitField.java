@@ -1,12 +1,15 @@
-package br.com.caelum.seleniumdsl;
+package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.io.IOException;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import br.com.caelum.seleniumdsl.Field;
+import br.com.caelum.seleniumdsl.Form;
+
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 
-public class HtmlUnitField implements Field {
+class HtmlUnitField implements Field {
 
 	private final HtmlInput input;
 	private final Form parent;
