@@ -1,6 +1,8 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.lang.NotImplementedException;
 
@@ -12,8 +14,10 @@ import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 class HtmlUnitPage implements Page {
@@ -41,7 +45,12 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Form form(String id) {
-		return new HtmlUnitForm(this, page.getFormByName(id));
+		for (HtmlForm form : page.getForms()) {
+			if (Arrays.asList("", form.getNameAttribute(), form.getIdAttribute()).contains(id)) {
+				return new HtmlUnitForm(this, form);
+			}
+		}
+		throw new ElementNotFoundException("form", "id|nome", id);
 	}
 	
 	void setPage(HtmlPage page) {
@@ -49,8 +58,12 @@ class HtmlUnitPage implements Page {
 	}
 
 	public boolean hasLink(String link) {
-		HtmlAnchor anchorByName = page.getAnchorByName(link);
-		return anchorByName == null;
+		try {
+			page.getFirstAnchorByText(link);
+			return true;
+		} catch (ElementNotFoundException e) {
+			return false;
+		}
 	}
 
 	public String invoke(String cmd) {
@@ -62,12 +75,24 @@ class HtmlUnitPage implements Page {
 			HtmlAnchor anchorByName = page.getFirstAnchorByText(element.replace("link=", ""));
 			try {
 				this.page = anchorByName.click();
-				return this;
 			} catch (IOException e) {
 				throw new IllegalArgumentException(e);
 			}
+		} else {
+			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
+			if (elements.isEmpty()) {
+				throw new NotImplementedException(element + " not recognized");
+			}
+			ClickableElement clickable = (ClickableElement) elements.get(0);
+			try {
+				this.page = clickable.click();
+			} catch (IOException e) {
+				throw new IllegalStateException(e);
+			}
 		}
-		throw new NotImplementedException(element + " not recognized");
+		
+		return this;
+		
 	}
 
 	public Page refresh() {

@@ -8,6 +8,8 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -23,7 +25,15 @@ class HtmlUnitForm implements Form {
     }
 
     public Form check(String checkbox) {
-        throw new NotImplementedException();
+    	
+    	HtmlCheckBoxInput chk;
+    	if (checkbox.startsWith("//")) {
+    		chk = form.getFirstByXPath(checkbox);
+    	} else {
+    		chk = form.getInputByName(checkbox);
+    	}
+    	parent.setPage((HtmlPage) chk.setChecked(true));
+    	return this;
     }
 
     public void click(String element) {
@@ -39,7 +49,12 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-        throw new NotImplementedException();
+    	HtmlButtonInput button = (HtmlButtonInput) form.getElementsByAttribute("input", "name", element).get(0);
+    	try {
+			parent.setPage((HtmlPage) button.click());
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
     }
 
     public SelectField select(String selectField) {
