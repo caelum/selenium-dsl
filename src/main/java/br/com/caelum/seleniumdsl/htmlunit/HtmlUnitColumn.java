@@ -8,11 +8,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 public class HtmlUnitColumn implements Column {
 
-	public HtmlUnitColumn(HtmlTable table, int i) {
+	private final HtmlTable table;
+	private final int index;
+
+	public HtmlUnitColumn(HtmlTable table, int index) {
+		this.table = table;
+		this.index = index;
 	}
 
 	public boolean contains(String text) {
-		throw new NotImplementedException();
+		return find(text) != -1;
 	}
 
 	public boolean containsPartial(String value) {
@@ -20,7 +25,12 @@ public class HtmlUnitColumn implements Column {
 	}
 
 	public int find(String text) {
-		throw new NotImplementedException();
+		for (int i = 0; i < table.getRowCount(); i++) {
+			if (table.getRow(i).getCell(index).getTextContent().equals(text)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

@@ -8,7 +8,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 
 public class HtmlUnitCell implements Cell {
 
+	private final HtmlTableCell cell;
+
 	public HtmlUnitCell(HtmlTableCell cell) {
+		this.cell = cell;
 	}
 
 	public Cell check() {
@@ -40,7 +43,7 @@ public class HtmlUnitCell implements Cell {
 	}
 
 	public String value() {
-		throw new NotImplementedException();
+		return cell.asText();
 	}
 
 }
