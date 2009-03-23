@@ -11,12 +11,15 @@ import br.com.caelum.seleniumdsl.table.Row;
 import br.com.caelum.seleniumdsl.table.Table;
 import br.com.caelum.seleniumdsl.table.layout.TableLayout;
 
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+
 class HtmlUnitTable implements Table {
 
-    private final String id;
+    private final HtmlTable table;
 
-    public HtmlUnitTable(String id) {
-        this.id = id;
+    public HtmlUnitTable(HtmlTable htmlTable) {
+        this.table = htmlTable;
     }
 
     public Cell cell(int row, int col) {
@@ -24,7 +27,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, String col) {
-        throw new NotImplementedException();
+        return new HtmlUnitCell(table.getRow(row).getCell(getColumn(col)));
     }
 
     public Column column(int columnIndex) {
@@ -32,9 +35,18 @@ class HtmlUnitTable implements Table {
     }
 
     public Column column(String columnName) {
-        throw new NotImplementedException();
+    	return new HtmlUnitColumn(table, getColumn(columnName));
     }
 
+    private int getColumn(String name) {
+    	HtmlTableRow header = table.getRow(0);
+    	for (int i = 0; i < header.getCells().size(); i++) {
+    		if (header.getCell(i).getTextContent().equals(name)) {
+    			return i;
+    		}
+		}
+    	throw new IllegalArgumentException("Cannot find column " + name + " in: " + header.asText());
+    }
     public TableCriteria createCriteria() {
         throw new NotImplementedException();
     }

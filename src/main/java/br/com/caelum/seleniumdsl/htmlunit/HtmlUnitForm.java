@@ -49,7 +49,7 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-    	HtmlButtonInput button = (HtmlButtonInput) form.getElementsByAttribute("input", "name", element).get(0);
+    	HtmlButtonInput button = form.getOneHtmlElementByAttribute("input", "name", element);
     	try {
 			parent.setPage((HtmlPage) button.click());
 		} catch (IOException e) {
@@ -63,7 +63,7 @@ class HtmlUnitForm implements Form {
 
     public void submit() {
         try {
-        	HtmlSubmitInput submit = (HtmlSubmitInput) form.getElementsByAttribute("input", "type", "submit").get(0);
+        	HtmlSubmitInput submit = form.getOneHtmlElementByAttribute("input", "type", "submit");
         	parent.setPage((HtmlPage) submit.click());
 		} catch (IOException e) {
 			new IllegalStateException("Error while clicking", e);

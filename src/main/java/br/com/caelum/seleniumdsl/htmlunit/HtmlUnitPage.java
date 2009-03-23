@@ -19,6 +19,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 class HtmlUnitPage implements Page {
 
@@ -108,7 +109,12 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Table table(String id) {
-		return new HtmlUnitTable(id);
+		List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
+		if (elements.isEmpty()) {
+			throw new ElementNotFoundException("table", "id|name", id);
+		}
+		
+		return new HtmlUnitTable((HtmlTable)elements.get(0));
 	}
 
 	public String title() {
