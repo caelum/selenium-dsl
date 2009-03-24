@@ -14,6 +14,7 @@ import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -34,7 +35,7 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page click(String element) {
-		throw new NotImplementedException();
+		return navigate(element);
 	}
 
 	public ContentTag div(String id) {
@@ -118,7 +119,19 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page waitUntil(String condition, long timeout) {
-		throw new NotImplementedException();
+		for (int i = 0; i < 10; i++) {
+			ScriptResult result = page.executeJavaScript(condition);
+			if (!ScriptResult.isFalse(result)) {
+				this.page = (HtmlPage) result.getNewPage();
+				return this;
+			}
+			try {
+				Thread.sleep(timeout/10);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		throw new IllegalStateException("Condition " + condition + " doesn't hold");
 	}
 
 }

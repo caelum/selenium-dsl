@@ -5,6 +5,7 @@ import org.apache.commons.lang.NotImplementedException;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
 
@@ -19,8 +20,13 @@ class HtmlUnitSelectField implements SelectField {
 	}
 
 	public Form choose(String value) {
-        select.setSelectedAttribute(value, true);
-        return parent;
+		for (HtmlOption option : select.getOptions()) {
+			if (option.getText().trim().equals(value)) {
+				select.setSelectedAttribute(option, true);
+				return parent;
+			}
+		}
+		throw new IllegalArgumentException("No option found with value: " + value);
     }
 
     public Form choose(int index) {
@@ -28,11 +34,11 @@ class HtmlUnitSelectField implements SelectField {
     }
 
     public String content() {
-        throw new NotImplementedException();
+    	return value();
     }
 
     public String value() {
-        throw new NotImplementedException();
+        return select.getSelectedOptions().get(0).getText().trim();
     }
 
     public String[] values() {

@@ -5,16 +5,16 @@ import org.apache.commons.lang.NotImplementedException;
 import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
-class HtmlUnitField implements Field {
+public class HtmlUnitTextArea implements Field {
 
-	private final HtmlInput input;
-	private final Form parent;
+	private final HtmlTextArea textArea;
+	private final HtmlUnitForm parent;
 
-	public HtmlUnitField(Form form, HtmlInput input) {
-		this.parent = form;
-		this.input = input;
+	public HtmlUnitTextArea(HtmlUnitForm parent, HtmlTextArea textArea) {
+		this.parent = parent;
+		this.textArea = textArea;
 	}
 
 	public void blur() {
@@ -30,11 +30,11 @@ class HtmlUnitField implements Field {
 	}
 
 	public String content() {
-		return input.getValueAttribute();
+		return textArea.getText();
 	}
 
 	public Form type(String content) {
-		input.setValueAttribute(content);
+		textArea.setText(content);
 		return parent;
 	}
 

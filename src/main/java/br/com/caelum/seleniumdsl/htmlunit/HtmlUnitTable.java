@@ -24,7 +24,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, int col) {
-        return new HtmlUnitCell(table.getRow(row).getCell(col));
+        return new HtmlUnitCell(table.getRow(row).getCell(col - 1));
     }
 
     public Cell cell(int row, String col) {
@@ -43,7 +43,7 @@ class HtmlUnitTable implements Table {
     	HtmlTableRow header = table.getRow(0);
     	for (int i = 0; i < header.getCells().size(); i++) {
     		if (header.getCell(i).getTextContent().equals(name)) {
-    			return i;
+    			return i + 1;
     		}
 		}
     	throw new IllegalArgumentException("Cannot find column " + name + " in: " + header.asText());

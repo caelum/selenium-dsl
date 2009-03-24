@@ -8,11 +8,14 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlUnitForm implements Form {
 
@@ -37,11 +40,15 @@ class HtmlUnitForm implements Form {
     }
 
     public void click(String element) {
-        throw new NotImplementedException();
+        navigate(element);
     }
 
     public Field field(String field) {
-        return new HtmlUnitField(this, form.getInputByName(field));
+        try {
+			return new HtmlUnitField(this, form.getInputByName(field));
+		} catch (ElementNotFoundException e) {
+			return new HtmlUnitTextArea(this, (HtmlTextArea) form.getOneHtmlElementByAttribute("textarea", "name", field));
+		}
     }
 
     public boolean isChecked(String checkbox) {
@@ -49,7 +56,12 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-    	HtmlButtonInput button = form.getOneHtmlElementByAttribute("input", "name", element);
+    	HtmlButtonInput button;
+    	try {
+			button = form.getElementById(element);
+		} catch (ElementNotFoundException e1) {
+			button = form.getOneHtmlElementByAttribute("input", "name", element);
+		}
     	try {
 			parent.setPage((HtmlPage) button.click());
 		} catch (IOException e) {
@@ -58,7 +70,11 @@ class HtmlUnitForm implements Form {
     }
 
     public SelectField select(String selectField) {
-    	return new HtmlUnitSelectField(this, form.getSelectByName(selectField));
+    	try {
+			return new HtmlUnitSelectField(this, form.getSelectByName(selectField));
+		} catch (ElementNotFoundException e) {
+			return new HtmlUnitSelectField(this, (HtmlSelect) form.getElementById(selectField));
+		}
     }
 
     public void submit() {
