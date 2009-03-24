@@ -38,11 +38,7 @@ class HtmlUnitPage implements Page {
 	}
 
 	public ContentTag div(String id) {
-		HtmlElement div = page.getElementById(id);
-		if (div == null) {
-			throw new ElementNotFoundException("div", "id", id);
-		}
-		return new HtmlUnitContentTag(div);
+		return new HtmlUnitContentTag(page, id);
 	}
 
 	public Form form(String id) {

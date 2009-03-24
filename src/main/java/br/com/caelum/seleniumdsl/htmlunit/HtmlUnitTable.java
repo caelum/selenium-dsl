@@ -93,7 +93,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Row row(Integer row) {
-        throw new NotImplementedException();
+        return new HtmlUnitRow(this, row);
     }
 
     public RowMatcher select(RowMatcher matcher) {
