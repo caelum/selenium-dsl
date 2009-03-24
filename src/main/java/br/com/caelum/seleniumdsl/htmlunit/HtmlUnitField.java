@@ -1,7 +1,5 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
-import java.io.IOException;
-
 import org.apache.commons.lang.NotImplementedException;
 
 import br.com.caelum.seleniumdsl.Field;
@@ -36,11 +34,7 @@ class HtmlUnitField implements Field {
 	}
 
 	public Form type(String content) {
-		try {
-			input.type(content);
-		} catch (IOException e) {
-			throw new IllegalArgumentException("can't type " + content, e);
-		}
+		input.setValueAttribute(content);
 		return parent;
 	}
 

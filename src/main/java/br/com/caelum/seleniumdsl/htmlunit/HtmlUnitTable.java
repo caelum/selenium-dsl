@@ -7,6 +7,7 @@ import br.com.caelum.seleniumdsl.search.RowVisitor;
 import br.com.caelum.seleniumdsl.search.TableCriteria;
 import br.com.caelum.seleniumdsl.table.Cell;
 import br.com.caelum.seleniumdsl.table.Column;
+import br.com.caelum.seleniumdsl.table.DefaultColumn;
 import br.com.caelum.seleniumdsl.table.Row;
 import br.com.caelum.seleniumdsl.table.Table;
 import br.com.caelum.seleniumdsl.table.layout.TableLayout;
@@ -23,11 +24,11 @@ class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, int col) {
-        throw new NotImplementedException();
+        return new HtmlUnitCell(table.getRow(row).getCell(col));
     }
 
     public Cell cell(int row, String col) {
-        return new HtmlUnitCell(table.getRow(row).getCell(getColumn(col)));
+        return cell(row, getColumn(col));
     }
 
     public Column column(int columnIndex) {
@@ -35,7 +36,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Column column(String columnName) {
-    	return new HtmlUnitColumn(table, getColumn(columnName));
+    	return new DefaultColumn(this, getColumn(columnName));
     }
 
     private int getColumn(String name) {
@@ -76,7 +77,7 @@ class HtmlUnitTable implements Table {
     }
 
     public int getRowCount() {
-        throw new NotImplementedException();
+        return table.getRowCount();
     }
 
     public String getType() {

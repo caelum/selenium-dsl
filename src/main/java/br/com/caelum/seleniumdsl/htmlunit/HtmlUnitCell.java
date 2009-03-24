@@ -23,7 +23,7 @@ public class HtmlUnitCell implements Cell {
 	}
 
 	public boolean contains(String content) {
-		throw new NotImplementedException();
+		return cell.asText().trim().equals(content);
 	}
 
 	public String getLink() {

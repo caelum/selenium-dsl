@@ -42,7 +42,7 @@ public class DefaultTable implements Table {
 	}
 
 	public Column column(int columnIndex) {
-		return new DefaultColumn(this, selenium, columnIndex);
+		return new DefaultColumn(this, columnIndex);
 	}
 
 	public Column column(String columnName) {
