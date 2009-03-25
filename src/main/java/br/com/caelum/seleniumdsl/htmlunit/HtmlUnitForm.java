@@ -12,10 +12,10 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlUnitForm implements Form {
 
@@ -47,7 +47,11 @@ class HtmlUnitForm implements Form {
         try {
 			return new HtmlUnitField(this, form.getInputByName(field));
 		} catch (ElementNotFoundException e) {
-			return new HtmlUnitTextArea(this, (HtmlTextArea) form.getOneHtmlElementByAttribute("textarea", "name", field));
+			try {
+				return new HtmlUnitTextArea(this, form.getTextAreaByName(field));
+			} catch (ElementNotFoundException e1) {
+				return new HtmlUnitField(this, (HtmlInput) form.getElementById(field));
+			}
 		}
     }
 
@@ -60,7 +64,7 @@ class HtmlUnitForm implements Form {
     	try {
 			button = form.getElementById(element);
 		} catch (ElementNotFoundException e1) {
-			button = form.getOneHtmlElementByAttribute("input", "name", element);
+			button = form.getInputByName(element);
 		}
     	try {
 			parent.setPage((HtmlPage) button.click());
