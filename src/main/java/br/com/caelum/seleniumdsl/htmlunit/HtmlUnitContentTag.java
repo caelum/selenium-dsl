@@ -27,9 +27,12 @@ class HtmlUnitContentTag implements ContentTag {
 		return page.getElementById(id);
 	}
 
-    // FIXME returns element html also
     public String innerHTML() {
-        return div().asXml();
+    	StringBuilder html = new StringBuilder();
+        for(HtmlElement child : div().getAllHtmlChildElements()) {
+			html.append(child.asXml());
+		}
+		return html.toString();
     }
     
     @Override

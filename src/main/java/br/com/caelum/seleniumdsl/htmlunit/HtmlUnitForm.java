@@ -9,7 +9,7 @@ import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -60,7 +60,7 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-    	HtmlButtonInput button;
+    	ClickableElement button;
     	try {
 			button = form.getElementById(element);
 		} catch (ElementNotFoundException e1) {
