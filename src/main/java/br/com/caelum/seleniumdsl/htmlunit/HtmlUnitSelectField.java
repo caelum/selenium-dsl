@@ -1,5 +1,8 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.NotImplementedException;
 
 import br.com.caelum.seleniumdsl.Form;
@@ -42,7 +45,12 @@ class HtmlUnitSelectField implements SelectField {
     }
 
     public String[] values() {
-        throw new NotImplementedException();
+    	List<String> options = new ArrayList<String>();
+        for (HtmlOption option : select.getOptions()) {
+        	options.add(option.getText());
+        }
+        String[] values = new String[select.getOptionSize()];
+        return options.toArray(values);
     }
 
 }
