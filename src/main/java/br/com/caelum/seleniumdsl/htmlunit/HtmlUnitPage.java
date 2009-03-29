@@ -108,8 +108,10 @@ class HtmlUnitPage implements Page {
 
 	public Table table(String id) {
 		List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
-		
-		return new HtmlUnitTable(elements.isEmpty()? null: (HtmlTable)elements.get(0));
+		if (elements.isEmpty()) {
+			throw new ElementNotFoundException("table", "id|name", id);
+		}
+		return new HtmlUnitTable((HtmlTable)elements.get(0));
 	}
 
 	public String title() {

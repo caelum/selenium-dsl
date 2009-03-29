@@ -2,6 +2,7 @@ package br.com.caelum.seleniumdsl.htmlunit;
 
 import br.com.caelum.seleniumdsl.ContentTag;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -29,10 +30,10 @@ class HtmlUnitContentTag implements ContentTag {
 
     public String innerHTML() {
     	StringBuilder html = new StringBuilder();
-        for(HtmlElement child : div().getAllHtmlChildElements()) {
+        for(DomNode child : div().getChildren()) {
 			html.append(child.asXml());
 		}
-		return html.toString();
+		return html.toString().trim();
     }
     
     @Override

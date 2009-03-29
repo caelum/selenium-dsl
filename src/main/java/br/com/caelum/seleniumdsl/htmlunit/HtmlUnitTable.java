@@ -62,7 +62,7 @@ class HtmlUnitTable implements Table {
     }
 
     public int getContentCount() {
-        throw new NotImplementedException();
+        return table.getBodies().get(0).getRows().size();
     }
 
     public String getId() {

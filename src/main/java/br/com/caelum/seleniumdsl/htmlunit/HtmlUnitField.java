@@ -18,7 +18,7 @@ class HtmlUnitField implements Field {
 	}
 
 	public void blur() {
-		throw new NotImplementedException();
+		input.blur();
 	}
 
 	public void change() {
