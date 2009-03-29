@@ -102,7 +102,14 @@ class HtmlUnitForm implements Form {
     }
 
     public Form uncheck(String checkbox) {
-        throw new NotImplementedException();
+    	HtmlCheckBoxInput check;
+		try {
+			check = form.getInputByName(checkbox);
+		} catch (ElementNotFoundException e) {
+			check = form.getElementById(checkbox);
+		}
+    	check.setChecked(false);
+        return this;
     }
     
     HtmlUnitPage getParent() {
