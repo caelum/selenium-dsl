@@ -9,6 +9,7 @@ import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
 
@@ -25,7 +26,7 @@ class HtmlUnitSelectField implements SelectField {
 	public Form choose(String value) {
 		for (HtmlOption option : select.getOptions()) {
 			if (option.getText().trim().equals(value)) {
-				select.setSelectedAttribute(option, true);
+				parent.getParent().setPage((HtmlPage) select.setSelectedAttribute(option, true));
 				return parent;
 			}
 		}

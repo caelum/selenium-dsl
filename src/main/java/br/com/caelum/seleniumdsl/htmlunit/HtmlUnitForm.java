@@ -11,11 +11,13 @@ import br.com.caelum.seleniumdsl.SelectField;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlUnitForm implements Form {
 
@@ -50,11 +52,15 @@ class HtmlUnitForm implements Form {
 			try {
 				return new HtmlUnitTextArea(this, form.getTextAreaByName(field));
 			} catch (ElementNotFoundException e1) {
-				return new HtmlUnitField(this, (HtmlInput) form.getElementById(field));
+				HtmlElement element = form.getElementById(field);
+				if (element instanceof HtmlTextArea) {
+					return new HtmlUnitTextArea(this, (HtmlTextArea) element);
+				}
+				return new HtmlUnitField(this, (HtmlInput) element);
 			}
 		}
     }
-
+    
     public boolean isChecked(String checkbox) {
         throw new NotImplementedException();
     }
@@ -93,5 +99,9 @@ class HtmlUnitForm implements Form {
     public Form uncheck(String checkbox) {
         throw new NotImplementedException();
     }
+    
+    HtmlUnitPage getParent() {
+		return parent;
+	}
 
 }

@@ -3,8 +3,6 @@ package br.com.caelum.seleniumdsl.htmlunit;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import br.com.caelum.seleniumdsl.Browser;
 import br.com.caelum.seleniumdsl.Page;
 
@@ -46,7 +44,8 @@ public class HtmlUnitBrowser implements Browser {
     }
 
     public Page waitForPageLoad(long timeout) {
-        throw new NotImplementedException();
+    	// it is not necessary in HtmlUnit
+        return currentPage();
     }
 
 }

@@ -1,7 +1,5 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import br.com.caelum.seleniumdsl.table.Cell;
 import br.com.caelum.seleniumdsl.table.Row;
 
@@ -24,7 +22,7 @@ public class HtmlUnitRow implements Row {
 	}
 
 	public Integer index() {
-		throw new NotImplementedException();
+		return row;
 	}
 
 }

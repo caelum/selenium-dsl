@@ -65,7 +65,8 @@ class HtmlUnitPage implements Page {
 	}
 
 	public String invoke(String cmd) {
-		throw new NotImplementedException();
+		ScriptResult result = page.executeJavaScript(cmd);
+		return result.getJavaScriptResult().toString();
 	}
 
 	public Page navigate(String element) {
