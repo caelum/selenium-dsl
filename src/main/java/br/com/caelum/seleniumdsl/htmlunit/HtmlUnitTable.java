@@ -28,7 +28,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, String col) {
-        return cell(row, getColumn(col));
+        return cell(row, findColumn(col));
     }
 
     public Column column(int columnIndex) {
@@ -36,28 +36,25 @@ class HtmlUnitTable implements Table {
     }
 
     public Column column(String columnName) {
-    	return new DefaultColumn(this, getColumn(columnName));
+    	return new DefaultColumn(this, findColumn(columnName));
     }
 
-    private int getColumn(String name) {
-    	HtmlTableRow header = table.getRow(0);
-    	for (int i = 0; i < header.getCells().size(); i++) {
-    		if (header.getCell(i).getTextContent().equals(name)) {
-    			return i + 1;
-    		}
-		}
-    	throw new IllegalArgumentException("Cannot find column " + name + " in: " + header.asText());
-    }
     public TableCriteria createCriteria() {
         throw new NotImplementedException();
     }
 
     public boolean exists() {
-        throw new NotImplementedException();
+        return table != null;
     }
 
     public Integer findColumn(String columnName) {
-        throw new NotImplementedException();
+    	HtmlTableRow header = table.getRow(0);
+    	for (int i = 0; i < header.getCells().size(); i++) {
+    		if (header.getCell(i).getTextContent().trim().equals(columnName)) {
+    			return i + 1;
+    		}
+		}
+    	throw new IllegalArgumentException("Cannot find column " + columnName + " in: " + header.asText());
     }
 
     public int getColCount() {

@@ -3,8 +3,6 @@ package br.com.caelum.seleniumdsl.htmlunit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
@@ -34,7 +32,8 @@ class HtmlUnitSelectField implements SelectField {
     }
 
     public Form choose(int index) {
-        throw new NotImplementedException();
+        select.getOption(index).setSelected(true);
+        return parent;
     }
 
     public String content() {

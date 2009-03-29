@@ -9,6 +9,7 @@ import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -91,6 +92,10 @@ class HtmlUnitForm implements Form {
         try {
         	HtmlSubmitInput submit = form.getOneHtmlElementByAttribute("input", "type", "submit");
         	parent.setPage((HtmlPage) submit.click());
+        } catch (ElementNotFoundException e) {
+        	HtmlPage page = (HtmlPage) form.getPage();
+			ScriptResult result = page.executeJavaScript("document.getElementById('" + form.getId() + "').submit()");
+			parent.setPage((HtmlPage) result.getNewPage());
 		} catch (IOException e) {
 			new IllegalStateException("Error while clicking", e);
 		}
