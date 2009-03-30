@@ -74,7 +74,7 @@ class HtmlUnitTable implements Table {
     }
 
     public int getRowCount() {
-        return table.getRowCount();
+        return table.getRowCount() - 1;
     }
 
     public String getType() {

@@ -109,7 +109,7 @@ class HtmlUnitPage implements Page {
 	public Table table(String id) {
 		List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
 		if (elements.isEmpty()) {
-			throw new ElementNotFoundException("table", "id|name", id);
+			return new InexistantTable(id);
 		}
 		return new HtmlUnitTable((HtmlTable)elements.get(0));
 	}

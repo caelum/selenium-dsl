@@ -17,7 +17,7 @@ class HtmlUnitContentTag implements ContentTag {
 	}
 
 	public boolean contains(String content) {
-        return innerHTML().contains(content);
+        return innerHTML().contains(content.trim());
     }
 
     public boolean exists() {
