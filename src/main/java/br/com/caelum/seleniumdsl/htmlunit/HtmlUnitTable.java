@@ -24,7 +24,11 @@ class HtmlUnitTable implements Table {
     }
 
     public Cell cell(int row, int col) {
-        return new HtmlUnitCell(table.getRow(row).getCell(col - 1));
+        try {
+			return new HtmlUnitCell(table.getRow(row).getCell(col - 1));
+		} catch (IndexOutOfBoundsException e) {
+			return new NullCell(table.getId() + " - " + table.getAttribute("name"), row, col);
+		}
     }
 
     public Cell cell(int row, String col) {
@@ -74,7 +78,7 @@ class HtmlUnitTable implements Table {
     }
 
     public int getRowCount() {
-        return table.getRowCount() - 1;
+        return table.getRowCount();
     }
 
     public String getType() {
