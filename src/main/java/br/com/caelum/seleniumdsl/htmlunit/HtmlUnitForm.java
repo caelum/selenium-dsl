@@ -8,71 +8,69 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlUnitForm implements Form {
 
-    private final HtmlForm form;
+    private final HtmlFormWrapper form;
 	private final HtmlUnitPage parent;
 
-    public HtmlUnitForm(HtmlUnitPage page, HtmlForm htmlForm) {
+    public HtmlUnitForm(HtmlUnitPage page, HtmlFormWrapper htmlForm) {
         this.parent = page;
 		this.form = htmlForm;
     }
 
     public Form check(String checkbox) {
     	
-    	HtmlCheckBoxInput chk;
-    	if (checkbox.startsWith("//")) {
-    		chk = form.getFirstByXPath(checkbox);
-    	} else {
-    		chk = form.getInputByName(checkbox);
-    	}
+    	HtmlCheckBoxInput chk = getCheckbox(checkbox);
     	parent.setPage((HtmlPage) chk.setChecked(true));
     	return this;
     }
+
+	private HtmlCheckBoxInput getCheckbox(String checkbox) {
+    	if (checkbox.startsWith("//")) {
+    		return form.getFirstByXPath(checkbox);
+    	} else {
+    		return form.getInputByNameOrIdOrDie(checkbox);
+    	}
+	}
 
     public void click(String element) {
         navigate(element);
     }
 
     public Field field(String field) {
-        try {
-			return new HtmlUnitField(this, form.getInputByName(field));
-		} catch (ElementNotFoundException e) {
-			try {
-				return new HtmlUnitTextArea(this, form.getTextAreaByName(field));
-			} catch (ElementNotFoundException e1) {
-				HtmlElement element = form.getElementById(field);
-				if (element instanceof HtmlTextArea) {
-					return new HtmlUnitTextArea(this, (HtmlTextArea) element);
-				}
-				return new HtmlUnitField(this, (HtmlInput) element);
-			}
+    	HtmlInput input = form.getInputByNameOrId(field);
+    	if (input != null) {
+    		return new HtmlUnitField(this, input);
+    	}
+    	HtmlTextArea textArea = form.getTextAreaByNameOrId(field);
+    	if (textArea != null) {
+			return new HtmlUnitTextArea(this, textArea);
 		}
+    	
+    	HtmlElement element = form.getElementByIdOrDie(field);
+    	if (element instanceof HtmlTextArea) {
+    		return new HtmlUnitTextArea(this, (HtmlTextArea) element);
+    	}
+    	return new HtmlUnitField(this, (HtmlInput) element);
     }
-    
+
     public boolean isChecked(String checkbox) {
         throw new NotImplementedException();
     }
 
     public void navigate(String element) {
-    	ClickableElement button;
-    	try {
-			button = form.getElementById(element);
-		} catch (ElementNotFoundException e1) {
-			button = form.getInputByName(element);
-		}
+    	ClickableElement button = form.getInputByName(element);
+    	if (button == null) {
+    		button = form.getElementByIdOrDie(element);
+    	}
     	try {
 			parent.setPage((HtmlPage) button.click());
 		} catch (IOException e) {
@@ -81,34 +79,26 @@ class HtmlUnitForm implements Form {
     }
 
     public SelectField select(String selectField) {
-    	try {
-			return new HtmlUnitSelectField(this, form.getSelectByName(selectField));
-		} catch (ElementNotFoundException e) {
-			return new HtmlUnitSelectField(this, (HtmlSelect) form.getElementById(selectField));
-		}
+    	return new HtmlUnitSelectField(this, form.getSelectByNameOrIdOrDie(selectField));
     }
 
     public void submit() {
-        try {
-        	HtmlSubmitInput submit = form.getOneHtmlElementByAttribute("input", "type", "submit");
-        	parent.setPage((HtmlPage) submit.click());
-        } catch (ElementNotFoundException e) {
-        	HtmlPage page = (HtmlPage) form.getPage();
-			ScriptResult result = page.executeJavaScript("document.getElementById('" + form.getId() + "').submit()");
-			parent.setPage((HtmlPage) result.getNewPage());
+    	try {
+	    	HtmlSubmitInput submit = form.getSubmitButton();
+	    	if (submit != null) {
+	        	HtmlPage page = submit.click();
+				parent.setPage(page);
+	    	} else {
+	    		parent.setPage(form.submitJs());
+	    	}
 		} catch (IOException e) {
-			new IllegalStateException("Error while clicking", e);
+			new IllegalStateException("Error while submitting form", e);
 		}
     }
 
     public Form uncheck(String checkbox) {
-    	HtmlCheckBoxInput check;
-		try {
-			check = form.getInputByName(checkbox);
-		} catch (ElementNotFoundException e) {
-			check = form.getElementById(checkbox);
-		}
-    	check.setChecked(false);
+    	HtmlCheckBoxInput check = getCheckbox(checkbox);
+    	parent.setPage((HtmlPage) check.setChecked(false));
         return this;
     }
     

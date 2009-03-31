@@ -45,7 +45,7 @@ class HtmlUnitPage implements Page {
 	public Form form(String id) {
 		for (HtmlForm form : page.getForms()) {
 			if (Arrays.asList("", form.getNameAttribute(), form.getIdAttribute()).contains(id)) {
-				return new HtmlUnitForm(this, form);
+				return new HtmlUnitForm(this, new HtmlFormWrapper(form));
 			}
 		}
 		throw new ElementNotFoundException("form", "id|nome", id);
