@@ -66,7 +66,14 @@ class HtmlUnitTable implements Table {
     }
 
     public int getContentCount() {
-        return table.getBodies().get(0).getRows().size();
+    	int result = table.getRowCount();
+    	if (table.getHeader() != null) {
+    		result -= table.getHeader().getRows().size();
+    	}
+    	if (table.getFooter() != null) {
+    		result -= table.getFooter().getRows().size();
+    	}
+        return result;
     }
 
     public String getId() {
