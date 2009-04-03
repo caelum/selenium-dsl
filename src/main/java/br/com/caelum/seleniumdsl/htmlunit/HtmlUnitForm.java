@@ -92,7 +92,7 @@ class HtmlUnitForm implements Form {
 	    		parent.setPage(form.submitJs());
 	    	}
 		} catch (IOException e) {
-			new IllegalStateException("Error while submitting form", e);
+			throw new IllegalStateException("Error while submitting form", e);
 		}
     }
 

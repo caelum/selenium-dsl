@@ -6,6 +6,7 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 class HtmlUnitField implements Field {
 
@@ -18,7 +19,7 @@ class HtmlUnitField implements Field {
 	}
 
 	public void blur() {
-		input.blur();
+		input.fireEvent(Event.TYPE_BLUR);
 	}
 
 	public void change() {

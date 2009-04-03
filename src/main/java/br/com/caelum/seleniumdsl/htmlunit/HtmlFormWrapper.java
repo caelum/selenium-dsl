@@ -25,7 +25,7 @@ class HtmlFormWrapper {
 	public <I extends HtmlInput> I getInputByNameOrId(String name) {
 		try {
 			return getInputByNameOrIdOrDie(name);
-		} catch (ElementNotFoundException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -39,7 +39,7 @@ class HtmlFormWrapper {
 	public HtmlTextArea getTextAreaByNameOrId(String name) {
 		try {
 			return getTextAreaByNameOrIdOrDie(name);
-		} catch (ElementNotFoundException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}

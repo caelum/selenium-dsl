@@ -26,7 +26,7 @@ public class HtmlUnitTextArea implements Field {
 	}
 
 	public boolean contains(String content) {
-		throw new NotImplementedException();
+		return content().contains(content);
 	}
 
 	public String content() {
