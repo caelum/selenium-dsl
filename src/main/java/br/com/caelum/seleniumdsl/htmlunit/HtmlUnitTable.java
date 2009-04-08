@@ -36,7 +36,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Column column(int columnIndex) {
-        throw new NotImplementedException();
+        return new DefaultColumn(this, columnIndex);
     }
 
     public Column column(String columnName) {

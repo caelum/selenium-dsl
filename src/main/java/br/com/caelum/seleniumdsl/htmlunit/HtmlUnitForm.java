@@ -2,8 +2,6 @@ package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.io.IOException;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
@@ -63,7 +61,7 @@ class HtmlUnitForm implements Form {
     }
 
     public boolean isChecked(String checkbox) {
-        throw new NotImplementedException();
+        return getCheckbox(checkbox).isChecked();
     }
 
     public void navigate(String element) {

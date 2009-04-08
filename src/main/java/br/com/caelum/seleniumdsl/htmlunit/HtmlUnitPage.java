@@ -57,7 +57,7 @@ class HtmlUnitPage implements Page {
 
 	public boolean hasLink(String link) {
 		try {
-			page.getFirstAnchorByText(link);
+			getFirstAnchorByText(link);
 			return true;
 		} catch (ElementNotFoundException e) {
 			return false;
@@ -69,11 +69,20 @@ class HtmlUnitPage implements Page {
 		return result.getJavaScriptResult().toString();
 	}
 
+	private HtmlAnchor getFirstAnchorByText(String text) {
+		List<HtmlAnchor> anchors = (List<HtmlAnchor>) page.getByXPath("//a");
+		for (HtmlAnchor anchor : anchors) {
+			if (text.trim().equals(anchor.asXml().replaceAll("<.*?>", "").trim())) {
+				return anchor;
+			}
+		}
+		throw new ElementNotFoundException("a", "text", text);
+	}
 	public Page navigate(String element) {
 		if (element.startsWith("link=")) {
-			HtmlAnchor anchorByName = page.getFirstAnchorByText(element.replace("link=", ""));
+			String text = element.replace("link=", "");
 			try {
-				this.page = anchorByName.click();
+				this.page = getFirstAnchorByText(text).click();
 			} catch (IOException e) {
 				throw new IllegalArgumentException(e);
 			}
