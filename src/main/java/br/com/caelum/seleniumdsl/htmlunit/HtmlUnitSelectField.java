@@ -37,11 +37,11 @@ class HtmlUnitSelectField implements SelectField {
     }
 
     public String content() {
-    	return value();
+    	return select.getSelectedOptions().get(0).getText().trim();
     }
 
     public String value() {
-        return select.getSelectedOptions().get(0).getText().trim();
+    	return select.getSelectedOptions().get(0).getValueAttribute();
     }
 
     public String[] values() {
