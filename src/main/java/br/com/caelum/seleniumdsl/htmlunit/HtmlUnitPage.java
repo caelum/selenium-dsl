@@ -35,7 +35,27 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page click(String element) {
-		return navigate(element);
+		if (element.startsWith("link=")) {
+			String text = element.replace("link=", "");
+			try {
+				this.page = getFirstAnchorByText(text).click();
+			} catch (IOException e) {
+				throw new IllegalArgumentException(e);
+			}
+		} else {
+			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
+			if (elements.isEmpty()) {
+				throw new NotImplementedException(element + " not recognized");
+			}
+			ClickableElement clickable = (ClickableElement) elements.get(0);
+			try {
+				this.page = clickable.click();
+			} catch (IOException e) {
+				throw new IllegalStateException(e);
+			}
+		}
+		
+		return this;
 	}
 	
 	public Page doubleClick(String element) {
@@ -89,28 +109,19 @@ class HtmlUnitPage implements Page {
 		throw new ElementNotFoundException("a", "text", text);
 	}
 	public Page navigate(String element) {
-		if (element.startsWith("link=")) {
-			String text = element.replace("link=", "");
+		HtmlPage old = page;
+		
+		click(element);
+		
+		while (old.equals(page)) {
+			page = (HtmlPage) page.getWebClient().getCurrentWindow().getEnclosedPage();
 			try {
-				this.page = getFirstAnchorByText(text).click();
-			} catch (IOException e) {
-				throw new IllegalArgumentException(e);
-			}
-		} else {
-			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
-			if (elements.isEmpty()) {
-				throw new NotImplementedException(element + " not recognized");
-			}
-			ClickableElement clickable = (ClickableElement) elements.get(0);
-			try {
-				this.page = clickable.click();
-			} catch (IOException e) {
-				throw new IllegalStateException(e);
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
 			}
 		}
-		
 		return this;
-		
 	}
 
 	public Page refresh() {
