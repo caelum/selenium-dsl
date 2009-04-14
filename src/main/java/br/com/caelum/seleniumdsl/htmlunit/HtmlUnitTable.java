@@ -93,7 +93,7 @@ class HtmlUnitTable implements Table {
     }
 
     public Row header() {
-        throw new NotImplementedException();
+        return row(1);
     }
 
     public void iterate(RowVisitor visitor) {
