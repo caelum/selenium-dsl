@@ -38,5 +38,11 @@ public interface SelectField {
 	 * @return
 	 */
 	String content();
+	
+	/**
+	 * Executes the blur action in this component. Typically used to simulate a
+	 * typing+lose focus action on a field to execute its javascript action.
+	 */
+	void blur();
 
 }

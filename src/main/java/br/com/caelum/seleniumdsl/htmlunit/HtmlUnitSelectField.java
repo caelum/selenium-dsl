@@ -10,6 +10,7 @@ import br.com.caelum.seleniumdsl.SelectField;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 
 class HtmlUnitSelectField implements SelectField {
@@ -52,6 +53,10 @@ class HtmlUnitSelectField implements SelectField {
         }
         String[] values = new String[select.getOptionSize()];
         return options.toArray(values);
+    }
+    
+    public void blur() {
+    	select.fireEvent(Event.TYPE_BLUR);
     }
 
 }

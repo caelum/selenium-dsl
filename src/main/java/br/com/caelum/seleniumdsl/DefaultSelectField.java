@@ -41,5 +41,9 @@ class DefaultSelectField implements SelectField {
 	public String content() {
 		return selenium.getSelectedLabel(id);
 	}
+	
+	public void blur() {
+		selenium.fireEvent(id, "blur");
+	}
 
 }
