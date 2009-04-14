@@ -48,6 +48,11 @@ class DefaultPage implements Page {
 		selenium.click(element);
 		return this;
 	}
+	
+	public Page doubleClick(String element) {
+		selenium.doubleClick(element);
+		return this;
+	}
 
 	public boolean hasLink(String link) {
 		return selenium.isTextPresent(link);

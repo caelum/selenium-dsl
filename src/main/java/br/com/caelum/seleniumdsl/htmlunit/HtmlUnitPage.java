@@ -37,6 +37,16 @@ class HtmlUnitPage implements Page {
 	public Page click(String element) {
 		return navigate(element);
 	}
+	
+	public Page doubleClick(String element) {
+		ClickableElement link =  page.getHtmlElementById(element);
+		try {
+			this.page = link.dblClick();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+		return this;
+	}
 
 	public ContentTag div(String id) {
 		return new HtmlUnitContentTag(page, id);

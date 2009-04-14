@@ -1,6 +1,7 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.caelum.seleniumdsl.Form;
@@ -28,7 +29,7 @@ class HtmlUnitSelectField implements SelectField {
 				return parent;
 			}
 		}
-		throw new IllegalArgumentException("No option found with value: " + value);
+		throw new IllegalArgumentException("No option found with value: '" + value + "'. Values: " + Arrays.toString(values()));
     }
 
     public Form choose(int index) {

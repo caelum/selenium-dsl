@@ -61,6 +61,15 @@ public interface Page {
 	Page click(String element);
 
 	/**
+	 * Double clicks something
+	 * 
+	 * @param element
+	 *            the element's id or name or a Selenium expression
+	 * @return the Page
+	 */
+	Page doubleClick(String element);
+
+	/**
 	 * Checks for the existence of a link
 	 * 
 	 * @param link
