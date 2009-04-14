@@ -1,7 +1,5 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 
@@ -23,7 +21,7 @@ class HtmlUnitField implements Field {
 	}
 
 	public void change() {
-		throw new NotImplementedException();
+		input.fireEvent(Event.TYPE_CHANGE);
 	}
 
 	public boolean contains(String content) {
