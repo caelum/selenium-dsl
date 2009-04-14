@@ -85,6 +85,9 @@ class HtmlUnitPage implements Page {
 		this.page = page;
 	}
 
+	HtmlPage getPage() {
+		return page;
+	}
 	public boolean hasLink(String link) {
 		try {
 			getFirstAnchorByText(link);
@@ -115,13 +118,21 @@ class HtmlUnitPage implements Page {
 		
 		while (old.equals(page)) {
 			page = (HtmlPage) page.getWebClient().getCurrentWindow().getEnclosedPage();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
+			sleep();
+		}
+		
+		while (page.isBeingParsed()) {
+			sleep();
 		}
 		return this;
+	}
+
+	private void sleep() {
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Page refresh() {

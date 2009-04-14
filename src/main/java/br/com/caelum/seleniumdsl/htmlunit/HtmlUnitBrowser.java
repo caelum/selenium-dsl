@@ -20,7 +20,7 @@ public class HtmlUnitBrowser implements Browser {
 		this.baseURL = baseURL;
 	}
 
-	public Page currentPage() {
+	public HtmlUnitPage currentPage() {
         return htmlUnitPage;
     }
 
@@ -44,8 +44,7 @@ public class HtmlUnitBrowser implements Browser {
     }
 
     public Page waitForPageLoad(long timeout) {
-    	// it is not necessary in HtmlUnit
-        return currentPage();
+    	return currentPage();
     }
 
 }
