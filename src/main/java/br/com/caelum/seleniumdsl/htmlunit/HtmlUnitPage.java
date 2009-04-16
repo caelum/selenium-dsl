@@ -83,6 +83,7 @@ class HtmlUnitPage implements Page {
 	
 	void setPage(HtmlPage page) {
 		this.page = page;
+		waitForLoad();
 	}
 
 	HtmlPage getPage() {
@@ -121,10 +122,14 @@ class HtmlUnitPage implements Page {
 			sleep();
 		}
 		
+		waitForLoad();
+		return this;
+	}
+
+	private void waitForLoad() {
 		while (page.isBeingParsed()) {
 			sleep();
 		}
-		return this;
 	}
 
 	private void sleep() {
