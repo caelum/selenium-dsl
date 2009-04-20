@@ -13,6 +13,7 @@ import br.com.caelum.seleniumdsl.js.Array;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -23,10 +24,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 class HtmlUnitPage implements Page {
 
+	private static final int SLEEP_TIME = 10;
+
 	private HtmlPage page;
+	
+	private HtmlPage lastPage;
 
 	public HtmlUnitPage(HtmlPage page) {
-		this.page = page;
+		setPage(page);
+		lastPage = page;
 	}
 
 	public Array array(String name) {
@@ -35,12 +41,7 @@ class HtmlUnitPage implements Page {
 
 	public Page click(String element) {
 		if (element.startsWith("link=")) {
-			String text = element.replace("link=", "");
-			try {
-				this.page = getFirstAnchorByText(text).click();
-			} catch (IOException e) {
-				throw new IllegalArgumentException(e);
-			}
+			return clickLink(element.replace("link=", ""));
 		} else {
 			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
 			if (elements.isEmpty()) {
@@ -55,6 +56,37 @@ class HtmlUnitPage implements Page {
 		}
 		
 		return this;
+	}
+
+	public Page clickLink(String text) {
+		try {
+			this.page = getFirstAnchorByText(text).click();
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}
+		return this;
+	}
+	
+	public Page navigate(String element) {
+		lastPage = page;
+		
+		click(element);
+		waitForPageToChange(5000);
+		
+		return this;
+	}
+
+	void waitForPageToChange(long timeout) {
+		long tries = timeout / SLEEP_TIME;
+		while (lastPage.equals(page)) {
+			page = (HtmlPage) page.getWebClient().getCurrentWindow().getEnclosedPage();
+			sleep();
+			tries--;
+			if (tries == 0) {
+				throw new IllegalStateException("Page was not loaded");
+			}
+		}
+		waitForLoad();
 	}
 	
 	public HtmlUnitPage mouseDown(String element) {
@@ -75,6 +107,10 @@ class HtmlUnitPage implements Page {
 		return this;
 	}
 	
+	public Page navigateLink(String text) {
+		return navigate("link=" + text);
+	}
+
 	public Page doubleClick(String element) {
 		ClickableElement link =  page.getHtmlElementById(element);
 		try {
@@ -99,6 +135,7 @@ class HtmlUnitPage implements Page {
 	}
 	
 	void setPage(HtmlPage page) {
+		this.lastPage = this.page;
 		this.page = page;
 		waitForLoad();
 	}
@@ -129,19 +166,6 @@ class HtmlUnitPage implements Page {
 		}
 		throw new ElementNotFoundException("a", "text", text);
 	}
-	public Page navigate(String element) {
-		HtmlPage old = page;
-		
-		click(element);
-		
-		while (old.equals(page)) {
-			page = (HtmlPage) page.getWebClient().getCurrentWindow().getEnclosedPage();
-			sleep();
-		}
-		
-		waitForLoad();
-		return this;
-	}
 
 	private void waitForLoad() {
 		while (page.isBeingParsed()) {
@@ -151,14 +175,19 @@ class HtmlUnitPage implements Page {
 
 	private void sleep() {
 		try {
-			Thread.sleep(100);
+			Thread.sleep(SLEEP_TIME);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public Page refresh() {
-		throw new NotImplementedException();
+		try {
+			setPage((HtmlPage) page.refresh());
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+		return this;
 	}
 
 	public void screenshot(String filename) {
@@ -171,10 +200,12 @@ class HtmlUnitPage implements Page {
 
 	public Table table(String id) {
 		List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
-		if (elements.isEmpty()) {
-			return new InexistantTable(id);
+		for (HtmlElement htmlElement : elements) {
+			if (htmlElement instanceof HtmlTable) {
+				return new HtmlUnitTable((HtmlTable) htmlElement);
+			}
 		}
-		return new HtmlUnitTable((HtmlTable)elements.get(0));
+		return new InexistantTable(id);
 	}
 
 	public String title() {
@@ -182,17 +213,19 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page waitUntil(String condition, long timeout) {
-		for (int i = 0; i < 10; i++) {
-			ScriptResult result = page.executeJavaScript(condition);
+		long start = System.currentTimeMillis();
+		while (System.currentTimeMillis() - start < timeout) {
+			ScriptResult result;
+			try {
+				result = page.executeJavaScript(condition);
+			} catch (ScriptException e) {
+				throw new IllegalStateException(page.toString(), e);
+			}
 			if (!ScriptResult.isFalse(result)) {
 				this.page = (HtmlPage) result.getNewPage();
 				return this;
 			}
-			try {
-				Thread.sleep(timeout/10);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
+			sleep();
 		}
 		throw new IllegalStateException("Condition " + condition + " doesn't hold");
 	}

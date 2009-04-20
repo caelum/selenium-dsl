@@ -2,6 +2,7 @@ package br.com.caelum.seleniumdsl.htmlunit;
 
 import br.com.caelum.seleniumdsl.ContentTag;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -29,6 +30,9 @@ class HtmlUnitContentTag implements ContentTag {
 	}
 
     public String innerHTML() {
+    	if (!exists()) {
+			throw new ElementNotFoundException("*", "id", id );
+		}
     	StringBuilder html = new StringBuilder();
         for(DomNode child : div().getChildren()) {
 			html.append(child.asXml());
@@ -38,6 +42,9 @@ class HtmlUnitContentTag implements ContentTag {
     
     @Override
 	public String toString() {
+    	if (!exists()) {
+			return "[null]";
+		}
 		return div().asXml();
 	} 
 
