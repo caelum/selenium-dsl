@@ -90,14 +90,14 @@ class HtmlUnitPage implements Page {
 	}
 	
 	public HtmlUnitPage mouseDown(String element) {
-		ClickableElement div = page.getHtmlElementById(element);
-		div.mouseDown();
+		ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		setPage((HtmlPage) div.mouseDown());
 		return this;
 	}
 	
 	public HtmlUnitPage mouseUp(String element) {
-		ClickableElement div = page.getHtmlElementById(element);
-		div.mouseUp();
+		ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		setPage((HtmlPage) div.mouseUp());
 		return this;
 	}
 	
