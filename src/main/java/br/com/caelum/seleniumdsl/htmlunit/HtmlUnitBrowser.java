@@ -44,6 +44,7 @@ public class HtmlUnitBrowser implements Browser {
     }
 
     public Page waitForPageLoad(long timeout) {
+    	currentPage().waitForPageToChange(timeout);
     	return currentPage();
     }
 

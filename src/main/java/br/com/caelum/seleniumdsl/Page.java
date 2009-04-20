@@ -52,6 +52,15 @@ public interface Page {
 	Page navigate(String element);
 
 	/**
+	 * Clicks a link and waits for the browser to load the page
+	 * 
+	 * @param text
+	 *            the text of the link
+	 * @return the Page
+	 */
+	Page navigateLink(String text);
+	
+	/**
 	 * Clicks something
 	 * 
 	 * @param element
@@ -60,6 +69,14 @@ public interface Page {
 	 */
 	Page click(String element);
 
+	/**
+	 * Clicks a link
+	 * 
+	 * @param text
+	 *            the text of the link
+	 * @return the Page
+	 */
+	Page clickLink(String text);
 	/**
 	 * Double clicks something
 	 * 
@@ -123,5 +140,6 @@ public interface Page {
 	 * Simulates the user clicking the "Refresh" button on their browser.
 	 */
 	Page refresh();
+
 
 }

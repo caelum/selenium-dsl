@@ -43,10 +43,18 @@ class DefaultPage implements Page {
 		selenium.waitForPageToLoad(Integer.toString(timeout));
 		return this;
 	}
+	
+	public Page navigateLink(String text) {
+		return navigate("link=" + text);
+	}
 
 	public Page click(String element) {
 		selenium.click(element);
 		return this;
+	}
+	
+	public Page clickLink(String text) {
+		return click("link=" + text);
 	}
 	
 	public Page doubleClick(String element) {
