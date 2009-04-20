@@ -81,4 +81,19 @@ class DefaultPage implements Page {
 		return this;
 	}
 
+	public Page dragAndDrop(String fromElement, String toElement) {
+		selenium.dragAndDrop(fromElement, toElement);
+		return this;
+	}
+
+	public Page mouseDown(String element) {
+		selenium.mouseDown(element);
+		return this;
+	}
+
+	public Page mouseUp(String element) {
+		selenium.mouseUp(element);
+		return this;
+	}
+
 }

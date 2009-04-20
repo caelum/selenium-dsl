@@ -10,7 +10,6 @@ import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.Page;
 import br.com.caelum.seleniumdsl.js.Array;
-import br.com.caelum.seleniumdsl.js.HtmlUnitArray;
 import br.com.caelum.seleniumdsl.table.Table;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -55,6 +54,24 @@ class HtmlUnitPage implements Page {
 			}
 		}
 		
+		return this;
+	}
+	
+	public HtmlUnitPage mouseDown(String element) {
+		ClickableElement div = page.getHtmlElementById(element);
+		div.mouseDown();
+		return this;
+	}
+	
+	public HtmlUnitPage mouseUp(String element) {
+		ClickableElement div = page.getHtmlElementById(element);
+		div.mouseUp();
+		return this;
+	}
+	
+	public HtmlUnitPage dragAndDrop(String fromElement, String toElement) {
+		mouseDown(fromElement);
+		mouseUp(toElement);
 		return this;
 	}
 	

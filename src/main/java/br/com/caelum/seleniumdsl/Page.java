@@ -123,5 +123,20 @@ public interface Page {
 	 * Simulates the user clicking the "Refresh" button on their browser.
 	 */
 	Page refresh();
+	
+	/**
+	 * Simulates the user pressing the mouse and holding on the designated element.
+	 */
+	Page mouseDown(String element);
+	
+	/**
+	 * Simulates the user releasing the mouseon the designated element.
+	 */
+	Page mouseUp(String element);
+	
+	/**
+	 * Simulates the user dragging and dropping.
+	 */
+	Page dragAndDrop(String fromElement, String toElement);
 
 }
