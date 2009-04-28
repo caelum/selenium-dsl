@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
+import org.apache.log4j.Logger;
+
 import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 
@@ -8,6 +10,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 class HtmlUnitField implements Field {
 
+	
+	private static final Logger logger = Logger.getLogger(HtmlUnitField.class);
+	
 	private final HtmlInput input;
 	private final Form parent;
 
@@ -17,10 +22,16 @@ class HtmlUnitField implements Field {
 	}
 
 	public void blur() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Firing blur on " + input);
+		}
 		input.fireEvent(Event.TYPE_BLUR);
 	}
 
 	public void change() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Firing change on " + input);
+		}
 		input.fireEvent(Event.TYPE_CHANGE);
 	}
 
@@ -33,6 +44,9 @@ class HtmlUnitField implements Field {
 	}
 
 	public Form type(String content) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("setting value " + content + " on " + input);
+		}
 		input.setValueAttribute(content);
 		return parent;
 	}

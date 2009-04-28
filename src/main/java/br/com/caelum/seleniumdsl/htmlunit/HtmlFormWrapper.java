@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
+import org.apache.log4j.Logger;
+
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -12,6 +14,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlFormWrapper {
 
+	private static final Logger logger = Logger.getLogger(HtmlFormWrapper.class);
+	
 	private final HtmlForm delegate;
 
 	HtmlFormWrapper(HtmlForm delegate) {
@@ -26,6 +30,9 @@ class HtmlFormWrapper {
 		try {
 			return getInputByNameOrIdOrDie(name);
 		} catch (Exception e) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Input with name or id " + name + " not found");
+			}
 			return null;
 		}
 	}
@@ -40,6 +47,9 @@ class HtmlFormWrapper {
 		try {
 			return getTextAreaByNameOrIdOrDie(name);
 		} catch (Exception e) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("TextArea with name or id " + name + " not found");
+			}
 			return null;
 		}
 	}
@@ -69,6 +79,9 @@ class HtmlFormWrapper {
 		try {
 			return delegate.getOneHtmlElementByAttribute("input", "type", "submit");
 		} catch (ElementNotFoundException e) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Submit not found");
+			}
 			return null;
 		}
 	}
@@ -83,9 +96,16 @@ class HtmlFormWrapper {
 		try {
 			return delegate.getInputByName(name);
 		} catch (Exception e) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Input with name " + name + " not found.");
+			}
 			return null;
 		}
 	}
 
 
+	@Override
+	public String toString() {
+		return delegate.toString();
+	}
 }

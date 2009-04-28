@@ -3,6 +3,8 @@ package br.com.caelum.seleniumdsl.htmlunit;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.apache.log4j.Logger;
+
 import br.com.caelum.seleniumdsl.Browser;
 import br.com.caelum.seleniumdsl.Page;
 
@@ -12,6 +14,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class HtmlUnitBrowser implements Browser {
 
+	
+	private static final Logger logger = Logger.getLogger(HtmlUnitBrowser.class);
+	
     private final WebClient webClient = new WebClient();
     private HtmlUnitPage htmlUnitPage = null;
 	private final String baseURL;
@@ -44,6 +49,9 @@ public class HtmlUnitBrowser implements Browser {
     }
 
     public Page waitForPageLoad(long timeout) {
+    	if (logger.isDebugEnabled()) {
+			logger.debug("Waiting for page to load for: " + timeout + "ms");
+		}
     	currentPage().waitForPageToChange(timeout);
     	return currentPage();
     }

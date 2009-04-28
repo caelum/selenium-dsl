@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl.htmlunit;
 
+import org.apache.commons.lang.NotImplementedException;
+
 import br.com.caelum.seleniumdsl.js.Element;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -19,13 +21,11 @@ public class HtmlUnitElement implements Element {
     }
 
     public String value(String property) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
     public String value() {
-        // TODO Auto-generated method stub
-        return null;
+        throw new NotImplementedException();
     }
 
 }
