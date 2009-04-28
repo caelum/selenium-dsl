@@ -1,5 +1,8 @@
 package br.com.caelum.seleniumdsl.table;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DefaultColumn implements Column {
 
@@ -37,5 +40,15 @@ public class DefaultColumn implements Column {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		int rowCount = table.getRowCount();
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < rowCount; i++) {
+			list.add("\"" + table.cell(i, columnNumber).value() + "\"");
+		}
+		return "[Column: " + list + "]";
 	}
 }

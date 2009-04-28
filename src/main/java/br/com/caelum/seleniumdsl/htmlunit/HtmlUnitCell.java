@@ -8,6 +8,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 
 public class HtmlUnitCell implements Cell {
 
+	private static final char NBSP = (char) 160;
 	private final HtmlTableCell cell;
 
 	public HtmlUnitCell(HtmlTableCell cell) {
@@ -23,7 +24,7 @@ public class HtmlUnitCell implements Cell {
 	}
 
 	public boolean contains(String content) {
-		return cell.asText().trim().equals(content);
+		return value().equals(content);
 	}
 
 	public String getLink() {
@@ -43,7 +44,7 @@ public class HtmlUnitCell implements Cell {
 	}
 
 	public String value() {
-		return cell.asText();
+		return cell.asXml().replaceAll("<.*?>", "").replace(NBSP, ' ').replaceAll("\\s+", " ").trim();
 	}
 
 }

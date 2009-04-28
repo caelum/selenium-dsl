@@ -3,8 +3,10 @@ package br.com.caelum.seleniumdsl.htmlunit;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.mozilla.javascript.NativeArray;
 
 import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.Form;
@@ -15,6 +17,7 @@ import br.com.caelum.seleniumdsl.table.Table;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.UnexpectedPage;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -40,19 +43,22 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page click(String element) {
+		ClickableElement clickable;
 		if (element.startsWith("link=")) {
 			return clickLink(element.replace("link=", ""));
+		} else if (element.startsWith("//")){
+			clickable = page.getFirstByXPath(element);
 		} else {
 			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
 			if (elements.isEmpty()) {
-				throw new NotImplementedException(element + " not recognized");
+				throw new ElementNotFoundException("*", "id|name", element);
 			}
-			ClickableElement clickable = (ClickableElement) elements.get(0);
-			try {
-				this.page = clickable.click();
-			} catch (IOException e) {
-				throw new IllegalStateException(e);
-			}
+			clickable = (ClickableElement) elements.get(0);
+		}
+		try {
+			this.page = clickable.click();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
 		}
 		
 		return this;
@@ -79,7 +85,17 @@ class HtmlUnitPage implements Page {
 	void waitForPageToChange(long timeout) {
 		long tries = timeout / SLEEP_TIME;
 		while (lastPage.equals(page)) {
-			page = (HtmlPage) page.getWebClient().getCurrentWindow().getEnclosedPage();
+			com.gargoylesoftware.htmlunit.Page newPage = page.getWebClient().getCurrentWindow().getEnclosedPage();
+			if (newPage instanceof UnexpectedPage) {
+				UnexpectedPage unexpected = (UnexpectedPage) newPage;
+				try {
+					String error = new Scanner(unexpected.getInputStream()).useDelimiter("$$").next();
+					throw new IllegalStateException("Unexpected page: \n" + error);
+				} catch (IOException e) {
+					throw new IllegalStateException(e);
+				}
+			}
+			page = (HtmlPage) newPage;
 			sleep();
 			tries--;
 			if (tries == 0) {
@@ -103,6 +119,7 @@ class HtmlUnitPage implements Page {
 	
 	public HtmlUnitPage dragAndDrop(String fromElement, String toElement) {
 		mouseDown(fromElement);
+		setPage((HtmlPage) page.getElementsByIdAndOrName(toElement).get(0).mouseMove());
 		mouseUp(toElement);
 		return this;
 	}
@@ -154,6 +171,10 @@ class HtmlUnitPage implements Page {
 
 	public String invoke(String cmd) {
 		ScriptResult result = page.executeJavaScript(cmd);
+		if (result.getJavaScriptResult() instanceof NativeArray) {
+			NativeArray array = (NativeArray) result.getJavaScriptResult();
+			return array.get(0, null).toString();
+		}
 		return result.getJavaScriptResult().toString();
 	}
 
