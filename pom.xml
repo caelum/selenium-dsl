@@ -113,6 +113,26 @@
 		    <artifactId>log4j</artifactId>
 		    <version>1.2.14</version>
 		</dependency> 
+		<dependency>
+	        <groupId>org.openqa.selenium.webdriver</groupId>
+	        <artifactId>webdriver-htmlunit</artifactId>
+	        <version>0.6.964</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openqa.selenium.webdriver</groupId>
+	        <artifactId>webdriver-support</artifactId>
+	        <version>0.6.964</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openqa.selenium.webdriver</groupId>
+	        <artifactId>webdriver-firefox</artifactId>
+	        <version>0.6.964</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openqa.selenium.webdriver</groupId>
+	        <artifactId>webdriver-ie</artifactId>
+	        <version>0.6.964</version>
+	    </dependency>
 	</dependencies>
 	<properties>
 		<java.compiler.version>1.5</java.compiler.version>
