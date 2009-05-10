@@ -1,5 +1,7 @@
 package br.com.caelum.seleniumdsl;
 
+import org.apache.commons.lang.NotImplementedException;
+
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -51,6 +53,11 @@ public class DefaultBrowser implements Browser {
 	public Page waitForPageLoad(long timeout) {
 		selenium.waitForPageToLoad("" + timeout);
 		return currentPage();
+	}
+
+	@Override
+	public Page window(String id) {
+		throw new NotImplementedException();
 	}
 
 }
