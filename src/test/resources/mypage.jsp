@@ -46,6 +46,7 @@
             Login: <input id="login" type="text" name="login" value="${param['remember']? param['login']:'' }"/><br/>
             Password: <input id="password" type="password" name="password" /><br/>
             Remember? <input type="checkbox" name="remember" value="true" checked=${param['remember'] }/>
+            <input type="submit" value="enviar" name="enviar" />
         </form>
     </body>
 </html>
