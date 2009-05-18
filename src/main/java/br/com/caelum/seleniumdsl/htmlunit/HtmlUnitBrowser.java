@@ -15,9 +15,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class HtmlUnitBrowser implements Browser {
 
-	
+
 	private static final Logger logger = Logger.getLogger(HtmlUnitBrowser.class);
-	
+
     private final WebClient webClient = new WebClient();
     private HtmlUnitPage htmlUnitPage = null;
 	private final String baseURL;
@@ -57,7 +57,6 @@ public class HtmlUnitBrowser implements Browser {
     	return currentPage();
     }
 
-	@Override
 	public Page window(String id) {
 		throw new NotImplementedException();
 	}

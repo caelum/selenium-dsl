@@ -7,7 +7,7 @@ import com.thoughtworks.selenium.Selenium;
 /**
  * A default browser implementation based on selenium. Other browser implementations might be created based on other
  * projects (webdriver?).
- * 
+ *
  * @author Guilherme Silveira
  */
 public class DefaultBrowser implements Browser {
@@ -18,7 +18,7 @@ public class DefaultBrowser implements Browser {
 
 	/**
 	 * Creates the browser with the default 10seconds timeout limit.
-	 * 
+	 *
 	 * @param selenium
 	 */
 	public DefaultBrowser(Selenium selenium) {
@@ -27,7 +27,7 @@ public class DefaultBrowser implements Browser {
 
 	/**
 	 * Creates the browser with this selenium implementation and the selected timeout in millisecs.
-	 * 
+	 *
 	 * @param selenium
 	 * @param timeout
 	 */
@@ -55,7 +55,6 @@ public class DefaultBrowser implements Browser {
 		return currentPage();
 	}
 
-	@Override
 	public Page window(String id) {
 		throw new NotImplementedException();
 	}
