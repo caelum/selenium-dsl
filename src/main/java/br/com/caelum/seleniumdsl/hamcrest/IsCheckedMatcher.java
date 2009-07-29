@@ -7,6 +7,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.Form;
 
+/**
+ * See description on SeleniumDslMatchers
+ * @author Lucas Cavalcanti
+ */
 public class IsCheckedMatcher<T extends Form> extends TypeSafeMatcher<T>{
 
 	private final String checkbox;

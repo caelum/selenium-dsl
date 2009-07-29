@@ -7,6 +7,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.ContentTag;
 
+/**
+ * See description on SeleniumDslMatchers
+ * @author Lucas Cavalcanti
+ */
 public class DivExistsMatcher<T extends ContentTag> extends TypeSafeMatcher<T> {
 	@Override
 	public boolean matchesSafely(ContentTag item) {

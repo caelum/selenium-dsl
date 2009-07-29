@@ -7,6 +7,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.table.Column;
 
+/**
+ * See description on SeleniumDslMatchers
+ * @author Lucas Cavalcanti
+ */
 public class ColumnContainsPartialMatcher<T extends Column> extends TypeSafeMatcher<T> {
 
 	private final String text;

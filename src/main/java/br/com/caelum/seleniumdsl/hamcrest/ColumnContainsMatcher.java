@@ -6,7 +6,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.table.Column;
-
+/**
+ * @author Lucas Cavalcanti
+ */
 public class ColumnContainsMatcher<T extends Column> extends TypeSafeMatcher<T> {
 
 	private final String text;

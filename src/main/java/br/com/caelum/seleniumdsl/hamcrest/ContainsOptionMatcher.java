@@ -7,6 +7,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.SelectField;
 
+/**
+ * See description on SeleniumDslMatchers
+ * @author Lucas Cavalcanti
+ */
 public class ContainsOptionMatcher<T extends SelectField> extends TypeSafeMatcher<T> {
 
 	private final String label;

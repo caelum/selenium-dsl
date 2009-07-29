@@ -7,6 +7,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import br.com.caelum.seleniumdsl.Page;
 
+/**
+ * See description on SeleniumDslMatchers
+ * @author Lucas Cavalcanti
+ */
 public class HasLinkMatcher<T extends Page> extends TypeSafeMatcher<T> {
 
 	private final String linkName;
