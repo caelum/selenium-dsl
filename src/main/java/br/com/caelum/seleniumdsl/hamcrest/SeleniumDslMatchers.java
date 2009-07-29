@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.Page;
+import br.com.caelum.seleniumdsl.SelectField;
 
 public class SeleniumDslMatchers {
 	private SeleniumDslMatchers() {}
@@ -23,5 +24,9 @@ public class SeleniumDslMatchers {
 
 	public static <T extends Page> Matcher<T> hasLink(String linkName) {
 		return HasLinkMatcher.hasLink(linkName);
+	}
+
+	public static <T extends SelectField> Matcher<T> containsOption(String label) {
+		return ContainsOptionMatcher.containsOption(label);
 	}
 }
