@@ -6,6 +6,7 @@ import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.Page;
 import br.com.caelum.seleniumdsl.SelectField;
+import br.com.caelum.seleniumdsl.table.Column;
 import br.com.caelum.seleniumdsl.table.Table;
 
 public class SeleniumDslMatchers {
@@ -33,5 +34,12 @@ public class SeleniumDslMatchers {
 
 	public static <T extends Table> Matcher<T> containsColumn(String name) {
 		return ContainsColumnMatcher.containsColumn(name);
+	}
+
+	public static <T extends Column> Matcher<T> columnContains(String text) {
+		return ColumnContainsMatcher.columnContains(text);
+	}
+	public static <T extends Column> Matcher<T> columnContainsPartial(String text) {
+		return ColumnContainsPartialMatcher.columnContainsPartial(text);
 	}
 }
