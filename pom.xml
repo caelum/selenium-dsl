@@ -4,7 +4,7 @@
 	<groupId>br.com.caelum.seleniumdsl</groupId>
 	<artifactId>selenium-dsl</artifactId>
 	<packaging>jar</packaging>
-	<version>0.8.6</version>
+	<version>0.8.7-SNAPSHOT</version>
 	<name>selenium-dsl</name>
 	<description>A DSL for working with Selenium and Java</description>
 	<url>http://maven.apache.org</url>
@@ -321,7 +321,7 @@
 		<profile>
 			<id>tomcat</id>
 			<properties>
-				<cargo.port>9891</cargo.port>
+				<cargo.port>8080</cargo.port>
 			</properties>
 			<build>
 				<plugins>
@@ -341,8 +341,8 @@
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
-						<version>6.1.10</version>
-						<configuration>
+						<!--<version>6.1.10</version>
+						--><configuration>
 							<connectors>
 								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 									<port>${cargo.port}</port>

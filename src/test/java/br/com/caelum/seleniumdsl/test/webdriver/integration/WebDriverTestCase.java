@@ -16,7 +16,7 @@ public abstract class WebDriverTestCase {
 
 	protected static WebDriver webDriver;
 	protected Browser browser;
-	protected static final String URL = "http://localhost:8080/selenium-dsl/";
+	protected static final String URL = "http://localhost:8080/";
 
 	@BeforeClass
 	public static void beforeStartup() {
