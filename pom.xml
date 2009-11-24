@@ -4,7 +4,7 @@
 	<groupId>br.com.caelum.seleniumdsl</groupId>
 	<artifactId>selenium-dsl</artifactId>
 	<packaging>jar</packaging>
-	<version>0.8.5.5-SNAPSHOT</version>
+	<version>0.8.6</version>
 	<name>selenium-dsl</name>
 	<description>A DSL for working with Selenium and Java</description>
 	<url>http://maven.apache.org</url>
@@ -435,9 +435,9 @@
 			<url>scp://shell.sourceforge.net/home/groups/s/se/seleniumdsl/htdocs</url>
 		</site>
 		<repository>
-			<id>seleniumdsl.sourceforge.net</id>
-			<name>Selenium DSL Maven Server</name>
-			<url>scp://shell.sourceforge.net/home/groups/s/se/seleniumdsl/htdocs/maven</url>
+			<id>mvn-repository</id>
+			<name>Caelum Central Repository</name>
+			<url>scp://caelum.com.br/home/mavensync/repo</url>
 		</repository>
 		<snapshotRepository>
 			<id>seleniumdsl.sourceforge.net</id>
