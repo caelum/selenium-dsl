@@ -30,11 +30,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 class HtmlUnitPage implements Page {
 
 	private static final Logger logger = Logger.getLogger(HtmlUnitPage.class);
-	
+
 	private static final int SLEEP_TIME = 10;
 
 	private HtmlPage page;
-	
+
 	private HtmlPage lastPage;
 
 	public HtmlUnitPage(HtmlPage page) {
@@ -62,7 +62,7 @@ class HtmlUnitPage implements Page {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Finding element " + element + " by id or name.");
 			}
-			List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
+			final List<HtmlElement> elements = page.getElementsByIdAndOrName(element);
 			if (elements.isEmpty()) {
 				throw new ElementNotFoundException("*", "id|name", element);
 			}
@@ -70,31 +70,31 @@ class HtmlUnitPage implements Page {
 		}
 		try {
 			this.page = clickable.click();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new IllegalStateException(e);
 		}
-		
+
 		return this;
 	}
 
 	public Page clickLink(String text) {
 		try {
 			this.page = getFirstAnchorByText(text).click();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new IllegalArgumentException(e);
 		}
 		return this;
 	}
-	
+
 	public Page navigate(String element) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Navigating element " + element);
 		}
 		lastPage = page;
-		
+
 		click(element);
 		waitForPageToChange(5000);
-		
+
 		return this;
 	}
 
@@ -104,13 +104,13 @@ class HtmlUnitPage implements Page {
 		}
 		long tries = timeout / SLEEP_TIME;
 		while (lastPage.equals(page)) {
-			com.gargoylesoftware.htmlunit.Page newPage = page.getWebClient().getCurrentWindow().getEnclosedPage();
+			final com.gargoylesoftware.htmlunit.Page newPage = page.getWebClient().getCurrentWindow().getEnclosedPage();
 			if (newPage instanceof UnexpectedPage) {
-				UnexpectedPage unexpected = (UnexpectedPage) newPage;
+				final UnexpectedPage unexpected = (UnexpectedPage) newPage;
 				try {
-					String error = new Scanner(unexpected.getInputStream()).useDelimiter("$$").next();
+					final String error = new Scanner(unexpected.getInputStream()).useDelimiter("$$").next();
 					throw new IllegalStateException("Unexpected page: \n" + error);
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					throw new IllegalStateException(e);
 				}
 			}
@@ -123,32 +123,32 @@ class HtmlUnitPage implements Page {
 		}
 		waitForLoad();
 	}
-	
+
 	public HtmlUnitPage mouseDown(String element) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Mouse down on " + element);
 		}
-		ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		final ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
 		setPage((HtmlPage) div.mouseDown());
 		return this;
 	}
-	
+
 	public HtmlUnitPage mouseUp(String element) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Mouse up on " + element);
 		}
-		ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		final ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
 		setPage((HtmlPage) div.mouseUp());
 		return this;
 	}
-	
+
 	public HtmlUnitPage dragAndDrop(String fromElement, String toElement) {
 		mouseDown(fromElement);
 		setPage((HtmlPage) page.getElementsByIdAndOrName(toElement).get(0).mouseMove());
 		mouseUp(toElement);
 		return this;
 	}
-	
+
 	public Page navigateLink(String text) {
 		return navigate("link=" + text);
 	}
@@ -157,10 +157,10 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Double clicking " + element);
 		}
-		ClickableElement link =  page.getHtmlElementById(element);
+		final ClickableElement link =  page.getHtmlElementById(element);
 		try {
 			this.page = link.dblClick();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new IllegalStateException(e);
 		}
 		return this;
@@ -171,21 +171,21 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Form form(String id) {
-		for (HtmlForm form : page.getForms()) {
+		for (final HtmlForm form : page.getForms()) {
 			if (Arrays.asList("", form.getNameAttribute(), form.getIdAttribute()).contains(id)) {
 				return new HtmlUnitForm(this, new HtmlFormWrapper(form));
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			List<String> forms = new ArrayList<String>();
-			for (HtmlForm form : page.getForms()) {
+			final List<String> forms = new ArrayList<String>();
+			for (final HtmlForm form : page.getForms()) {
 				forms.add(form.toString());
 			}
 			logger.debug("No forms found with id: " + id + ". Forms found: \n" + forms);
 		}
 		throw new ElementNotFoundException("form", "id|nome", id);
 	}
-	
+
 	void setPage(HtmlPage page) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Change page " + this.page + " to " + page);
@@ -202,7 +202,7 @@ class HtmlUnitPage implements Page {
 		try {
 			getFirstAnchorByText(link);
 			return true;
-		} catch (ElementNotFoundException e) {
+		} catch (final ElementNotFoundException e) {
 			return false;
 		}
 	}
@@ -211,27 +211,27 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Invoking javascript: " + cmd);
 		}
-		ScriptResult result = page.executeJavaScript(cmd);
+		final ScriptResult result = page.executeJavaScript(cmd);
 		if (result.getJavaScriptResult() instanceof NativeArray) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Result is a native array");
 			}
-			NativeArray array = (NativeArray) result.getJavaScriptResult();
+			final NativeArray array = (NativeArray) result.getJavaScriptResult();
 			return array.get(0, null).toString();
 		}
 		return result.getJavaScriptResult().toString();
 	}
 
 	private HtmlAnchor getFirstAnchorByText(String text) {
-		List<HtmlAnchor> anchors = (List<HtmlAnchor>) page.getByXPath("//a");
-		for (HtmlAnchor anchor : anchors) {
+		final List<HtmlAnchor> anchors = (List<HtmlAnchor>) page.getByXPath("//a");
+		for (final HtmlAnchor anchor : anchors) {
 			if (text.trim().equals(anchor.asXml().replaceAll("<.*?>", "").trim())) {
 				return anchor;
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			List<String> list = new ArrayList<String>();
-			for (HtmlAnchor anchor : anchors) {
+			final List<String> list = new ArrayList<String>();
+			for (final HtmlAnchor anchor : anchors) {
 				list.add(anchor.asXml().replaceAll("<.*?>", "").trim());
 			}
 			logger.debug("No link found with text: " + text + ". Links found: \n" + list);
@@ -248,7 +248,7 @@ class HtmlUnitPage implements Page {
 	private void sleep() {
 		try {
 			Thread.sleep(SLEEP_TIME);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -256,7 +256,7 @@ class HtmlUnitPage implements Page {
 	public Page refresh() {
 		try {
 			setPage((HtmlPage) page.refresh());
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new IllegalStateException(e);
 		}
 		return this;
@@ -271,15 +271,15 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Table table(String id) {
-		List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
-		for (HtmlElement htmlElement : elements) {
+		final List<HtmlElement> elements = page.getElementsByIdAndOrName(id);
+		for (final HtmlElement htmlElement : elements) {
 			if (htmlElement instanceof HtmlTable) {
 				return new HtmlUnitTable((HtmlTable) htmlElement);
 			}
 		}
 		if (logger.isDebugEnabled()) {
-			List<String> list = new ArrayList<String>();
-			for (HtmlElement element : elements) {
+			final List<String> list = new ArrayList<String>();
+			for (final HtmlElement element : elements) {
 				if (element instanceof HtmlTable) {
 					list.add(element.toString());
 				}
@@ -297,12 +297,12 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Waiting for condition " + condition);
 		}
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 		while (System.currentTimeMillis() - start < timeout) {
 			ScriptResult result;
 			try {
 				result = page.executeJavaScript(condition);
-			} catch (ScriptException e) {
+			} catch (final ScriptException e) {
 				throw new IllegalStateException(page.toString(), e);
 			}
 			if (!ScriptResult.isFalse(result)) {
@@ -312,6 +312,10 @@ class HtmlUnitPage implements Page {
 			sleep();
 		}
 		throw new IllegalStateException("Condition " + condition + " doesn't hold");
+	}
+
+	public String htmlSource() {
+		throw new NotImplementedException();
 	}
 
 }

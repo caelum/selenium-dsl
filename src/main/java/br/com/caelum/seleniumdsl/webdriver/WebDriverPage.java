@@ -106,4 +106,8 @@ public class WebDriverPage implements Page {
 		clickLink(text);
 		return this;
 	}
+
+	public String htmlSource() {
+		return webDriver.getPageSource();
+	}
 }

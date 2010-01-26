@@ -1,11 +1,11 @@
 package br.com.caelum.seleniumdsl;
 
+import junit.framework.Assert;
+
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
-
-import br.com.caelum.seleniumdsl.Page;
 
 import com.thoughtworks.selenium.Selenium;
 
@@ -52,6 +52,19 @@ public class DefaultPageTest {
 			}
 		});
 		page.hasLink("id");
+		mockery.assertIsSatisfied();
+	}
+
+	@Test
+	public void testGetSource() throws Exception {
+		final String html = "<html></html>";
+		mockery.checking(new Expectations() {
+			{
+				exactly(1).of(mock).getHtmlSource();
+				will(returnValue(html));
+			}
+		});
+		Assert.assertEquals(html, page.htmlSource());
 		mockery.assertIsSatisfied();
 	}
 

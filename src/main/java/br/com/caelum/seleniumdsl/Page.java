@@ -5,14 +5,14 @@ import br.com.caelum.seleniumdsl.table.Table;
 
 /**
  * A web page.
- * 
+ *
  * @author Guilherme Silveira
  */
 public interface Page {
 
 	/**
 	 * Accesses a web form.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -20,7 +20,7 @@ public interface Page {
 
 	/**
 	 * Access to a div.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -28,7 +28,7 @@ public interface Page {
 
 	/**
 	 * Access to a span.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public interface Page {
 
 	/**
 	 * Access to a table.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public interface Page {
 
 	/**
 	 * Clicks an element and waits for the browser to load the page
-	 * 
+	 *
 	 * @param element
 	 *            the elements's id or name or an Selenium expression
 	 * @return the Page
@@ -53,16 +53,16 @@ public interface Page {
 
 	/**
 	 * Clicks a link and waits for the browser to load the page
-	 * 
+	 *
 	 * @param text
 	 *            the text of the link
 	 * @return the Page
 	 */
 	Page navigateLink(String text);
-	
+
 	/**
 	 * Clicks something
-	 * 
+	 *
 	 * @param element
 	 *            the element's id or name or a Selenium expression
 	 * @return the Page
@@ -71,7 +71,7 @@ public interface Page {
 
 	/**
 	 * Clicks a link
-	 * 
+	 *
 	 * @param text
 	 *            the text of the link
 	 * @return the Page
@@ -79,7 +79,7 @@ public interface Page {
 	Page clickLink(String text);
 	/**
 	 * Double clicks something
-	 * 
+	 *
 	 * @param element
 	 *            the element's id or name or a Selenium expression
 	 * @return the Page
@@ -88,7 +88,7 @@ public interface Page {
 
 	/**
 	 * Checks for the existence of a link
-	 * 
+	 *
 	 * @param link
 	 * @return
 	 */
@@ -96,14 +96,14 @@ public interface Page {
 
 	/**
 	 * Returns the page title.
-	 * 
+	 *
 	 * @return the page title
 	 */
 	String title();
 
 	/**
 	 * Returns access to a javascript array.
-	 * 
+	 *
 	 * @param name
 	 *            the variable name
 	 * @return the javascript array
@@ -112,7 +112,7 @@ public interface Page {
 
 	/**
 	 * Invokes a javascript command.
-	 * 
+	 *
 	 * @param cmd
 	 *            a command
 	 * @return the result
@@ -121,7 +121,7 @@ public interface Page {
 
 	/**
 	 * Waits at most timeout miliseconds until condition is true.
-	 * 
+	 *
 	 * @param condition
 	 *            a javascript command that evals to true or false
 	 * @param timeout
@@ -131,7 +131,7 @@ public interface Page {
 
 	/**
 	 * Takes a screenshot to the designated file.
-	 * 
+	 *
 	 * @param filename
 	 */
 	void screenshot(String filename);
@@ -140,21 +140,25 @@ public interface Page {
 	 * Simulates the user clicking the "Refresh" button on their browser.
 	 */
 	Page refresh();
-	
+
 	/**
 	 * Simulates the user pressing the mouse and holding on the designated element.
 	 */
 	Page mouseDown(String element);
-	
+
 	/**
 	 * Simulates the user releasing the mouseon the designated element.
 	 */
 	Page mouseUp(String element);
-	
+
 	/**
 	 * Simulates the user dragging and dropping.
 	 */
 	Page dragAndDrop(String fromElement, String toElement);
 
+	/**
+	 * Retrieves the HTML source of this page
+	 */
+	String htmlSource();
 
 }

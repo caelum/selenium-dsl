@@ -43,7 +43,7 @@ class DefaultPage implements Page {
 		selenium.waitForPageToLoad(Integer.toString(timeout));
 		return this;
 	}
-	
+
 	public Page navigateLink(String text) {
 		return navigate("link=" + text);
 	}
@@ -52,11 +52,11 @@ class DefaultPage implements Page {
 		selenium.click(element);
 		return this;
 	}
-	
+
 	public Page clickLink(String text) {
 		return click("link=" + text);
 	}
-	
+
 	public Page doubleClick(String element) {
 		selenium.doubleClick(element);
 		return this;
@@ -102,6 +102,10 @@ class DefaultPage implements Page {
 	public Page mouseUp(String element) {
 		selenium.mouseUp(element);
 		return this;
+	}
+
+	public String htmlSource() {
+		return selenium.getHtmlSource();
 	}
 
 }
