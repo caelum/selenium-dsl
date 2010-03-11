@@ -10,6 +10,7 @@ import org.junit.Test;
 import br.com.caelum.seleniumdsl.table.layout.FullTableLayout;
 
 import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.SeleniumException;
 
 public class FullTableLayoutTest {
 	private static final int ROW_COUNT = 5;
@@ -22,13 +23,6 @@ public class FullTableLayoutTest {
 	public void setUp() {
 		mockery = new Mockery();
 		mock = mockery.mock(Selenium.class);
-
-		mockery.checking(new Expectations() {
-			{
-				allowing(mock).getXpathCount("//table[@id='table']/*/tr");
-				will(returnValue(ROW_COUNT));
-			}
-		});
 
 		tableLayout = new FullTableLayout(mock, "table", "id");
 	}
@@ -49,7 +43,23 @@ public class FullTableLayoutTest {
 	public void testGetValueOfFooter() throws Exception {
 		mockery.checking(new Expectations() {
 			{
+				one(mock).getText("xpath=//table[@id='table']/tbody/tr[" + (ROW_COUNT - 1) + "]/td[1]");
+				will(throwException(new SeleniumException("exception")));
+
 				one(mock).getText("xpath=//table[@id='table']/tfoot/tr[1]/td[1]");
+				will(returnValue("test"));
+			}
+		});
+		Assert.assertEquals("test", tableLayout.value(ROW_COUNT - 1, 1));
+		mockery.assertIsSatisfied();
+	}
+
+
+	@Test
+	public void testGetValueOfFooterInsideTBody() throws Exception {
+		mockery.checking(new Expectations() {
+			{
+				one(mock).getText("xpath=//table[@id='table']/tbody/tr[" + (ROW_COUNT - 1) + "]/td[1]");
 				will(returnValue("test"));
 			}
 		});

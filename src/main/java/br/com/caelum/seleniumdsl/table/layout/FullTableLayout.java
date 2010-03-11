@@ -29,10 +29,11 @@ public class FullTableLayout implements TableLayout {
 	}
 
 	public String value(int row, int col) {
-		if (row + 1 == getRowCount()) {
-			return helper.getXPathText("/tfoot/tr[1]/td[" + col + "]");
+		String value = helper.getXPathText("/tbody/tr[" + row + "]/td[" + col + "]");
+		if (value == null) {
+			value = helper.getXPathText("/tfoot/tr[1]/td[" + col + "]");
 		}
-		return helper.getXPathText("/tbody/tr[" + row + "]/td[" + col + "]");
+		return value;
 	}
 
 	public int getRowCount() {
