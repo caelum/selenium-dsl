@@ -110,4 +110,22 @@ public class TableTest extends WebDriverTestCase {
 		Assert.assertFalse(full.row(2).cell(3).uncheck().checked());
 		Assert.assertFalse(nested.row(2).cell(3).uncheck().checked());
 	}
+
+	@Test
+	public void testContainsPartialValueByColumnName() throws Exception {
+		Assert.assertTrue(plain.column("header_1").contains("cell_1_2"));
+		Assert.assertTrue(plainTh.column("header_1").contains("cell_1_2"));
+		Assert.assertTrue(full.column("header_1").contains("cell_1_2"));
+		Assert.assertTrue(nested.column("header_1").contains("cell_1_2"));
+
+		Assert.assertFalse(plain.column("header_2").contains("cell_1_2"));
+		Assert.assertFalse(plainTh.column("header_2").contains("cell_1_2"));
+		Assert.assertFalse(full.column("header_2").contains("cell_1_2"));
+		Assert.assertFalse(nested.column("header_2").contains("cell_1_2"));
+
+		Assert.assertTrue(plain.column("header_3").contains("footer_3"));
+		Assert.assertTrue(plainTh.column("header_3").contains("footer_3"));
+		Assert.assertTrue(full.column("header_3").contains("footer_3"));
+		Assert.assertTrue(nested.column("header_3").contains("footer_3"));
+	}
 }

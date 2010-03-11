@@ -19,7 +19,7 @@ public abstract class SeleniumTestCase {
 
 	@BeforeClass
 	public static void beforeStartup() {
-		String port = getProperty("cargo.servlet.port", "8080");
+		String port = getProperty("cargo.servlet.port", "9091");
 		String browser = getProperty("seleniumBrowserString", "*firefox");
 		String seleniumPort = getProperty("selenium.port", "4444");
 
@@ -31,8 +31,9 @@ public abstract class SeleniumTestCase {
 
 	private static String getProperty(String key, String standard) {
 		String value = System.getProperty(key);
-		if (value == null || value.equals(""))
+		if (value == null || value.equals("")) {
 			return standard;
+		}
 		return value;
 	}
 
