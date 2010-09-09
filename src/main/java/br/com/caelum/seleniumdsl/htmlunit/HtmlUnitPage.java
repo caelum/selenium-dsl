@@ -6,9 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
-import org.mozilla.javascript.NativeArray;
 
 import br.com.caelum.seleniumdsl.ContentTag;
 import br.com.caelum.seleniumdsl.Form;
@@ -20,7 +21,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.UnexpectedPage;
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -47,7 +47,7 @@ class HtmlUnitPage implements Page {
 	}
 
 	public Page click(String element) {
-		ClickableElement clickable;
+		HtmlElement clickable;
 		if (element.startsWith("link=")) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Element " + element + " is a link");
@@ -66,7 +66,7 @@ class HtmlUnitPage implements Page {
 			if (elements.isEmpty()) {
 				throw new ElementNotFoundException("*", "id|name", element);
 			}
-			clickable = (ClickableElement) elements.get(0);
+			clickable = (HtmlElement) elements.get(0);
 		}
 		try {
 			this.page = clickable.click();
@@ -128,7 +128,7 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Mouse down on " + element);
 		}
-		final ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		final HtmlElement div = (HtmlElement) page.getElementsByIdAndOrName(element).get(0);
 		setPage((HtmlPage) div.mouseDown());
 		return this;
 	}
@@ -137,7 +137,7 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Mouse up on " + element);
 		}
-		final ClickableElement div = (ClickableElement) page.getElementsByIdAndOrName(element).get(0);
+		final HtmlElement div = (HtmlElement) page.getElementsByIdAndOrName(element).get(0);
 		setPage((HtmlPage) div.mouseUp());
 		return this;
 	}
@@ -157,7 +157,7 @@ class HtmlUnitPage implements Page {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Double clicking " + element);
 		}
-		final ClickableElement link =  page.getHtmlElementById(element);
+		final HtmlElement link =  page.getHtmlElementById(element);
 		try {
 			this.page = link.dblClick();
 		} catch (final IOException e) {
@@ -172,7 +172,7 @@ class HtmlUnitPage implements Page {
 
 	public Form form(String id) {
 		for (final HtmlForm form : page.getForms()) {
-			if (Arrays.asList("", form.getNameAttribute(), form.getIdAttribute()).contains(id)) {
+			if (Arrays.asList("", form.getNameAttribute(), form.getAttribute("id")).contains(id)) {
 				return new HtmlUnitForm(this, new HtmlFormWrapper(form));
 			}
 		}

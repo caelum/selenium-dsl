@@ -8,7 +8,6 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -83,7 +82,7 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-    	ClickableElement button = form.getInputByName(element);
+    	HtmlElement button = form.getInputByName(element);
     	if (button == null) {
     		if (logger.isDebugEnabled()) {
 				logger.debug("Element " + element + " was not found by name, trying id");
