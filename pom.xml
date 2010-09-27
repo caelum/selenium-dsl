@@ -98,11 +98,13 @@
 			<version>2.4.0</version>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
-			<groupId>org.openqa.selenium.client-drivers</groupId>
-			<artifactId>selenium-java-client-driver</artifactId>
-			<version>1.0-beta-1</version>
+		    <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+		    <artifactId>selenium-java-client-driver</artifactId>
+		    <version>1.0.2</version>
 		</dependency>
+        
         <dependency>
 		    <groupId>net.sourceforge.htmlunit</groupId>
 		    <artifactId>htmlunit</artifactId>
@@ -114,30 +116,31 @@
 		    <version>1.2.14</version>
 		</dependency> 
 		<dependency>
-	        <groupId>org.openqa.selenium.webdriver</groupId>
-	        <artifactId>webdriver-htmlunit</artifactId>
-	        <version>0.6.964</version>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-htmlunit-driver</artifactId>
+	        <version>${selenium.version}</version>
 	    </dependency>
 	    <dependency>
-	        <groupId>org.openqa.selenium.webdriver</groupId>
-	        <artifactId>webdriver-support</artifactId>
-	        <version>0.6.964</version>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-support</artifactId>
+	        <version>${selenium.version}</version>
 	    </dependency>
 	    <dependency>
-	        <groupId>org.openqa.selenium.webdriver</groupId>
-	        <artifactId>webdriver-firefox</artifactId>
-	        <version>0.6.964</version>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-firefox-driver</artifactId>
+	        <version>${selenium.version}</version>
 	    </dependency>
 	    <dependency>
-	        <groupId>org.openqa.selenium.webdriver</groupId>
-	        <artifactId>webdriver-ie</artifactId>
-	        <version>0.6.964</version>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-ie-driver</artifactId>
+	        <version>${selenium.version}</version>
 	    </dependency>
 	</dependencies>
 	<properties>
 		<java.compiler.version>1.5</java.compiler.version>
-		<firefox.bin>/usr/lib/firefox/firefox-bin</firefox.bin>
+		<firefox.bin>/usr/lib/firefox-3.6.8/firefox-bin</firefox.bin>
 		<cargo.port>8081</cargo.port>
+		<selenium.version>2.0a5</selenium.version>
 	</properties>
 	<build>
 		<plugins>
@@ -337,12 +340,12 @@
 							</execution>
 						</executions>
 					</plugin>
-  			<!-- jetty -->
+  					<!-- jetty -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
-						<!--<version>6.1.10</version>
-						--><configuration>
+						<version>6.1.10</version>
+						<configuration>
 							<connectors>
 								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 									<port>${cargo.port}</port>
@@ -377,6 +380,24 @@
 <!--							</execution>-->
 						</executions>
 					</plugin>
+					
+					<!--  selenium server -->
+					<plugin>
+		                <groupId>org.codehaus.mojo</groupId>
+		                <artifactId>selenium-maven-plugin</artifactId>
+		                <executions>
+		                    <execution>
+		                        <phase>pre-integration-test</phase>
+		                        <goals>
+		                            <goal>start-server</goal>
+		                        </goals>
+		                        <configuration>
+		                            <background>true</background>
+		                        </configuration>
+		                    </execution>
+		                </executions>
+		            </plugin>
+					
 				</plugins>
 			</build>
 			<reporting>
@@ -426,6 +447,10 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<downloadUrl>http://sourceforge.net/project/showfiles.php?group_id=227875</downloadUrl>
@@ -472,4 +497,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
 </project>
