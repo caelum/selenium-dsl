@@ -4,7 +4,7 @@
 	<groupId>br.com.caelum.seleniumdsl</groupId>
 	<artifactId>selenium-dsl</artifactId>
 	<packaging>jar</packaging>
-	<version>0.8.7-SNAPSHOT</version>
+	<version>0.8.8-SNAPSHOT</version>
 	<name>selenium-dsl</name>
 	<description>A DSL for working with Selenium and Java</description>
 	<url>http://maven.apache.org</url>
@@ -106,7 +106,7 @@
         <dependency>
 		    <groupId>net.sourceforge.htmlunit</groupId>
 		    <artifactId>htmlunit</artifactId>
-		    <version>2.4</version>
+		    <version>2.7</version>
 		</dependency> 
         <dependency>
 		    <groupId>log4j</groupId>

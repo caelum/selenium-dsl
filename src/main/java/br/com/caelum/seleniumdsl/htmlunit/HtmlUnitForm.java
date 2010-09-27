@@ -8,7 +8,6 @@ import br.com.caelum.seleniumdsl.Field;
 import br.com.caelum.seleniumdsl.Form;
 import br.com.caelum.seleniumdsl.SelectField;
 
-import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -17,9 +16,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 class HtmlUnitForm implements Form {
-	
+
 	private static final Logger logger = Logger.getLogger(HtmlUnitForm.class);
-	
+
     private final HtmlFormWrapper form;
 	private final HtmlUnitPage parent;
 
@@ -67,7 +66,7 @@ class HtmlUnitForm implements Form {
 			}
 			return new HtmlUnitTextArea(this, textArea);
 		}
-    	
+
     	if (logger.isDebugEnabled()) {
 			logger.debug("Trying to find a generic input");
 		}
@@ -83,7 +82,7 @@ class HtmlUnitForm implements Form {
     }
 
     public void navigate(String element) {
-    	ClickableElement button = form.getInputByName(element);
+    	HtmlInput button = form.getInputByName(element);
     	if (button == null) {
     		if (logger.isDebugEnabled()) {
 				logger.debug("Element " + element + " was not found by name, trying id");
@@ -129,7 +128,7 @@ class HtmlUnitForm implements Form {
     	parent.setPage((HtmlPage) check.setChecked(false));
         return this;
     }
-    
+
     HtmlUnitPage getParent() {
 		return parent;
 	}
