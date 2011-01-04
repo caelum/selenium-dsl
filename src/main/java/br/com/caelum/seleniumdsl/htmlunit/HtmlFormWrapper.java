@@ -22,7 +22,7 @@ class HtmlFormWrapper {
 		this.delegate = delegate;
 	}
 
-	public <X> X getFirstByXPath(String xpathExpr) {
+	public <T> T getFirstByXPath(String xpathExpr) {
 		return delegate.getFirstByXPath(xpathExpr);
 	}
 
