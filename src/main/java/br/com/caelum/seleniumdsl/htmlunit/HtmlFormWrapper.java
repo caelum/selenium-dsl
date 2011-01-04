@@ -22,13 +22,15 @@ class HtmlFormWrapper {
 		this.delegate = delegate;
 	}
 
-	public <T> T getFirstByXPath(String xpathExpr) {
-		return delegate.getFirstByXPath(xpathExpr);
+	@SuppressWarnings("unchecked")
+	public <X> X getFirstByXPath(String xpathExpr) {
+		return (X)delegate.getFirstByXPath(xpathExpr);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <I extends HtmlInput> I getInputByNameOrId(String name) {
 		try {
-			return getInputByNameOrIdOrDie(name);
+			return (I)getInputByNameOrIdOrDie(name);
 		} catch (Exception e) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Input with name or id " + name + " not found");
@@ -54,16 +56,18 @@ class HtmlFormWrapper {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <I extends HtmlInput> I getInputByNameOrIdOrDie(String name) throws ElementNotFoundException {
 		try {
-			return delegate.getInputByName(name);
+			return (I)delegate.getInputByName(name);
 		} catch (ElementNotFoundException e) {
-			return delegate.getElementById(name);
+			return (I)delegate.getElementById(name);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <E extends HtmlElement> E getElementByIdOrDie(String id) throws ElementNotFoundException {
-		return delegate.getElementById(id);
+		return (E)delegate.getElementById(id);
 	}
 
 	
@@ -92,9 +96,10 @@ class HtmlFormWrapper {
 		return (HtmlPage) result.getNewPage();
 	}
 
+	@SuppressWarnings("unchecked")
 	public <I extends HtmlInput> I getInputByName(String name) {
 		try {
-			return delegate.getInputByName(name);
+			return (I)delegate.getInputByName(name);
 		} catch (Exception e) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Input with name " + name + " not found.");
